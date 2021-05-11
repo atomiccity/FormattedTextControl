@@ -1,0 +1,72 @@
+#tag FileTypeSet
+	#tag FileType
+		CodeName=FTC_RTF
+		Extension=rtf
+		Flags=&h0
+		MacCreator=fmTx
+		MacType=RTF
+		Name=FTC RTF
+		UTI=
+		UTIConformsTo=
+		Description=
+		MimeType=
+		Imported=False
+	#tag EndFileType
+
+	#tag FileType
+		CodeName=FTC_TEXT
+		Extension=txt
+		Flags=&h0
+		MacCreator=fmTx
+		MacType=TEXT
+		Name=FTC TEXT
+		UTI=
+		UTIConformsTo=
+		Description=
+		MimeType=
+		Imported=False
+	#tag EndFileType
+
+	#tag FileType
+		CodeName=FTC_XML
+		Extension=xml
+		Flags=&h0
+		MacCreator=fmTx
+		MacType=FTCx
+		Name=FTC XML
+		UTI=
+		UTIConformsTo=
+		Description=
+		MimeType=
+		Imported=False
+	#tag EndFileType
+
+	#tag FileType
+		CodeName=FTC_ANY
+		Extension=xml;txt;rtf
+		Flags=&h0
+		MacCreator=fmTx
+		MacType=????
+		Name=FTC ANY
+		UTI=
+		UTIConformsTo=
+		Description=
+		MimeType=
+		Imported=False
+	#tag EndFileType
+
+	#tag FileType
+		CodeName=HTML
+		Extension=html
+		Flags=&h0
+		MacCreator=????
+		MacType=????
+		Name=HTML
+		UTI=
+		UTIConformsTo=
+		Description=
+		MimeType=
+		Imported=False
+	#tag EndFileType
+
+#tag EndFileTypeSet

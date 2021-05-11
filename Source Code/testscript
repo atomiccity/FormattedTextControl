@@ -1,0 +1,106 @@
+'------------------------------------------------------------
+' *** Sample code from the actual Formatted Text Control. ***
+'------------------------------------------------------------
+
+#if not DebugBuild
+
+#pragma BoundsChecking FTC_BOUNDSCHECKING
+#pragma NilObjectChecking FTC_NILOBJECTCHECKING
+#pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+
+#endif
+
+Dim page as FTPage
+Dim currentPage as FTPage
+Dim pp as FTParagraphProxy
+Dim line as FTLine
+Dim index as integer
+
+' Are we within range?
+if not force and (pageIndex >= 1) and (pageIndex <= Ubound(pages)) then
+
+' Get the page.
+currentPage = pages(pageIndex)
+
+' Get the last paparagraph proxy on the previous page.
+pp = currentPage.getParagraph(pages(pageIndex - 1).getParagraphCount - 1)
+
+' Did we get a proxy?
+if (not (pp is nil)) and (not (pp.getParent is nil)) then
+
+' Get the next line in the paragraph.
+line = pp.getParent.getLine(pp.getLineEnd + 1)
+
+' Are we into the next paragraph?
+if line is nil then
+
+' Get the paragraph index.
+index = pp.getParent.getAbsoluteIndex + 1
+
+' Is the paragraph index in range?
+if (index > -1) and (index <= Ubound(paragraphs)) then
+
+' Get the first line of that paragraph.
+line = paragraphs(index).getLine(0)
+
+end if
+
+end if
+
+' Will anything change on the page?
+if (not (line is nil)) and ((pageIndex + 1) <= Ubound(pages)) then
+
+' Have we reached a page that doesn't need updating?
+if pages(pageIndex + 1).getFirstLineId = line.getId then
+
+' Signal that a new page is not needed.
+return nil
+
+end if
+
+end if
+
+end if
+
+' Use the current page.
+page = currentPage
+
+' Clear the content off the page.
+page.clear
+
+else
+
+' Are we within the page range?
+if pageIndex <= Ubound(pages) then
+
+' Get the page.
+page = pages(pageIndex)
+
+' Clear the content off the page.
+page.clear
+
+else
+
+' Call the user event.
+page = parentControl.callNewPage
+
+' Did we get a new page?
+if page is nil then
+
+' Create an FTPage.
+page = new FTPage(parentControl)
+
+end if
+
+' Add the page to the list.
+pages.Append(page)
+
+' Set the page number.
+page.setAbsolutePage(Ubound(pages))
+
+end if
+
+end if
+
+' Return the page to the caller.
+return page
