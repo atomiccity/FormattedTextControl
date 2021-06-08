@@ -12,41 +12,45 @@ Inherits TextArea
 		    
 		  #endif
 		  
-		  Dim cb as Clipboard
-		  
-		  ' Is anything selected?
-		  if SelLength > 0 then
+		  #if FTCConfiguration.FTC_AUTOWIRE_EDIT_MENU
 		    
-		    ' Turn them on.
-		    EditCut.Enable
-		    EditCopy.Enable
+		    Dim cb as Clipboard
 		    
-		  else
+		    ' Is anything selected?
+		    if SelLength > 0 then
+		      
+		      ' Turn them on.
+		      if CutMenuItem <> nil then CutMenuItem.Enable
+		      if CopyMenuItem <> nil then CopyMenuItem.Enable
+		      
+		    else
+		      
+		      ' Turn them off.
+		      if CutMenuItem <> nil then CutMenuItem.Enabled = false
+		      if CopyMenuItem <> nil then CopyMenuItem.Enabled = false
+		      
+		    end if
 		    
-		    ' Turn them off.
-		    EditCut.Enabled = false
-		    EditCopy.Enabled = false
+		    ' Get the clipboard.
+		    cb = new Clipboard
 		    
-		  end if
-		  
-		  ' Get the clipboard.
-		  cb = new Clipboard
-		  
-		  ' Is there something we can paste (plain text or RTF)?
-		  if cb.TextAvailable or cb.RawDataAvailable(RTF_DATA_TYPE) then
+		    ' Is there something we can paste (plain text or RTF)?
+		    if (cb.TextAvailable or cb.RawDataAvailable(RTF_DATA_TYPE)) and PasteMenuItem <> nil then
+		      
+		      ' Turn it on.
+		      PasteMenuItem.Enable
+		      
+		    elseif PasteMenuItem <> nil then
+		      
+		      ' Turn it off.
+		      PasteMenuItem.Enabled = false
+		      
+		    end if
 		    
-		    ' Turn it on.
-		    EditPaste.Enable
+		    ' Release the clipboard.
+		    cb.close
 		    
-		  else
-		    
-		    ' Turn it off.
-		    EditPaste.Enabled = false
-		    
-		  end if
-		  
-		  ' Release the clipboard.
-		  cb.close
+		  #endif
 		  
 		End Sub
 	#tag EndEvent
@@ -222,6 +226,19 @@ Inherits TextArea
 		  
 		End Sub
 	#tag EndMethod
+
+
+	#tag Property, Flags = &h0
+		CopyMenuItem As MenuItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		CutMenuItem As MenuItem
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		PasteMenuItem As MenuItem
+	#tag EndProperty
 
 
 	#tag Constant, Name = RTF_DATA_TYPE, Type = String, Dynamic = False, Default = \"public.rtf", Scope = Public

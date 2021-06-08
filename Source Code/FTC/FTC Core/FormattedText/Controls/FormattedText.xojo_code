@@ -646,6 +646,16 @@ Inherits TextInputCanvas
 		  ' Make sure the scrollbars and contents are up to date.
 		  resize
 		  
+		  ' Auto-wire the Edit menu items, if configured to do so
+		  #if FTCConfiguration.FTC_AUTOWIRE_EDIT_MENU
+		    UndoMenuItem = EditUndo
+		    RedoMenuItem = EditRedo
+		    CutMenuItem = EditCut
+		    CopyMenuItem = EditCopy
+		    PasteMenuItem = EditPaste
+		    ClearMenuItem = EditClear
+		  #endif
+		  
 		End Sub
 	#tag EndEvent
 
@@ -1995,28 +2005,28 @@ Inherits TextInputCanvas
 		  '--------------------------------------
 		  
 		  ' Enable the menu items.
-		  if isClearActionAvailable then EditClear.Enable
-		  if isCopyActionAvailable then EditCopy.Enable
-		  if isCutActionAvailable then EditCut.Enable
-		  if isPasteActionAvailable then EditPaste.Enable
+		  if isClearActionAvailable and ClearMenuItem <> nil then ClearMenuItem.Enable
+		  if isCopyActionAvailable and CopyMenuItem <> nil then CopyMenuItem.Enable
+		  if isCutActionAvailable and CutMenuItem <> nil then CutMenuItem.Enable
+		  if isPasteActionAvailable and PasteMenuItem <> nil then PasteMenuItem.Enable
 		  
 		  '--------------------------------------
 		  ' Undo.
 		  '--------------------------------------
 		  
 		  ' Can we do undo?
-		  if isUndoActionAvailable then
+		  if isUndoActionAvailable and UndoMenuItem <> nil then
 		    
 		    ' Enable the menu item.
-		    EditUndo.Enable
+		    UndoMenuItem.Enable
 		    
 		    ' Set up the name of the undo menu item.
-		    EditUndo.Text = Trim(FTCStrings.UNDO + " " + undo.getUndoName)
+		    UndoMenuItem.Text = Trim(FTCStrings.UNDO + " " + undo.getUndoName)
 		    
-		  else
+		  elseif UndoMenuItem <> nil then
 		    
 		    ' Reset the undo text.
-		    EditUndo.Text = FTCStrings.UNDO
+		    UndoMenuItem.Text = FTCStrings.UNDO
 		    
 		  end if
 		  
@@ -2032,18 +2042,18 @@ Inherits TextInputCanvas
 		  '2 - Comment out the following bit of code.  Comment out to <End>
 		  
 		  ' Can we do redo?
-		  if isRedoActionAvailable then
+		  if isRedoActionAvailable and RedoMenuItem <> nil then
 		    
 		    ' Enable the menu item.
-		    EditRedo.Enable
+		    RedoMenuItem.Enable
 		    
 		    ' Set up the name of the redo menu item.
-		    EditRedo.Text = Trim(FTCStrings.REDO + " " + undo.getRedoName)
+		    RedoMenuItem.Text = Trim(FTCStrings.REDO + " " + undo.getRedoName)
 		    
-		  else
+		  elseif RedoMenuItem <> nil then
 		    
 		    ' Reset the redo text.
-		    EditRedo.Text = FTCStrings.REDO
+		    RedoMenuItem.Text = FTCStrings.REDO
 		    
 		  end if
 		  
@@ -13151,30 +13161,41 @@ Inherits TextInputCanvas
 		  if state then
 		    
 		    ' Restore the auto enable state.
-		    EditUndo.AutoEnable = editMenuAutoEnableState.undo
-		    EditRedo.AutoEnable = editMenuAutoEnableState.redo //Comment out if no Redo Menu
-		    EditCut.AutoEnable = editMenuAutoEnableState.cut
-		    EditCopy.AutoEnable = editMenuAutoEnableState.copy
-		    EditPaste.AutoEnable = editMenuAutoEnableState.paste
-		    EditClear.AutoEnable = editMenuAutoEnableState.clear
+		    if UndoMenuItem <> nil then UndoMenuItem.AutoEnable = editMenuAutoEnableState.undo
+		    if RedoMenuItem <> nil then RedoMenuItem.AutoEnable = editMenuAutoEnableState.redo
+		    if CutMenuItem <> nil then CutMenuItem.AutoEnable = editMenuAutoEnableState.cut
+		    if CopyMenuItem <> nil then CopyMenuItem.AutoEnable = editMenuAutoEnableState.copy
+		    if PasteMenuItem <> nil then PasteMenuItem.AutoEnable = editMenuAutoEnableState.paste
+		    if ClearMenuItem <> nil then ClearMenuItem.AutoEnable = editMenuAutoEnableState.clear
 		    
 		  else
 		    
-		    ' Save the current auto enable state.
-		    editMenuAutoEnableState.undo = EditUndo.AutoEnable
-		    editMenuAutoEnableState.redo = EditRedo.AutoEnable //Comment out if no Redo Menu
-		    editMenuAutoEnableState.cut = EditCut.AutoEnable
-		    editMenuAutoEnableState.copy = EditCopy.AutoEnable
-		    editMenuAutoEnableState.paste = EditPaste.AutoEnable
-		    editMenuAutoEnableState.clear = EditClear.AutoEnable
-		    
-		    ' Turn off the auto enable state.
-		    EditUndo.AutoEnable = state
-		    EditRedo.AutoEnable = state //Comment out if no Redo Menu
-		    EditCut.AutoEnable = state
-		    EditCopy.AutoEnable = state
-		    EditPaste.AutoEnable = state
-		    EditClear.AutoEnable = state
+		    ' Save the current auto enable state and
+		    ' turn off the auto enable state.
+		    if UndoMenuItem <> nil then
+		      editMenuAutoEnableState.undo = UndoMenuItem.AutoEnable
+		      UndoMenuItem.AutoEnable = state
+		    end
+		    if RedoMenuItem <> nil then
+		      editMenuAutoEnableState.redo = RedoMenuItem.AutoEnable
+		      RedoMenuItem.AutoEnable = state
+		    end
+		    if CutMenuItem <> nil then
+		      editMenuAutoEnableState.cut = CutMenuItem.AutoEnable
+		      CutMenuItem.AutoEnable = state
+		    end
+		    if CopyMenuItem <> nil then
+		      editMenuAutoEnableState.copy = CopyMenuItem.AutoEnable
+		      CopyMenuItem.AutoEnable = state
+		    end
+		    if PasteMenuItem <> nil then
+		      editMenuAutoEnableState.paste = PasteMenuItem.AutoEnable
+		      PasteMenuItem.AutoEnable = state
+		    end
+		    if ClearMenuItem <> nil then
+		      editMenuAutoEnableState.clear = ClearMenuItem.AutoEnable
+		      ClearMenuItem.AutoEnable = state
+		    end
 		    
 		  end if
 		  
@@ -15258,12 +15279,20 @@ Inherits TextInputCanvas
 		CaretColor As Color = &c000000
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		ClearMenuItem As MenuItem
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		Private clickCount As integer
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
 		Private contextualInsertionOffset As FTInsertionOffset
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		CopyMenuItem As MenuItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -15280,6 +15309,10 @@ Inherits TextInputCanvas
 
 	#tag Property, Flags = &h21
 		Private cursorVisible As boolean = true
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		CutMenuItem As MenuItem
 	#tag EndProperty
 
 	#tag ComputedProperty, Flags = &h0
@@ -15650,12 +15683,20 @@ Inherits TextInputCanvas
 		PageWidth As double = 8.5
 	#tag EndProperty
 
+	#tag Property, Flags = &h0
+		PasteMenuItem As MenuItem
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		Private picDisplay As picture
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		ReadOnly As boolean
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		RedoMenuItem As MenuItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
@@ -15740,6 +15781,10 @@ Inherits TextInputCanvas
 
 	#tag Property, Flags = &h0
 		UndoLimit As Integer = 128
+	#tag EndProperty
+
+	#tag Property, Flags = &h0
+		UndoMenuItem As MenuItem
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
