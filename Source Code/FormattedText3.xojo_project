@@ -1,6 +1,7 @@
 Type=Desktop
-RBProjectVersion=2019.011
+RBProjectVersion=2021.011
 MinIDEVersion=20070100
+OrigIDEVersion=00000000
 Module=ReleaseNotes;ReleaseNotes.xojo_code;&h000000005B795FFF;&h0000000000000000;false
 Folder=Application;Application;&h000000007E2E7D65;&h0000000000000000;false
 Folder=Libraries;Libraries;&h000000003EC04877;&h0000000000000000;false
@@ -176,7 +177,7 @@ AppMenuBar=FormattedTextMenuBar
 MajorVersion=3
 MinorVersion=1
 SubVersion=9
-NonRelease=13
+NonRelease=14
 Release=3
 InfoVersion=Formatted Text Demo
 LongVersion=3.1.9 © 2007 - 2017 BKeeney Software Inc.

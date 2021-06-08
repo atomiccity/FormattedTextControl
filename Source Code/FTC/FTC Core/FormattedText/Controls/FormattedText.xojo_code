@@ -15826,9 +15826,18 @@ Inherits TextInputCanvas
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="Tooltip"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -15836,6 +15845,7 @@ Inherits TextInputCanvas
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
 			EditorType="String"
 		#tag EndViewProperty
@@ -15843,6 +15853,7 @@ Inherits TextInputCanvas
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
 			EditorType="String"
 		#tag EndViewProperty
@@ -15856,13 +15867,17 @@ Inherits TextInputCanvas
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InitialParent"
+			Visible=false
 			Group="Position"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -15870,6 +15885,7 @@ Inherits TextInputCanvas
 			Name="LockBottom"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -15877,6 +15893,7 @@ Inherits TextInputCanvas
 			Name="LockLeft"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -15884,6 +15901,7 @@ Inherits TextInputCanvas
 			Name="LockRight"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -15891,6 +15909,7 @@ Inherits TextInputCanvas
 			Name="LockTop"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -15904,6 +15923,7 @@ Inherits TextInputCanvas
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TabPanelIndex"
+			Visible=false
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
@@ -15921,6 +15941,7 @@ Inherits TextInputCanvas
 			Name="Top"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -15949,13 +15970,6 @@ Inherits TextInputCanvas
 			EditorType="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="HelpTag"
-			Visible=true
-			Group="Appearance"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Visible"
 			Visible=true
 			Group="Appearance"
@@ -15967,68 +15981,97 @@ Inherits TextInputCanvas
 			Name="AutoComplete"
 			Visible=true
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorDisabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&ccccccc"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorRollover"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorVisited"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="IsHiDPT"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="objectCountId"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_PageTop"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_xCaret"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_yCaret"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="updateFlag"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="xDisplayAlignmentOffset"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowBackgroundUpdates"
@@ -16036,6 +16079,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowPictures"
@@ -16043,6 +16087,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="BackgroundColor"
@@ -16050,6 +16095,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&cA0ADCD"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="BorderColor"
@@ -16057,6 +16103,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&ca0a0a0"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="CaretColor"
@@ -16064,6 +16111,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="CornerColor"
@@ -16071,6 +16119,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&cFFFFFF00"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DragAndDrop"
@@ -16078,6 +16127,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DrawControlBorder"
@@ -16085,6 +16135,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="true"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HScrollbarAutoHide"
@@ -16092,6 +16143,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InhibitSelections"
@@ -16099,6 +16151,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InvisiblesColor"
@@ -16106,6 +16159,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&c526AFF"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="MarginGuideColor"
@@ -16113,11 +16167,13 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&cCACACA"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Mode"
 			Visible=true
 			Group="FT Behavior"
+			InitialValue=""
 			Type="Display_Mode"
 			EditorType="Enum"
 			#tag EnumValues
@@ -16133,6 +16189,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowInvisibles"
@@ -16140,6 +16197,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowMarginGuides"
@@ -16147,6 +16205,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowPilcrows"
@@ -16154,6 +16213,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="SpellCheckWhileTyping"
@@ -16161,6 +16221,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UndoLimit"
@@ -16168,6 +16229,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="128"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UsePageShadow"
@@ -16175,6 +16237,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="VScrollbarAutoHide"
@@ -16182,6 +16245,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="WordParagraphBackground"
@@ -16189,6 +16253,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="BottomMargin"
@@ -16196,6 +16261,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LeftMargin"
@@ -16203,6 +16269,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="PageHeight"
@@ -16210,6 +16277,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="11.0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="PageWidth"
@@ -16217,6 +16285,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="8.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="RightMargin"
@@ -16224,6 +16293,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TopMargin"
@@ -16231,6 +16301,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultFont"
@@ -16246,6 +16317,7 @@ Inherits TextInputCanvas
 			Group="FT Defaults"
 			InitialValue="12"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultTabStop"
@@ -16253,6 +16325,7 @@ Inherits TextInputCanvas
 			Group="FT Defaults"
 			InitialValue="0.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultTextColor"
@@ -16260,6 +16333,7 @@ Inherits TextInputCanvas
 			Group="FT Defaults"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DisplayAlignment"
@@ -16280,6 +16354,7 @@ Inherits TextInputCanvas
 			Group="FT Edit Mode"
 			InitialValue="0.06"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="EditViewPrintMargin"
@@ -16287,6 +16362,7 @@ Inherits TextInputCanvas
 			Group="FT Edit Mode"
 			InitialValue="0.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

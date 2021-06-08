@@ -3,14 +3,14 @@ Begin Window HTMLExportWindow
    BackColor       =   &cFFFFFF00
    Backdrop        =   0
    CloseButton     =   True
-   Compatibility   =   ""
    Composite       =   False
    Frame           =   1
    FullScreen      =   False
    HasBackColor    =   False
+   HasFullScreenButton=   False
    Height          =   261
    ImplicitInstance=   True
-   LiveResize      =   False
+   LiveResize      =   "False"
    MacProcID       =   0
    MaxHeight       =   32000
    MaximizeButton  =   False
@@ -28,6 +28,7 @@ Begin Window HTMLExportWindow
    Begin PushButton ProceedButton
       AutoDeactivate  =   True
       Bold            =   False
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "Proceed"
       Default         =   True
@@ -35,7 +36,7 @@ Begin Window HTMLExportWindow
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
-      InitialParent   =   
+      InitialParent   =   ""
       Italic          =   False
       Left            =   405
       LockBottom      =   True
@@ -43,7 +44,7 @@ Begin Window HTMLExportWindow
       LockLeft        =   False
       LockRight       =   True
       LockTop         =   False
-      Scope           =   "0"
+      Scope           =   0
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
@@ -51,6 +52,7 @@ Begin Window HTMLExportWindow
       TextSize        =   0.0
       TextUnit        =   0
       Top             =   221
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   80
@@ -64,7 +66,7 @@ Begin Window HTMLExportWindow
       Height          =   195
       HelpTag         =   ""
       Index           =   -2147483648
-      InitialParent   =   
+      InitialParent   =   ""
       Italic          =   False
       Left            =   20
       LockBottom      =   True
@@ -73,14 +75,14 @@ Begin Window HTMLExportWindow
       LockRight       =   True
       LockTop         =   True
       Multiline       =   True
-      Scope           =   "0"
+      Scope           =   0
       Selectable      =   False
       TabIndex        =   1
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "This functionality demonstrates the FTIterator and FTIteratorBase classes within the FTC. These two classes allow you to easily walk through the FTC paragraphs and style runs. In this case it is used to generate some basic HTML output. The class FTinterator takes care of the mechanics of walking through the data structures and FTIteratorBase is the base class you use to create your own handlers. The FTinterator class will call the handlers in your subclass.\r\rNote, the HTML produced by this particular implementation only handles paragraphs, paragraph alignment, bold, italic and underline. Pictures are ignored. You can extend this code to format the text any way want."
       TextAlign       =   0
-      TextColor       =   
+      TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   0.0
       TextUnit        =   0

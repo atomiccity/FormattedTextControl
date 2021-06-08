@@ -259,9 +259,11 @@ Inherits RTFReader
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="currentAlignment"
+			Visible=false
 			Group="Behavior"
 			InitialValue="1"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -269,6 +271,7 @@ Inherits RTFReader
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -276,28 +279,39 @@ Inherits RTFReader
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="paragraphCount"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="startIndex"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -305,6 +319,7 @@ Inherits RTFReader
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

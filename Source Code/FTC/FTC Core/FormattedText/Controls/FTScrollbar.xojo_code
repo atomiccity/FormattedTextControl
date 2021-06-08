@@ -114,20 +114,60 @@ Inherits Scrollbar
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="AcceptFocus"
-			Visible=true
-			Group="Behavior"
-			InitialValue="true"
-			Type="Boolean"
-			InheritedFrom="Scrollbar"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="AutoDeactivate"
+			Name="AllowAutoDeactivate"
 			Visible=true
 			Group="Appearance"
 			InitialValue="True"
 			Type="Boolean"
-			InheritedFrom="Scrollbar"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Tooltip"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Transparent"
+			Visible=true
+			Group="Appearance"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MinimumValue"
+			Visible=true
+			Group="Initial State"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MaximumValue"
+			Visible=true
+			Group="Initial State"
+			InitialValue="100"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowFocus"
+			Visible=true
+			Group="Behavior"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AllowLiveScrolling"
+			Visible=true
+			Group="Behavior"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Enabled"
@@ -135,7 +175,7 @@ Inherits Scrollbar
 			Group="Appearance"
 			InitialValue="True"
 			Type="Boolean"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Height"
@@ -143,33 +183,31 @@ Inherits Scrollbar
 			Group="Position"
 			InitialValue="100"
 			Type="Integer"
-			InheritedFrom="Scrollbar"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="HelpTag"
-			Visible=true
-			Group="Appearance"
-			Type="String"
-			EditorType="MultiLineEditor"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InitialParent"
-			InheritedFrom="Scrollbar"
+			Visible=false
+			Group=""
+			InitialValue=""
+			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LineStep"
@@ -177,65 +215,47 @@ Inherits Scrollbar
 			Group="Behavior"
 			InitialValue="1"
 			Type="Integer"
-			InheritedFrom="Scrollbar"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="LiveScroll"
-			Visible=true
-			Group="Behavior"
-			Type="Boolean"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LockBottom"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LockLeft"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LockRight"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LockTop"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
-			InheritedFrom="Scrollbar"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Maximum"
-			Visible=true
-			Group="Initial State"
-			InitialValue="100"
-			Type="Integer"
-			InheritedFrom="Scrollbar"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Minimum"
-			Visible=true
-			Group="Initial State"
-			InitialValue="0"
-			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="PageStep"
@@ -243,14 +263,15 @@ Inherits Scrollbar
 			Group="Behavior"
 			InitialValue="20"
 			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TabIndex"
@@ -258,14 +279,15 @@ Inherits Scrollbar
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TabPanelIndex"
+			Visible=false
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TabStop"
@@ -273,14 +295,15 @@ Inherits Scrollbar
 			Group="Position"
 			InitialValue="True"
 			Type="Boolean"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Value"
@@ -288,7 +311,7 @@ Inherits Scrollbar
 			Group="Initial State"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Visible"
@@ -296,7 +319,7 @@ Inherits Scrollbar
 			Group="Appearance"
 			InitialValue="True"
 			Type="Boolean"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Width"
@@ -304,7 +327,7 @@ Inherits Scrollbar
 			Group="Position"
 			InitialValue="16"
 			Type="Integer"
-			InheritedFrom="Scrollbar"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

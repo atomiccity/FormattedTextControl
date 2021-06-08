@@ -26,39 +26,52 @@ Inherits MenuItem
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="AutoEnable"
+			Name="HasCheckMark"
+			Visible=false
 			Group="Behavior"
-			InitialValue="0"
+			InitialValue=""
 			Type="Boolean"
-			InheritedFrom="MenuItem"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="Checked"
+			Name="Shortcut"
+			Visible=false
 			Group="Behavior"
-			InitialValue="0"
-			Type="Boolean"
-			InheritedFrom="MenuItem"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="CommandKey"
-			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
-			InheritedFrom="MenuItem"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="AutoEnabled"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="LastRowIndex"
+			Visible=false
+			Group="Behavior"
+			InitialValue=""
+			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Enabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="Boolean"
-			InheritedFrom="MenuItem"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Icon"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="Picture"
-			InheritedFrom="MenuItem"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -66,14 +79,7 @@ Inherits MenuItem
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
-			InheritedFrom="MenuItem"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="KeyboardShortcut"
-			Group="Behavior"
-			Type="String"
-			EditorType="MultiLineEditor"
-			InheritedFrom="MenuItem"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -81,29 +87,31 @@ Inherits MenuItem
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			EditorType="MultiLineEditor"
-			InheritedFrom="MenuItem"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Text"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
-			InheritedFrom="MenuItem"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -111,28 +119,31 @@ Inherits MenuItem
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Visible"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="Boolean"
-			InheritedFrom="MenuItem"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="_mIndex"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="MenuItem"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="_mName"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
-			InheritedFrom="MenuItem"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

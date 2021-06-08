@@ -3,14 +3,14 @@ Begin Window FontSizeWindow
    BackColor       =   &cFFFFFF00
    Backdrop        =   0
    CloseButton     =   True
-   Compatibility   =   ""
    Composite       =   False
    Frame           =   1
    FullScreen      =   False
    HasBackColor    =   False
+   HasFullScreenButton=   False
    Height          =   108
    ImplicitInstance=   True
-   LiveResize      =   False
+   LiveResize      =   "False"
    MacProcID       =   0
    MaxHeight       =   32000
    MaximizeButton  =   True
@@ -28,6 +28,7 @@ Begin Window FontSizeWindow
    Begin PushButton CancelButton
       AutoDeactivate  =   True
       Bold            =   False
+      ButtonStyle     =   0
       Cancel          =   True
       Caption         =   "Cancel"
       ControlOrder    =   "0"
@@ -36,7 +37,7 @@ Begin Window FontSizeWindow
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
-      InitialParent   =   
+      InitialParent   =   ""
       Italic          =   False
       Left            =   154
       LockBottom      =   True
@@ -49,7 +50,9 @@ Begin Window FontSizeWindow
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
+      TextUnit        =   0
       Top             =   68
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   69
@@ -57,6 +60,7 @@ Begin Window FontSizeWindow
    Begin PushButton SelectButton
       AutoDeactivate  =   True
       Bold            =   False
+      ButtonStyle     =   0
       Cancel          =   False
       Caption         =   "Select"
       ControlOrder    =   "1"
@@ -65,7 +69,7 @@ Begin Window FontSizeWindow
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
-      InitialParent   =   
+      InitialParent   =   ""
       Italic          =   False
       Left            =   73
       LockBottom      =   True
@@ -78,7 +82,9 @@ Begin Window FontSizeWindow
       TabStop         =   True
       TextFont        =   "System"
       TextSize        =   12.0
+      TextUnit        =   0
       Top             =   68
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   69
@@ -93,7 +99,7 @@ Begin Window FontSizeWindow
       Height          =   20
       HelpTag         =   ""
       Index           =   -2147483648
-      InitialParent   =   
+      InitialParent   =   ""
       Italic          =   False
       Left            =   20
       LockBottom      =   False
@@ -102,15 +108,18 @@ Begin Window FontSizeWindow
       LockRight       =   False
       LockTop         =   True
       Multiline       =   False
+      Selectable      =   False
       TabIndex        =   2
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   "Font size:"
       TextAlign       =   2
-      TextColor       =   
+      TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
+      TextUnit        =   0
       Top             =   22
+      Transparent     =   False
       Underline       =   False
       Visible         =   True
       Width           =   61
@@ -119,10 +128,12 @@ Begin Window FontSizeWindow
       AcceptTabs      =   False
       Alignment       =   0
       AutoDeactivate  =   True
-      BackColor       =   
+      AutomaticallyCheckSpelling=   False
+      BackColor       =   &cFFFFFF00
       Bold            =   False
       Border          =   True
       ControlOrder    =   "3"
+      CueText         =   ""
       DataField       =   ""
       DataSource      =   ""
       Enabled         =   True
@@ -150,10 +161,12 @@ Begin Window FontSizeWindow
       TabPanelIndex   =   0
       TabStop         =   True
       Text            =   ""
-      TextColor       =   
+      TextColor       =   &c00000000
       TextFont        =   "System"
       TextSize        =   12.0
+      TextUnit        =   0
       Top             =   21
+      Transparent     =   False
       Underline       =   False
       UseFocusRing    =   False
       Visible         =   True

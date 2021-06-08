@@ -21,46 +21,44 @@ Inherits Window
 
 	#tag ViewBehavior
 		#tag ViewProperty
-			Name="BackColor"
+			Name="MinimumWidth"
 			Visible=true
-			Group="Appearance"
-			InitialValue="&hFFFFFF"
-			Type="Color"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Backdrop"
-			Visible=true
-			Group="Appearance"
-			Type="Picture"
-			EditorType="Picture"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="CloseButton"
-			Visible=true
-			Group="Appearance"
-			InitialValue="True"
-			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Composite"
-			Visible=true
-			Group="Appearance"
-			InitialValue="False"
-			Type="Boolean"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Frame"
-			Visible=true
-			Group="Appearance"
-			InitialValue="0"
+			Group="Size"
+			InitialValue="64"
 			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MinimumHeight"
+			Visible=true
+			Group="Size"
+			InitialValue="64"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MaximumWidth"
+			Visible=true
+			Group="Size"
+			InitialValue="32000"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MaximumHeight"
+			Visible=true
+			Group="Size"
+			InitialValue="32000"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Type"
+			Visible=true
+			Group="Frame"
+			InitialValue="0"
+			Type="Types"
 			EditorType="Enum"
-			InheritedFrom="Window"
 			#tag EnumValues
 				"0 - Document"
 				"1 - Movable Modal"
@@ -72,150 +70,48 @@ Inherits Window
 				"7 - Global Floating Window"
 				"8 - Sheet Window"
 				"9 - Metal Window"
-				"10 - Drawer Window"
 				"11 - Modeless Dialog"
 			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="FullScreen"
+			Name="HasCloseButton"
 			Visible=true
-			Group="Appearance"
-			InitialValue="False"
-			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="HasBackColor"
-			Visible=true
-			Group="Appearance"
-			InitialValue="False"
-			Type="Boolean"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Height"
-			Visible=true
-			Group="Position"
-			InitialValue="400"
-			Type="Integer"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="ImplicitInstance"
-			Visible=true
-			Group="Appearance"
+			Group="Frame"
 			InitialValue="True"
 			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="Interfaces"
+			Name="HasMaximizeButton"
 			Visible=true
-			Group="ID"
-			Type="String"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="LiveResize"
-			Visible=true
-			Group="Appearance"
+			Group="Frame"
 			InitialValue="True"
 			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="MacProcID"
+			Name="HasMinimizeButton"
 			Visible=true
-			Group="Appearance"
+			Group="Frame"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="HasFullScreenButton"
+			Visible=true
+			Group="Frame"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="DefaultLocation"
+			Visible=true
+			Group="Behavior"
 			InitialValue="0"
-			Type="Integer"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="MaxHeight"
-			Visible=true
-			Group="Position"
-			InitialValue="32000"
-			Type="Integer"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="MaximizeButton"
-			Visible=true
-			Group="Appearance"
-			InitialValue="False"
-			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="MaxWidth"
-			Visible=true
-			Group="Position"
-			InitialValue="32000"
-			Type="Integer"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="MenuBar"
-			Visible=true
-			Group="Appearance"
-			Type="MenuBar"
-			EditorType="MenuBar"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="MenuBarVisible"
-			Visible=true
-			Group="Appearance"
-			InitialValue="True"
-			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="MinHeight"
-			Visible=true
-			Group="Position"
-			InitialValue="64"
-			Type="Integer"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="MinimizeButton"
-			Visible=true
-			Group="Appearance"
-			InitialValue="True"
-			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="MinWidth"
-			Visible=true
-			Group="Position"
-			InitialValue="64"
-			Type="Integer"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Name"
-			Visible=true
-			Group="ID"
-			Type="String"
-			InheritedFrom="Window"
-		#tag EndViewProperty
-		#tag ViewProperty
-			Name="Placement"
-			Visible=true
-			Group="Position"
-			InitialValue="0"
-			Type="Integer"
+			Type="Locations"
 			EditorType="Enum"
-			InheritedFrom="Window"
 			#tag EnumValues
 				"0 - Default"
 				"1 - Parent Window"
@@ -225,20 +121,116 @@ Inherits Window
 			#tag EndEnumValues
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="HasBackgroundColor"
+			Visible=true
+			Group="Background"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="BackgroundColor"
+			Visible=true
+			Group="Background"
+			InitialValue="&hFFFFFF"
+			Type="Color"
+			EditorType="Color"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Backdrop"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="Picture"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Composite"
+			Visible=true
+			Group="Appearance"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="FullScreen"
+			Visible=true
+			Group="Appearance"
+			InitialValue="False"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Height"
+			Visible=true
+			Group="Position"
+			InitialValue="400"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="ImplicitInstance"
+			Visible=true
+			Group="Appearance"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Interfaces"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MacProcID"
+			Visible=true
+			Group="Appearance"
+			InitialValue="0"
+			Type="Integer"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MenuBar"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="MenuBar"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="MenuBarVisible"
+			Visible=true
+			Group="Appearance"
+			InitialValue="True"
+			Type="Boolean"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="Name"
+			Visible=true
+			Group="ID"
+			InitialValue=""
+			Type="String"
+			EditorType=""
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Resizeable"
 			Visible=true
 			Group="Appearance"
 			InitialValue="True"
 			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			InheritedFrom="Window"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Title"
@@ -246,7 +238,7 @@ Inherits Window
 			Group="Appearance"
 			InitialValue="Untitled"
 			Type="String"
-			InheritedFrom="Window"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Visible"
@@ -254,8 +246,7 @@ Inherits Window
 			Group="Appearance"
 			InitialValue="True"
 			Type="Boolean"
-			EditorType="Boolean"
-			InheritedFrom="Window"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Width"
@@ -263,7 +254,7 @@ Inherits Window
 			Group="Position"
 			InitialValue="600"
 			Type="Integer"
-			InheritedFrom="Window"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

@@ -758,8 +758,11 @@ Inherits Application
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="stopit"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
