@@ -39,6 +39,18 @@ Protected Module BKSSC
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Function GetApplicationSupportFolder() As FolderItem
+		  dim f as FolderItem = SpecialFolder.ApplicationData.child("com.bkeeney.formattedtextdemo")
+		  
+		  if f.exists = false or f.Directory = false then
+		    f.CreateAsFolder
+		  end
+		  
+		  return f
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Sub InitSpellChecker()
 		  dim fBase as folderitem
@@ -61,7 +73,7 @@ Protected Module BKSSC
 		  
 		  
 		  
-		  dim f as FolderItem = app.GetApplicationSupportFolder.Child("en_US")
+		  dim f as FolderItem = GetApplicationSupportFolder.Child("en_US")
 		  if f.Exists = false or f.Directory = false then
 		    f.CreateAsFolder
 		  end if
@@ -110,7 +122,7 @@ Protected Module BKSSC
 		#tag Getter
 			Get
 			  if mfUserDictionary = nil  or mfUserDictionary.Exists = false then
-			    dim f as FolderItem = app.GetApplicationSupportFolder.Child("user.dic")
+			    dim f as FolderItem = GetApplicationSupportFolder.Child("user.dic")
 			    if f <> nil and  f.Exists = false then
 			      Dim t AS TextOutputStream
 			      t = TextOutputStream.Create(f)
@@ -162,8 +174,8 @@ Protected Module BKSSC
 			    
 			    if moSpellCheck = nil then//system spell check not available
 			      //Try Hunspell
-			      dim fDict as FolderItem = app.GetApplicationSupportFolder.Child("en_US").Child("en_US.dic")
-			      dim fAff as FolderItem = app.GetApplicationSupportFolder.Child("en_US").Child("en_US.aff")
+			      dim fDict as FolderItem = GetApplicationSupportFolder.Child("en_US").Child("en_US.dic")
+			      dim fAff as FolderItem = GetApplicationSupportFolder.Child("en_US").Child("en_US.aff")
 			      Try
 			        moSpellCheck  = BKSSpellChecker.CreateHunspellChecker(fDict,fAff)
 			        moSpellCheck.LoadUserDictionary fUserDictionary
