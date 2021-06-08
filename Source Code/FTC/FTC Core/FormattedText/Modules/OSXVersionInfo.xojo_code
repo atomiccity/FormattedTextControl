@@ -21,8 +21,8 @@ Protected Module OSXVersionInfo
 		End Function
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Function OSVersion() As OSVersionInfo
+	#tag Method, Flags = &h1
+		Protected Function OSVersion() As OSVersionInfo
 		  Dim rvalue as OSVersionInfo
 		  if appKitVersionNumber >= appKitVersionNumber10_10 then
 		    // --- We're using 10.10
