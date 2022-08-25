@@ -131,7 +131,7 @@ End
 	#tag Method, Flags = &h21
 		Private Sub ChangeWindowStyle(win as Window, flag as Integer, set as Boolean)
 		  #If TargetWindows
-		    #If TargetWin32
+		    #If TargetWindows
 		      Dim oldFlags As Integer
 		      Dim newFlags As Integer
 		      Dim styleFlags As Integer
@@ -198,7 +198,7 @@ End
 	#tag Method, Flags = &h21
 		Private Sub ChangeWindowStyleEx(w as Window, flag as Integer, set as Boolean)
 		  #If targetWindows 
-		    #If TargetWin32
+		    #If TargetWindows
 		      Dim oldFlags As Integer
 		      Dim newFlags As Integer
 		      Dim styleFlags As Integer

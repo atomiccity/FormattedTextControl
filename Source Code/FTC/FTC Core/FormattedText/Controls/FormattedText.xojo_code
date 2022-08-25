@@ -11899,7 +11899,7 @@ Inherits TextInputCanvas
 		    
 		  End If
 		  
-		  #If TargetWin32
+		  #If TargetWindows
 		    
 		    ' Set the page boundaries to print.
 		    firstPage = firstPage - 1
