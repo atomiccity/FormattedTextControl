@@ -899,6 +899,7 @@ Inherits FTObject
 		  ftp.rtfPictData = rtfPictData
 		  ftp.scaledWidthFactor = scaledWidthFactor
 		  ftp.scaledHeightFactor = scaledHeightFactor
+		  ftp.scaledPicture = scaledPicture
 		  
 		  ' Copy the sub data.
 		  copy(ftp)

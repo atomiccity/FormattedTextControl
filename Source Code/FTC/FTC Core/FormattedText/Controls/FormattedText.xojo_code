@@ -10547,7 +10547,8 @@ Inherits TextInputCanvas
 		  if targetPicture is nil then return
 		  
 		  ' Create the picture.
-		  p = new Picture(targetPicture.Width, targetPicture.Height, BIT_DEPTH)
+		  
+		  p = New Picture(targetPicture.Width/Window.ScaleFactor, targetPicture.Height/Window.ScaleFactor, BIT_DEPTH)
 		  
 		  ' Copy over the picture.
 		  p.Graphics.DrawPicture(targetPicture, 0, 0)
