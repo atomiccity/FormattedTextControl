@@ -139,7 +139,7 @@ Inherits FTIteratorBase
 		        Dim sNumber As String = Format(arImages.Ubound + 1, "00000")
 		        
 		        //<img src="data:image/png;base64,ElFTkSuQmCC" alt="Horizontal.png" height="100" width="500">
-		        Dim lPicString As String = EncodeBase64MBS(p.GetData(p.FormatPNG),0,"")
+		        Dim lPicString As String = EncodeBase64(p.GetData(p.FormatPNG))
 		        lines.Append "<img src=" + Chr(34) + "data:image/png;base64," + lPicString + Chr(34) + " alt=" + sNumber + ".png" + Chr(34) + " height=" + Chr(34) + CStr(p.height) + Chr(34) + " width=" + Chr(34) + CStr(p.Width) + Chr(34) + ">"
 		      Else
 		        arImages.Append p
@@ -160,7 +160,7 @@ Inherits FTIteratorBase
 		        Dim sNumber As String = Format(arImages.Ubound + 1, "00000")
 		        
 		        //<img src="data:image/png;base64,ElFTkSuQmCC" alt="Horizontal.png" height="100" width="500">
-		        Dim lPicString As String = EncodeBase64MBS(p.GetData(p.FormatPNG),0,"")
+		        Dim lPicString As String = EncodeBase64(p.GetData(p.FormatPNG))
 		        lines.Append "<img src=" + Chr(34) + "data:image/png;base64," + lPicString + Chr(34) + " alt=" + sNumber + ".png" + Chr(34) + " height=" + Chr(34) + CStr(p.height) + Chr(34) + " width=" + Chr(34) + CStr(p.Width) + Chr(34) + ">"
 		        
 		      Else
