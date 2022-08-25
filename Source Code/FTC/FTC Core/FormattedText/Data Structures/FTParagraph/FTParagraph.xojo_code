@@ -8029,7 +8029,7 @@ Inherits FTBase
 		    
 		  #endif
 		  
-		  ' Invalidate the cache.
+		  ' Refresh the cache.
 		  afterParagraphSpaceCache = -1
 		  
 		  ' Set the margin.
@@ -8185,7 +8185,7 @@ Inherits FTBase
 		    
 		  #endif
 		  
-		  ' Invalidate the cache.
+		  ' Refresh the cache.
 		  wrapWidthCache = -1
 		  
 		  ' Set the first indent.
@@ -8208,7 +8208,7 @@ Inherits FTBase
 		    
 		  #endif
 		  
-		  ' Invalidate the cache.
+		  ' Refresh the cache.
 		  wrapWidthCache = -1
 		  
 		  ' Set the left margin.
@@ -8455,7 +8455,7 @@ Inherits FTBase
 		    
 		  #endif
 		  
-		  ' Invalidate the cache.
+		  ' Refresh the cache.
 		  wrapWidthCache = -1
 		  
 		  ' Set the right margin.
@@ -9315,6 +9315,7 @@ Inherits FTBase
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -9322,23 +9323,31 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="selectPilcrow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -9346,6 +9355,7 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

@@ -1,7 +1,7 @@
 #tag Class
 Protected Class FTCProxy
 	#tag Method, Flags = &h0
-		Function callConstructContexualMenu(base as MenuItem, x as integer, y as integer) As boolean
+		Function callConstructContexualMenu(base as DesktopMenuItem, x as integer, y as integer) As boolean
 		  
 		  #if not DebugBuild
 		    
@@ -18,7 +18,7 @@ Protected Class FTCProxy
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function callContextualMenuAction(hitItem as MenuItem) As boolean
+		Function callContextualMenuAction(selectedItem as DesktopMenuItem) As boolean
 		  
 		  #if not DebugBuild
 		    
@@ -29,13 +29,13 @@ Protected Class FTCProxy
 		  #endif
 		  
 		  ' Call the event.
-		  return ftc.callContextualMenuAction(hitItem)
+		  return ftc.callContextualMenuAction(selectedItem)
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub callDropObject(obj as DragItem, action as integer)
+		Sub callDropObject(obj as DragItem, action as DragItem.Types)
 		  
 		  #if not DebugBuild
 		    
@@ -239,7 +239,7 @@ Protected Class FTCProxy
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub Constructor(target as TextInputCanvas, ftc as FormattedTextProxy)
+		Sub Constructor(target as DesktopTextInputCanvas, ftc as FormattedTextProxy)
 		  
 		  #if not DebugBuild
 		    
@@ -361,7 +361,7 @@ Protected Class FTCProxy
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -369,21 +369,23 @@ Protected Class FTCProxy
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -391,7 +393,7 @@ Protected Class FTCProxy
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

@@ -51,7 +51,7 @@ Protected Module TextAreaRTFUtilities
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function buildAlignmentArray(oTextArea as TextArea, ari() as integer) As RTFAlignment()
+		Private Function buildAlignmentArray(oTextArea as DesktopTextArea, ari() as integer) As RTFAlignment()
 		  
 		  #pragma DisableBackgroundTasks
 		  
@@ -316,7 +316,7 @@ Protected Module TextAreaRTFUtilities
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getRTF(extends oTextArea as TextArea) As string
+		Function getRTF(extends oTextArea as DesktopTextArea) As string
 		  
 		  #pragma DisableBackgroundTasks
 		  
@@ -358,7 +358,7 @@ Protected Module TextAreaRTFUtilities
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getSelectedRTF(extends oTextArea as TextArea) As string
+		Function getSelectedRTF(extends oTextArea as DesktopTextArea) As string
 		  
 		  #pragma DisableBackgroundTasks
 		  
@@ -372,7 +372,7 @@ Protected Module TextAreaRTFUtilities
 		  
 		  
 		  ' Is there anything to do?
-		  if oTextArea.SelLength = 0 then return ""
+		  if oTextArea.SelectionLength = 0 then return ""
 		  
 		  Dim iRunStart as integer
 		  Dim iRunEnd as integer
@@ -388,8 +388,8 @@ Protected Module TextAreaRTFUtilities
 		  
 		  
 		  ' Get the start and end positions.
-		  dim iSelectStart as integer = oTextArea.SelStart + 1
-		  dim iSelectEnd as integer = iSelectStart + oTextArea.SelLength
+		  dim iSelectStart as integer = oTextArea.SelectionStart + 1
+		  dim iSelectEnd as integer = iSelectStart + oTextArea.SelectionLength
 		  
 		  ' Get the start indexes of all the paragraphs.
 		  dim ariPargraphIndexes() as integer  = parseParagraphs(oTextArea.Text)
@@ -419,10 +419,10 @@ Protected Module TextAreaRTFUtilities
 		  dim iLength as integer = oStyleRun.Text.len
 		  
 		  ' Are we within this style run?
-		  if (oSelectionInfo.styleRunStartIndex + oTextArea.SelLength) <= iLength then
+		  if (oSelectionInfo.styleRunStartIndex + oTextArea.SelectionLength) <= iLength then
 		    
 		    ' Use the current selection length.
-		    iLength = oTextArea.SelLength
+		    iLength = oTextArea.SelectionLength
 		    
 		  end if
 		  
@@ -577,7 +577,7 @@ Protected Module TextAreaRTFUtilities
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub setRTF(extends ta as TextArea, rtf as string, applyStyles as boolean = true, moveToBeginning as boolean = false)
+		Sub setRTF(extends ta as DesktopTextArea, rtf as string, applyStyles as boolean = true, moveToBeginning as boolean = false)
 		  
 		  #if not DebugBuild
 		    
@@ -599,8 +599,8 @@ Protected Module TextAreaRTFUtilities
 		  if moveToBeginning then
 		    
 		    ' Move to the beginning of the text.
-		    ta.SelStart = 0
-		    ta.SelLength = 0
+		    ta.SelectionStart = 0
+		    ta.SelectionLength = 0
 		    
 		  end if
 		  
@@ -625,6 +625,7 @@ Protected Module TextAreaRTFUtilities
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -632,18 +633,23 @@ Protected Module TextAreaRTFUtilities
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -651,6 +657,7 @@ Protected Module TextAreaRTFUtilities
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

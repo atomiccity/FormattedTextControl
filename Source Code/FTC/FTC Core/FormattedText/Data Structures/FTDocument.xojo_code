@@ -3837,7 +3837,7 @@ Inherits FTBase
 		  end if
 		  
 		  '--------------------------------------------
-		  ' Invalidate the background.
+		  ' Refresh the background.
 		  '--------------------------------------------
 		  
 		  ' Has the page count changed?
@@ -11085,7 +11085,7 @@ Inherits FTBase
 		  position = (getPageHeightLength + getPageSpace) * page
 		  
 		  ' Check the range.
-		  if position > parentControl.getVScrollbar.Maximum then position = parentControl.getVScrollbar.Maximum
+		  if position > parentControl.getVScrollbar.MaximumValue then position = parentControl.getVScrollbar.MaximumValue
 		  
 		  ' Scroll to the page.
 		  parentControl.getVScrollbar.Value = position
@@ -15868,11 +15868,15 @@ Inherits FTBase
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="isTyping"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -15880,18 +15884,23 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -15899,6 +15908,7 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

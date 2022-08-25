@@ -559,7 +559,7 @@ Protected Module FTUtilities
 		    ' System.Gestalt("sys3", sys3) then
 		    ' end if
 		    
-		    dim oVersion as OSVersionInfo = OSXVersionInfo.OSVersion
+		    dim oVersion as OSVersionInfo = OSVersion
 		    
 		    sys1 = oVersion.major
 		    sys2 = oVersion.minor
@@ -620,8 +620,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = obj.font
-		  scratchGraphic.TextSize = obj.getFontSize
+		  scratchGraphic.FontName = obj.font
+		  scratchGraphic.FontSize = obj.getFontSize
 		  scratchGraphic.Bold = obj.bold
 		  scratchGraphic.Italic = obj.italic
 		  
@@ -643,8 +643,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = font
-		  scratchGraphic.TextSize = Round(fontSize * scale)
+		  scratchGraphic.FontName = font
+		  scratchGraphic.FontSize = Round(fontSize * scale)
 		  scratchGraphic.Bold = false
 		  scratchGraphic.Italic = false
 		  
@@ -666,8 +666,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = obj.font
-		  scratchGraphic.TextSize = obj.getFontSize
+		  scratchGraphic.FontName = obj.font
+		  scratchGraphic.FontSize = obj.getFontSize
 		  scratchGraphic.Bold = obj.bold
 		  scratchGraphic.Italic = obj.italic
 		  
@@ -689,8 +689,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = font
-		  scratchGraphic.TextSize = fontSize
+		  scratchGraphic.FontName = font
+		  scratchGraphic.FontSize = fontSize
 		  
 		  ' Compute the height of the string.
 		  return scratchGraphic.TextHeight * scale
@@ -710,8 +710,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = obj.getFontName
-		  scratchGraphic.TextSize = obj.getFontSize
+		  scratchGraphic.FontName = obj.getFontName
+		  scratchGraphic.FontSize = obj.getFontSize
 		  scratchGraphic.Bold = obj.getBold
 		  scratchGraphic.Italic = obj.getItalic
 		  #If XojoVersion > 2015.03 Then
@@ -736,8 +736,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = obj.font
-		  scratchGraphic.TextSize = Round(obj.getFontSize * scale)
+		  scratchGraphic.FontName = obj.font
+		  scratchGraphic.FontSize = Round(obj.getFontSize * scale)
 		  scratchGraphic.Bold = obj.bold
 		  scratchGraphic.Italic = obj.italic
 		  #If XojoVersion > 2015.03 Then
@@ -763,8 +763,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = obj.font
-		  scratchGraphic.TextSize = Round(obj.getFontSize * scale)
+		  scratchGraphic.FontName = obj.font
+		  scratchGraphic.FontSize = Round(obj.getFontSize * scale)
 		  scratchGraphic.Bold = obj.bold
 		  scratchGraphic.Italic = obj.italic
 		  #If XojoVersion > 2015.03 Then
@@ -789,8 +789,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = obj.font
-		  scratchGraphic.TextSize = Round(obj.getFontSize * scale)
+		  scratchGraphic.FontName = obj.font
+		  scratchGraphic.FontSize = Round(obj.getFontSize * scale)
 		  scratchGraphic.Bold = obj.bold
 		  scratchGraphic.Italic = obj.italic
 		  #If XojoVersion > 2015.03 Then
@@ -816,8 +816,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = font
-		  scratchGraphic.TextSize = size
+		  scratchGraphic.FontName = font
+		  scratchGraphic.FontSize = size
 		  scratchGraphic.Bold = bold
 		  scratchGraphic.Italic = italic
 		  #If XojoVersion > 2015.03 Then
@@ -843,8 +843,8 @@ Protected Module FTUtilities
 		  #endif
 		  
 		  ' Set up for the correct font.
-		  scratchGraphic.TextFont = obj.font
-		  scratchGraphic.TextSize = size
+		  scratchGraphic.FontName = obj.font
+		  scratchGraphic.FontSize = size
 		  scratchGraphic.Bold = obj.bold
 		  scratchGraphic.Italic = obj.italic
 		  
@@ -1390,6 +1390,7 @@ Protected Module FTUtilities
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -1397,18 +1398,23 @@ Protected Module FTUtilities
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -1416,6 +1422,7 @@ Protected Module FTUtilities
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

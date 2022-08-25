@@ -1383,7 +1383,7 @@ Inherits FTBase
 		  if (lineType = Line_Type.Last) or (lineType = Line_Type.Both_First_And_Last) then
 		    
 		    ' Set up the display font.
-		    g.TextFont = "Arial"
+		    g.FontName = "Arial"
 		    g.TextSize = PILCROW_SIZE * scale
 		    g.bold = false
 		    g.Italic = false
@@ -1952,6 +1952,7 @@ Inherits FTBase
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -1959,24 +1960,31 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

@@ -4,7 +4,7 @@ Protected Module modHiDPT
 		Function MacOS10_7_Or_Better() As Boolean
 		  //Retina displays are currently only available on Mac OS and 10.7 or greater.
 		  #if TargetMacOS then
-		    dim oVersion as OSVersionInfo = OSXVersionInfo.OSVersion
+		    dim oVersion as OSVersionInfo = OSVersion
 		    
 		    return oVersion.major >=10 and oVersion.minor > 6
 		    
@@ -27,7 +27,27 @@ Protected Module modHiDPT
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function ScalingFactor(Extends G As Graphics) As Double
+		Function ScaleFactor(Extends W As DesktopWindow) As Double
+		  #If XojoVersion >= 2016.02 then
+		    return w.ScaleFactor
+		  #else
+		    #if TargetMacOS then
+		      //This must be checked because Mac OS 10.6 doesn't handle Retina display Mac's.
+		      if MacOS10_7_Or_Better = false then
+		        return 1
+		      end
+		      
+		      Declare Function BackingScaleFactor Lib "AppKit" Selector "backingScaleFactor" (Target As WindowPtr) As Double
+		      Return BackingScaleFactor(W)
+		    #else
+		      Return 1
+		    #endif
+		  #Endif
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function ScaleFactor(Extends G As Graphics) As Double
 		  #If XojoVersion >= 2016.02 then
 		    return g.ScaleX
 		  #else
@@ -49,26 +69,6 @@ Protected Module modHiDPT
 		      Else
 		        Return 1
 		      End If
-		    #else
-		      Return 1
-		    #endif
-		  #Endif
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function ScalingFactor(Extends W As Window) As Double
-		  #If XojoVersion >= 2016.02 then
-		    return w.ScaleFactor
-		  #else
-		    #if TargetMacOS then
-		      //This must be checked because Mac OS 10.6 doesn't handle Retina display Mac's.
-		      if MacOS10_7_Or_Better = false then
-		        return 1
-		      end
-		      
-		      Declare Function BackingScaleFactor Lib "AppKit" Selector "backingScaleFactor" (Target As WindowPtr) As Double
-		      Return BackingScaleFactor(W)
 		    #else
 		      Return 1
 		    #endif
@@ -98,6 +98,7 @@ Protected Module modHiDPT
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -105,18 +106,23 @@ Protected Module modHiDPT
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -124,6 +130,7 @@ Protected Module modHiDPT
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module
