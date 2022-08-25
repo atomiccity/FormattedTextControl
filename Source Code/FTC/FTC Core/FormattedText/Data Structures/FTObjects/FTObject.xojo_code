@@ -2,7 +2,7 @@
 Protected Class FTObject
 Inherits FTBase
 	#tag Method, Flags = &h0
-		Function callConstructContextualMenu(base as Menuitem, x as integer, y as integer) As boolean
+		Function callConstructContextualMenu(base as DesktopMenuItem, x as integer, y as integer) As boolean
 		  
 		  #if not DebugBuild
 		    
@@ -19,7 +19,7 @@ Inherits FTBase
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function callContextualMenuAction(hitItem as MenuItem) As boolean
+		Function callContextualMenuAction(selectedItem as DesktopMenuItem) As boolean
 		  
 		  #if not DebugBuild
 		    
@@ -30,7 +30,7 @@ Inherits FTBase
 		  #endif
 		  
 		  ' Call the event.
-		  return ContextualMenuAction(hitItem)
+		  return ContextualMenuAction(selectedItem)
 		  
 		End Function
 	#tag EndMethod
@@ -586,6 +586,23 @@ Inherits FTBase
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub drawBackgroundToPDF(g as PDFgraphics, x as integer, y as integer, leftPoint as integer, rightPoint as integer, lineTop as double, lineHeight as double, printScale as double)
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  ' Draw the background.
+		  Call paintBackground(g, x, y, leftPoint, rightPoint, lineTop, lineHeight, True, printScale)
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub drawForeground(g as graphics, page as integer, x as integer, y as integer, leftPoint as integer, rightPoint as integer, beforeSpace as double, afterSpace as double, printing as boolean, printScale as double)
 		  
 		  #if not DebugBuild
@@ -599,6 +616,29 @@ Inherits FTBase
 		  ' Draw the object.
 		  call paintForeground(g, x, y, _
 		  leftPoint, rightPoint, beforeSpace, afterSpace, printing, printScale)
+		  
+		  ' Save the drawing coordinates.
+		  lastDrawnPage = page
+		  lastDrawnX = x
+		  lastDrawnY = y
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub drawForegroundToPDF(g as graphics, page as integer, x as integer, y as integer, leftPoint as integer, rightPoint as integer, beforeSpace as double, afterSpace as double, printScale as double)
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  ' Draw the object.
+		  call paintForeground(g, x, y, _
+		  leftPoint, rightPoint, beforeSpace, afterSpace, True, printScale)
 		  
 		  ' Save the drawing coordinates.
 		  lastDrawnPage = page
@@ -652,21 +692,21 @@ Inherits FTBase
 		    end if
 		    
 		    ' Save the current color.
-		    saveColor = g.ForeColor
+		    saveColor = g.DrawingColor
 		    
 		    ' Set the underline line color.
 		    if colorOpacity >0 then
 		      dim c as color = me.getHyperLinkColor(0)
-		      g.ForeColor= RGB(c.Red,c.Green,c.Blue,colorOpacity/100 * 255)
+		      g.DrawingColor= RGB(c.Red,c.Green,c.Blue,colorOpacity/100 * 255)
 		    else
-		      g.ForeColor = me.getHyperLinkColor(0)
+		      g.DrawingColor = me.getHyperLinkColor(0)
 		    end
 		    
 		    ' Draw the line.
-		    g.FillRect(x, yPos, width, If(g.PenHeight < 1, 1 * scale, g.PenHeight))
+		    g.FillRectangle(x, yPos, width, If(g.PenHeight < 1, 1 * scale, g.PenHeight))
 		    
 		    ' Restore the color.
-		    g.ForeColor = saveColor
+		    g.DrawingColor = saveColor
 		    
 		  end if
 		  
@@ -716,16 +756,16 @@ Inherits FTBase
 		    end if
 		    
 		    ' Save the current color.
-		    saveColor = g.ForeColor
+		    saveColor = g.DrawingColor
 		    
 		    ' Set the underline line color.
-		    g.ForeColor = markColor
+		    g.DrawingColor = markColor
 		    
 		    ' Draw the line.
 		    g.DrawLine(x, yPos, x + width, yPos)
 		    
 		    ' Restore the color.
-		    g.ForeColor = saveColor
+		    g.DrawingColor = saveColor
 		    
 		  end if
 		  
@@ -767,10 +807,10 @@ Inherits FTBase
 		  if lineWidth = 0 then lineWidth = BLANK_SPACE
 		  
 		  ' Set the color.
-		  g.ForeColor = getBackgroundColor
+		  g.DrawingColor = getBackgroundColor
 		  
 		  ' Draw the background.
-		  g.FillRect(x, lineTop, lineWidth, lineHeight)
+		  g.FillRectangle(x, lineTop, lineWidth, lineHeight)
 		  
 		End Sub
 	#tag EndMethod
@@ -811,7 +851,11 @@ Inherits FTBase
 		  '--------------------------------------------
 		  
 		  ' Get the starting position.
-		  xPos = x + getWidth(1, selectStart - 1, scale)
+		  If g IsA PDFGraphics Then
+		    xPos = x + getWidth(PDFGraphics(g), 1, selectStart - 1, scale)
+		  Else
+		    xPos = x + getWidth(1, selectStart - 1, scale)
+		  End If
 		  
 		  ' Is this an empty paragraph item?
 		  if emptySelect then
@@ -825,8 +869,11 @@ Inherits FTBase
 		    if ((selectStart <> 1) or (selectEnd <> getLength)) then
 		      
 		      ' Get the partial text width.
-		      lineWidth = getWidth(selectStart, selectEnd, scale)
-		      
+		      If g IsA PDFGraphics Then
+		        lineWidth = getWidth(PDFGraphics(g), selectStart, selectEnd, scale)
+		      Else
+		        lineWidth = getWidth(selectStart, selectEnd, scale)
+		      End If
 		    else
 		      
 		      ' Get the whole text width.
@@ -855,12 +902,12 @@ Inherits FTBase
 		  if parentControl.getFocusState then
 		    
 		    ' Set the in focus selection color.
-		    g.ForeColor = HighlightColor
+		    g.DrawingColor = HighlightColor
 		    
 		  else
 		    
 		    ' Set the out of focus selection color.
-		    g.ForeColor = FTUtilities.OUT_OF_FOCUS_COLOR
+		    g.DrawingColor = FTUtilities.OUT_OF_FOCUS_COLOR
 		    
 		  end if
 		  
@@ -868,10 +915,10 @@ Inherits FTBase
 		  if useBackgroundColor then
 		    
 		    ' Get the color.
-		    c = g.ForeColor
+		    c = g.DrawingColor
 		    
 		    ' Set the color.
-		    g.ForeColor = RGB(c.Red - HIGHLIGHT_COLOR_TINT, _
+		    g.DrawingColor = RGB(c.Red - HIGHLIGHT_COLOR_TINT, _
 		    c.Green - HIGHLIGHT_COLOR_TINT, _
 		    c.Blue - HIGHLIGHT_COLOR_TINT)
 		    
@@ -909,7 +956,7 @@ Inherits FTBase
 		  saveSelectDimensions(xPos, lineTop, lineWidth, lineHeight)
 		  
 		  ' Draw the selection.
-		  g.FillRect(selectX, selectY, selectWidth, selectHeight)
+		  g.FillRectangle(selectX, selectY, selectWidth, selectHeight)
 		  
 		End Sub
 	#tag EndMethod
@@ -952,16 +999,16 @@ Inherits FTBase
 		    ypos = y - (getAscent(scale) / 3)
 		    
 		    ' Save the current color.
-		    saveColor = g.ForeColor
+		    saveColor = g.DrawingColor
 		    
 		    ' Set the underline line color.
-		    ' g.ForeColor = textColor  //Removed.  Not setting it will make sure it uses the same opacity setting as our text
+		    ' g.DrawingColor = textColor  //Removed.  Not setting it will make sure it uses the same opacity setting as our text
 		    
 		    ' Draw the strike through line.
-		    g.FillRect(x, yPos, width, If(g.PenHeight < 1, 1 * scale, g.PenHeight))
+		    g.FillRectangle(x, yPos, width, If(g.PenHeight < 1, 1 * scale, g.PenHeight))
 		    
 		    ' Restore the color.
-		    g.ForeColor = saveColor
+		    g.DrawingColor = saveColor
 		  end if
 		  
 		End Sub
@@ -1012,16 +1059,16 @@ Inherits FTBase
 		    End If
 		    
 		    ' Save the current color.
-		    saveColor = g.ForeColor
+		    saveColor = g.DrawingColor
 		    
 		    ' Set the underline line color.
-		    ' g.ForeColor = textColor  //Removed.  Not setting it will make sure it uses the same opacity setting as our text
+		    ' g.DrawingColor = textColor  //Removed.  Not setting it will make sure it uses the same opacity setting as our text
 		    
 		    ' Draw the line.
-		    g.FillRect(x, yPos, width, If(g.PenHeight < 1, 1 * scale, g.PenHeight))
+		    g.FillRectangle(x, yPos, width, If(g.PenHeight < 1, 1 * scale, g.PenHeight))
 		    
 		    ' Restore the color.
-		    g.ForeColor = saveColor
+		    g.DrawingColor = saveColor
 		    
 		  End If
 		  
@@ -1676,7 +1723,41 @@ Inherits FTBase
 		  #endif
 		  
 		  ' Return the partial width of the object.
-		  return partialWidth(startIndex, endIndex, scale, currentWidth)
+		  Return partialWidth(startIndex, endIndex, scale, currentWidth)
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getWidth(g as PDFgraphics, scale as double, currentWidth as double = 0.0) As double
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  ' Return the width of the object.
+		  return WidthPDF(g, scale, currentWidth)
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getWidth(g as PDFgraphics, startIndex as integer, endIndex as integer, scale as double = 1.0, currentWidth as double = 0.0) As double
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  ' Return the partial width of the object.
+		  return PartialWidthPDF(g, startIndex, endIndex, scale, currentWidth)
 		  
 		End Function
 	#tag EndMethod
@@ -2103,11 +2184,11 @@ Inherits FTBase
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event ConstructContextualMenu(base as MenuItem, x as integer, y as integer) As boolean
+		Event ConstructContextualMenu(base as DesktopMenuItem, x as integer, y as integer) As boolean
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event ContextualMenuAction(hitItem as MenuItem) As boolean
+		Event ContextualMenuAction(selectedItem As DesktopMenuItem) As boolean
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -2127,11 +2208,19 @@ Inherits FTBase
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
+		Event PartialWidthPDF(g as PDFgraphics, startIndex as integer, endIndex as integer, scale as double, startPosition as double) As double
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
 		Event ScaleChanged()
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
 		Event Width(scale as double, startPosition as double) As double
+	#tag EndHook
+
+	#tag Hook, Flags = &h0
+		Event WidthPDF(g as PDFgraphics, scale as double, startPosition as double) As double
 	#tag EndHook
 
 
@@ -2310,43 +2399,59 @@ Inherits FTBase
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="colorOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hasShadow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HyperLink"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorDisabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cC0C0C0"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorRollover"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorVisited"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -2354,11 +2459,15 @@ Inherits FTBase
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="inNewWindow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -2366,68 +2475,95 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="markColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="marked"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowAngle"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowBlur"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOffset"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="strikeThrough"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="textColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -2435,17 +2571,23 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="underline"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="useCustomHyperLinkColor"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

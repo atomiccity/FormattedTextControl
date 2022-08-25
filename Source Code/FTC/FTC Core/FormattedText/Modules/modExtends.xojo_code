@@ -1,14 +1,14 @@
 #tag Module
 Protected Module modExtends
 	#tag Method, Flags = &h0
-		Sub AddItemAndTag(extends base as MenuItem, sText as string, Tag as Variant)
-		  base.Append(New MenuItem(sText))
-		  base.Item(base.Count - 1).Tag = tag
+		Sub AddItemAndTag(extends base as DesktopMenuItem, sText as string, Tag as Variant)
+		  base.AddMenu(New DesktopMenuItem(sText))
+		  base.MenuAt(base.Count - 1).Tag = tag
 		End Sub
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub DrawTriangle(extends lst as Listbox, g as Graphics, bSelected as Boolean = false)
+		Sub DrawTriangle(extends lst as DesktopListBox, g as Graphics, bSelected as Boolean = false)
 		  #Pragma Unused lst
 		  
 		  // Settings
@@ -47,7 +47,9 @@ Protected Module modExtends
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -55,12 +57,15 @@ Protected Module modExtends
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -68,6 +73,7 @@ Protected Module modExtends
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -75,6 +81,7 @@ Protected Module modExtends
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

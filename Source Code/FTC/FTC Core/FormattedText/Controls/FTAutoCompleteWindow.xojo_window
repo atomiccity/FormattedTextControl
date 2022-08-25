@@ -1,52 +1,53 @@
-#tag Window
-Begin Window FTAutoCompleteWindow
-   BackColor       =   &cFFFFFF00
+#tag DesktopWindow
+Begin DesktopWindow FTAutoCompleteWindow
    Backdrop        =   0
-   CloseButton     =   False
-   Compatibility   =   ""
+   BackgroundColor =   &cFFFFFF00
    Composite       =   False
-   Frame           =   3
+   DefaultLocation =   0
    FullScreen      =   False
-   FullScreenButton=   False
-   HasBackColor    =   False
+   HasBackgroundColor=   False
+   HasCloseButton  =   False
+   HasFullScreenButton=   False
+   HasMaximizeButton=   False
+   HasMinimizeButton=   False
    Height          =   250
    ImplicitInstance=   False
-   LiveResize      =   False
    MacProcID       =   1040
-   MaxHeight       =   32000
-   MaximizeButton  =   False
-   MaxWidth        =   32000
+   MaximumHeight   =   32000
+   MaximumWidth    =   32000
    MenuBar         =   0
    MenuBarVisible  =   True
-   MinHeight       =   64
-   MinimizeButton  =   False
-   MinWidth        =   64
-   Placement       =   0
+   MinimumHeight   =   64
+   MinimumWidth    =   64
    Resizeable      =   False
    Title           =   ""
+   Type            =   3
    Visible         =   True
    Width           =   150
-   Begin Listbox lbOption
-      AutoDeactivate  =   True
-      AutoHideScrollbars=   True
+   Begin DesktopListBox lbOption
+      AllowAutoDeactivate=   True
+      AllowAutoHideScrollbars=   True
+      AllowExpandableRows=   False
+      AllowFocusRing  =   False
+      AllowResizableColumns=   False
+      AllowRowDragging=   False
+      AllowRowReordering=   False
       Bold            =   False
-      Border          =   True
       ColumnCount     =   1
-      ColumnsResizable=   False
       ColumnWidths    =   ""
-      DataField       =   ""
-      DataSource      =   ""
       DefaultRowHeight=   -1
+      DropIndicatorVisible=   False
       Enabled         =   True
-      EnableDrag      =   False
-      EnableDragReorder=   False
-      GridLinesHorizontal=   0
-      GridLinesVertical=   0
-      HasHeading      =   False
+      FontName        =   "System"
+      FontSize        =   0.0
+      FontUnit        =   0
+      GridLineStyle   =   0
+      HasBorder       =   True
+      HasHeader       =   False
+      HasHorizontalScrollbar=   False
+      HasVerticalScrollbar=   True
       HeadingIndex    =   -1
       Height          =   250
-      HelpTag         =   ""
-      Hierarchical    =   False
       Index           =   -2147483648
       InitialParent   =   ""
       InitialValue    =   ""
@@ -58,40 +59,34 @@ Begin Window FTAutoCompleteWindow
       LockRight       =   True
       LockTop         =   True
       RequiresSelection=   True
+      RowSelectionType=   0
       Scope           =   0
-      ScrollbarHorizontal=   False
-      ScrollBarVertical=   True
-      SelectionType   =   0
-      ShowDropIndicator=   False
       TabIndex        =   0
       TabPanelIndex   =   0
       TabStop         =   True
-      TextFont        =   "System"
-      TextSize        =   0.0
-      TextUnit        =   0
+      Tooltip         =   ""
       Top             =   0
       Transparent     =   False
       Underline       =   False
-      UseFocusRing    =   False
       Visible         =   True
       Width           =   150
       _ScrollOffset   =   0
       _ScrollWidth    =   -1
    End
 End
-#tag EndWindow
+#tag EndDesktopWindow
 
 #tag WindowCode
 	#tag Event
-		Function KeyDown(Key As String) As Boolean
+		Function KeyDown(key As String) As Boolean
 		  select case Asc(Key)
 		  case 30 'up arrow
-		    lbOption.ListIndex = Max(0, lbOption.ListIndex-1)
+		    lbOption.SelectedRowIndex = Max(0, lbOption.SelectedRowIndex-1)
 		  case 31 'down arrow
-		    lbOption.ListIndex = Min(lbOption.ListCount-1, lbOption.ListIndex+1)
+		    lbOption.SelectedRowIndex = Min(lbOption.RowCount-1, lbOption.SelectedRowIndex+1)
 		  case 13, 9 'completion keys
 		    dim s as string
-		    s = lbOption.Cell(lbOption.ListIndex, 0)
+		    s = lbOption.CellTextAt(lbOption.SelectedRowIndex, 0)
 		    m_ftc.hideAutoComplete
 		    if m_sPrefix.Len<s.Len then
 		      s = s.Mid(m_sPrefix.Len+1)
@@ -110,7 +105,7 @@ End
 	#tag EndEvent
 
 	#tag Event
-		Sub Open()
+		Sub Opening()
 		  #If TargetWindows
 		    Const WS_BORDER = &H800000
 		    Const WS_CAPTION = &h00C00000
@@ -129,9 +124,9 @@ End
 
 
 	#tag Method, Flags = &h21
-		Private Sub ChangeWindowStyle(win as Window, flag as Integer, set as Boolean)
+		Private Sub ChangeWindowStyle(win as DesktopWindow, flag as Integer, set as Boolean)
 		  #If TargetWindows
-		    #If TargetWin32
+		    #If TargetWindows
 		      Dim oldFlags As Integer
 		      Dim newFlags As Integer
 		      Dim styleFlags As Integer
@@ -147,7 +142,7 @@ End
 		      Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (hwnd As Integer, nIndex As Integer, dwNewLong As Integer) As Integer
 		      Declare Function SetWindowPos Lib "user32" (hwnd As Integer, hWndInstertAfter As Integer, x As Integer, y As Integer, cx As Integer, cy As Integer, flags As Integer) As Integer
 		      
-		      oldFlags = GetWindowLong( win.Handle, GWL_STYLE )
+		      oldFlags = GetWindowLong( win.Handle.Integer, GWL_STYLE )
 		      
 		      If Not set Then
 		        newFlags = BitwiseAnd( oldFlags, Bitwise.OnesComplement( flag ) )
@@ -156,8 +151,8 @@ End
 		      End
 		      
 		      
-		      styleFlags = SetWindowLong( win.Handle, GWL_STYLE, newFlags )
-		      styleFlags = SetWindowPos( win.Handle, 0, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + SWP_FRAMECHANGED )
+		      styleFlags = SetWindowLong( win.Handle.Integer, GWL_STYLE, newFlags )
+		      styleFlags = SetWindowPos( win.Handle.Integer, 0, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + SWP_FRAMECHANGED )
 		      
 		    #Else
 		      //64 Bit
@@ -196,9 +191,9 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub ChangeWindowStyleEx(w as Window, flag as Integer, set as Boolean)
+		Private Sub ChangeWindowStyleEx(w as DesktopWindow, flag as Integer, set as Boolean)
 		  #If targetWindows 
-		    #If TargetWin32
+		    #If TargetWindows
 		      Dim oldFlags As Integer
 		      Dim newFlags As Integer
 		      Dim styleFlags As Integer
@@ -214,7 +209,7 @@ End
 		      Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (hwnd As Integer, nIndex As Integer, dwNewLong As Integer) As Integer
 		      Declare Function SetWindowPos Lib "user32" (hwnd As Integer, hWndInstertAfter As Integer, x As Integer, y As Integer, cx As Integer, cy As Integer, flags As Integer) As Integer
 		      
-		      oldFlags = GetWindowLong(w.WinHWND, GWL_EXSTYLE)
+		      oldFlags = GetWindowLong(w.Handle.Integer, GWL_EXSTYLE)
 		      
 		      If Not set Then
 		        newFlags = BitwiseAnd( oldFlags, Bitwise.OnesComplement( flag ) )
@@ -223,8 +218,8 @@ End
 		      End
 		      
 		      
-		      styleFlags = SetWindowLong( w.WinHWND, GWL_EXSTYLE, newFlags )
-		      styleFlags = SetWindowPos( w.WinHWND, 0, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + SWP_FRAMECHANGED )
+		      styleFlags = SetWindowLong( w.Handle.Integer, GWL_EXSTYLE, newFlags )
+		      styleFlags = SetWindowPos( w.Handle.Integer, 0, 0, 0, 0, 0, SWP_NOMOVE + SWP_NOSIZE + SWP_NOZORDER + SWP_FRAMECHANGED )
 		      
 		    #Else 
 		      Dim oldFlags As Integer
@@ -275,35 +270,35 @@ End
 		    #Pragma DisableBackgroundTasks
 		    FreezeUpdate(lbOption)
 		    lbOption.ScrollPosition = 0
-		    lbOption.ScrollBarVertical = False
+		    lbOption.HasVerticalScrollbar = False
 		  #Else
 		    lbOption.Visible = False
 		  #EndIf
 		  
-		  lbOption.DeleteAllRows
+		  lbOption.RemoveAllRows
 		  For Each s As String In arsOption
 		    lbOption.AddRow(s)
 		  Next
 		  
 		  #If TargetWindows
-		    lbOption.ScrollBarVertical = True
+		    lbOption.HasVerticalScrollbar = True
 		    UnfreezeUpdate(lbOption)
-		    lbOption.Invalidate(False)
+		    lbOption.Refresh(False)
 		  #Else
 		    lbOption.Visible = True
 		    lbOption.SetFocus
 		  #EndIf
 		  
-		  lbOption.ListIndex = 0
+		  lbOption.SelectedRowIndex = 0
 		  m_sPrefix = sPrefix
 		  
-		  Height = Min(lbOption.RowHeight*lbOption.ListCount+4, m_ftc.Height)
+		  Height = Min(lbOption.RowHeight*lbOption.RowCount+4, m_ftc.Height)
 		  
 		  Dim iMaxWidth As Integer
 		  Dim pict As New Picture(1,1,32)
 		  Dim g As Graphics = pict.Graphics
 		  g.TextSize = 0
-		  g.TextFont = "System"
+		  g.FontName = "System"
 		  
 		  Dim iMax As Integer = Min(arsOption.Ubound, 99)
 		  For i As Integer = 0 To iMax
@@ -320,12 +315,12 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub FreezeUpdate(w as RectControl)
+		Private Sub FreezeUpdate(w as DesktopUIControl)
 		  #If TargetWindows
 		    // We use the WM_SETREDRAW message to lock the redraw
 		    // state of the window (note that this can be used for controls as well)
 		    Const WM_SETREDRAW = &hB
-		    Call SendMessage( w.Handle, WM_SETREDRAW, 0, 0 )
+		    Call SendMessage( w.Handle.Integer, WM_SETREDRAW, 0, 0 )
 		  #Else
 		    #Pragma Unused w
 		  #endif
@@ -343,7 +338,7 @@ End
 		    Const SWP_NOMOVE = &h2
 		    Const SWP_NOACTIVATE = &h10
 		    
-		    SetWindowPos( Self.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE )
+		    SetWindowPos( Self.Handle.Integer, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOSIZE + SWP_NOMOVE + SWP_NOACTIVATE )
 		    
 		  #endif
 		End Sub
@@ -370,12 +365,12 @@ End
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Sub UnfreezeUpdate(w as RectControl)
+		Private Sub UnfreezeUpdate(w as DesktopUIControl)
 		  #If TargetWindows
 		    // We use the WM_SETREDRAW message to unlock the redraw
 		    // state of the window (note that this can be used for controls as well)
 		    Const WM_SETREDRAW = &hB
-		    Call SendMessage( w.Handle, WM_SETREDRAW, 1, 0 )
+		    Call SendMessage( w.Handle.Integer, WM_SETREDRAW, 1, 0 )
 		  #Else
 		    #Pragma Unused w
 		  #Endif
@@ -409,7 +404,7 @@ End
 
 #tag Events lbOption
 	#tag Event
-		Sub LostFocus()
+		Sub FocusLost()
 		  if me.Visible then
 		    m_ftc.hideAutoComplete
 		  end if
@@ -426,12 +421,12 @@ End
 	#tag Event
 		Sub MouseUp(x As Integer, y As Integer)
 		  dim row as integer = me.RowFromXY(x,y)
-		  if row<0 or row>=me.ListCount then
+		  if row<0 or row>=me.RowCount then
 		    return
 		  end if
 		  
 		  dim s as string
-		  s = lbOption.Cell(row, 0)
+		  s = lbOption.CellTextAt(row, 0)
 		  
 		  m_ftc.hideAutoComplete
 		  if m_sPrefix.Len<s.Len then
@@ -441,10 +436,10 @@ End
 		End Sub
 	#tag EndEvent
 	#tag Event
-		Function KeyDown(Key As String) As Boolean
+		Function KeyDown(key As String) As Boolean
 		  if Key=Chr(9) then
 		    dim s as string
-		    s = lbOption.Cell(lbOption.ListIndex, 0)
+		    s = lbOption.CellTextAt(lbOption.SelectedRowIndex, 0)
 		    m_ftc.hideAutoComplete
 		    if m_sPrefix.Len<s.Len then
 		      s = s.Mid(m_sPrefix.Len+1)
@@ -457,40 +452,43 @@ End
 #tag EndEvents
 #tag ViewBehavior
 	#tag ViewProperty
-		Name="BackColor"
+		Name="MinimumWidth"
 		Visible=true
-		Group="Appearance"
-		InitialValue="&hFFFFFF"
-		Type="Color"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Backdrop"
-		Visible=true
-		Group="Appearance"
-		Type="Picture"
-		EditorType="Picture"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="CloseButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Composite"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Frame"
-		Visible=true
-		Group="Appearance"
-		InitialValue="0"
+		Group="Size"
+		InitialValue="64"
 		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MinimumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="64"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumWidth"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MaximumHeight"
+		Visible=true
+		Group="Size"
+		InitialValue="32000"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Type"
+		Visible=true
+		Group="Frame"
+		InitialValue="0"
+		Type="Types"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Document"
@@ -507,135 +505,43 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="FullScreen"
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="FullScreenButton"
+		Name="HasCloseButton"
 		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="HasBackColor"
-		Visible=true
-		Group="Appearance"
-		InitialValue="False"
-		Type="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Height"
-		Visible=true
-		Group="Position"
-		InitialValue="400"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="ImplicitInstance"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="Interfaces"
+		Name="HasMaximizeButton"
 		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="LiveResize"
-		Visible=true
-		Group="Appearance"
+		Group="Frame"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
-		Name="MacProcID"
+		Name="HasMinimizeButton"
 		Visible=true
-		Group="Appearance"
+		Group="Frame"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="HasFullScreenButton"
+		Visible=true
+		Group="Frame"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="DefaultLocation"
+		Visible=true
+		Group="Behavior"
 		InitialValue="0"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaximizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MaxWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="32000"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBar"
-		Visible=true
-		Group="Appearance"
-		Type="MenuBar"
-		EditorType="MenuBar"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MenuBarVisible"
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinHeight"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinimizeButton"
-		Visible=true
-		Group="Appearance"
-		InitialValue="True"
-		Type="Boolean"
-		EditorType="Boolean"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="MinWidth"
-		Visible=true
-		Group="Position"
-		InitialValue="64"
-		Type="Integer"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Name"
-		Visible=true
-		Group="ID"
-		Type="String"
-		EditorType="String"
-	#tag EndViewProperty
-	#tag ViewProperty
-		Name="Placement"
-		Visible=true
-		Group="Position"
-		InitialValue="0"
-		Type="Integer"
+		Type="Locations"
 		EditorType="Enum"
 		#tag EnumValues
 			"0 - Default"
@@ -646,19 +552,116 @@ End
 		#tag EndEnumValues
 	#tag EndViewProperty
 	#tag ViewProperty
+		Name="HasBackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="BackgroundColor"
+		Visible=true
+		Group="Background"
+		InitialValue="&hFFFFFF"
+		Type="Color"
+		EditorType="Color"
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Backdrop"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="Picture"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Composite"
+		Visible=true
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="FullScreen"
+		Visible=false
+		Group="Appearance"
+		InitialValue="False"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Height"
+		Visible=true
+		Group="Position"
+		InitialValue="400"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="ImplicitInstance"
+		Visible=true
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Interfaces"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MacProcID"
+		Visible=true
+		Group="Appearance"
+		InitialValue="0"
+		Type="Integer"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBar"
+		Visible=true
+		Group="Appearance"
+		InitialValue=""
+		Type="MenuBar"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="MenuBarVisible"
+		Visible=false
+		Group="Appearance"
+		InitialValue="True"
+		Type="Boolean"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
+		Name="Name"
+		Visible=true
+		Group="ID"
+		InitialValue=""
+		Type="String"
+		EditorType=""
+	#tag EndViewProperty
+	#tag ViewProperty
 		Name="Resizeable"
 		Visible=true
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Super"
 		Visible=true
 		Group="ID"
+		InitialValue=""
 		Type="String"
-		EditorType="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Title"
@@ -666,6 +669,7 @@ End
 		Group="Appearance"
 		InitialValue="Untitled"
 		Type="String"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Visible"
@@ -673,7 +677,7 @@ End
 		Group="Appearance"
 		InitialValue="True"
 		Type="Boolean"
-		EditorType="Boolean"
+		EditorType=""
 	#tag EndViewProperty
 	#tag ViewProperty
 		Name="Width"
@@ -681,5 +685,6 @@ End
 		Group="Position"
 		InitialValue="600"
 		Type="Integer"
+		EditorType=""
 	#tag EndViewProperty
 #tag EndViewBehavior

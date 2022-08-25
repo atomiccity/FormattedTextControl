@@ -160,9 +160,10 @@ Inherits FTObject
 		  ' Draw the mispelled indicator.
 		  drawMispelledIndicator(g, x, y, printing, scale)
 		  
-		  g.AntiAlias = True
+		  g.AntiAliased = True
+		  
 		  ' Set the graphics characteristics.
-		  g.TextFont = Font
+		  g.FontName = Font
 		  g.Bold = bold
 		  g.Italic = italic
 		  #If XojoVersion > 2015.03 Then
@@ -175,26 +176,26 @@ Inherits FTObject
 		  If colorOpacity >0 Then
 		    
 		    If HyperLink.LenB>0 Then
-		      g.ForeColor= RGB(hyperLinkColor.Red,hyperLinkColor.Green,hyperLinkColor.Blue,Round(colorOpacity/100 * 255))
+		      g.DrawingColor= RGB(hyperLinkColor.Red,hyperLinkColor.Green,hyperLinkColor.Blue,Round(colorOpacity/100 * 255))
 		      
 		    Else
-		      g.ForeColor= RGB(TextColor.Red,TextColor.Green,TextColor.Blue,Round(colorOpacity/100 * 255))
+		      g.DrawingColor= RGB(TextColor.Red,TextColor.Green,TextColor.Blue,Round(colorOpacity/100 * 255))
 		      
 		    End
 		    
 		  Else
 		    
 		    If HyperLink.LenB>0 Then
-		      g.ForeColor = getHyperLinkColor(0)
+		      g.DrawingColor = getHyperLinkColor(0)
 		      
 		    Else
-		      g.ForeColor = TextColor
+		      g.DrawingColor = TextColor
 		      
 		    End If
 		  End
 		  
 		  
-		  g.TextSize = Round(fontSize * scale)
+		  g.FontSize = Round(fontSize * scale)
 		  
 		  'draw a shadow
 		  // Issue 3700: Drop Shadow available on Windows and Linux
@@ -222,7 +223,7 @@ Inherits FTObject
 		    shadowMask.Graphics.FillRect(0, 0, shadowMask.Width, shadowMask.Height)
 		    
 		    ' draw Text for shadow
-		    shadowMask.Graphics.TextFont = Font
+		    shadowMask.Graphics.FontName = Font
 		    shadowMask.Graphics.Bold = bold
 		    shadowMask.Graphics.Italic = italic
 		    #If XojoVersion > 2015.03 Then
@@ -230,7 +231,7 @@ Inherits FTObject
 		    #endif
 		    
 		    shadowMask.Graphics.ForeColor = RGB(shadowColor.Red, shadowColor.Green, shadowColor.Blue, shadowOpacity)
-		    shadowMask.Graphics.TextSize = Round(fontSize * scale)
+		    shadowMask.Graphics.FontSize = Round(fontSize * scale)
 		    shadowMask.Graphics.DrawString(Text, 0 + offsetX, g.TextAscent - offsety)
 		    
 		    ' blur Mask Picture
@@ -249,17 +250,17 @@ Inherits FTObject
 		  End
 		  
 		  ' Draw the string.
-		  g.DrawString(Text, x, y)
+		  g.DrawText(Text, x, y)
 		  
 		  
 		  ' Draw the underline.
-		  drawUnderline(g.TextSize, g, drawWidth, x, y, printing, scale)
+		  drawUnderline(g.FontSize, g, drawWidth, x, y, printing, scale)
 		  
 		  ' Draw the strike through.
-		  drawStrikethrough(g.TextSize, g, drawWidth, x, y, printing, scale)
+		  drawStrikethrough(g.FontSize, g, drawWidth, x, y, printing, scale)
 		  
 		  ' Draw the hyperlink ->changed by Paul
-		  drawHyperLink(g.TextSize, g, drawWidth, x, y, printing, scale)
+		  drawHyperLink(g.FontSize, g, drawWidth, x, y, printing, scale)
 		  
 		End Sub
 	#tag EndEvent
@@ -278,7 +279,26 @@ Inherits FTObject
 		  #pragma Unused startPosition
 		  
 		  ' Look up the partial width.
-		  return lookupWidth(startIndex, endIndex, scale)
+		  Return lookupWidth(startIndex, endIndex, scale)
+		  
+		End Function
+	#tag EndEvent
+
+	#tag Event
+		Function PartialWidthPDF(g as PDFgraphics, startIndex as integer, endIndex as integer, scale as double, startPosition as double) As double
+		  
+		  #If Not DebugBuild
+		    
+		    #Pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #Pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #Pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #EndIf
+		  
+		  #Pragma Unused startPosition
+		  
+		  ' Look up the partial width.
+		  Return lookupWidth(g, startIndex, endIndex, scale)
 		  
 		End Function
 	#tag EndEvent
@@ -315,6 +335,25 @@ Inherits FTObject
 		  
 		  ' Look up the width.
 		  return lookupWidth(1, length, scale)
+		  
+		End Function
+	#tag EndEvent
+
+	#tag Event
+		Function WidthPDF(g as PDFgraphics, scale as double, startPosition as double) As double
+		  
+		  #If Not DebugBuild
+		    
+		    #Pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #Pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #Pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #EndIf
+		  
+		  #Pragma Unused startPosition
+		  
+		  ' Look up the width.
+		  Return lookupWidth(g, 1, length, scale)
 		  
 		End Function
 	#tag EndEvent
@@ -1142,7 +1181,7 @@ Inherits FTObject
 		    ypos = y + INDICATOR_OFFSET
 		    
 		    ' Set the misspelled line color.
-		    g.ForeColor = MISSPELLED_COLOR
+		    g.DrawingColor = MISSPELLED_COLOR
 		    
 		    ' Get the width.
 		    drawWidth = Round(getWidth(parentControl.getDisplayScale))
@@ -1922,7 +1961,7 @@ Inherits FTObject
 		  else
 		    
 		    ' Get the width.
-		    value = self.getStringWidth(startIndex, endIndex, scale)
+		    value = self.getStringWidth(doc.GetGraphics, startIndex, endIndex, scale)
 		    
 		    ' Have we reached the upper bound?
 		    if widthCache.Count <= MAX_CACHE_LOOKUP then
@@ -1933,6 +1972,29 @@ Inherits FTObject
 		    end if
 		    
 		  end if
+		  
+		  ' Return the calculated width.
+		  return value
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h21
+		Private Function lookupWidth(g as PDFgraphics, startIndex as integer, endIndex as integer, scale as double) As double
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Var value As Double
+		  
+		  ' Get the width.
+		  value = Self.getStringWidth(g, startIndex, endIndex, scale)
+		  
 		  
 		  ' Return the calculated width.
 		  return value
@@ -2658,61 +2720,83 @@ Inherits FTObject
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="bold"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="colorOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="font"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="string"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="fontSize"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hasShadow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HyperLink"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorDisabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cC0C0C0"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorRollover"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorVisited"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -2720,17 +2804,23 @@ Inherits FTObject
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="inNewWindow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="italic"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -2738,85 +2828,119 @@ Inherits FTObject
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="markColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="marked"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="misspelled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="scriptLevel"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowAngle"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowBlur"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOffset"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="strikeThrough"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="textCacheScale"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="textColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -2824,22 +2948,31 @@ Inherits FTObject
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="underline"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="useCustomHyperLinkColor"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="characterSpacing"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

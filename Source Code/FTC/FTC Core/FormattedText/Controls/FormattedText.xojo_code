@@ -1,8 +1,8 @@
 #tag Class
 Protected Class FormattedText
-Inherits TextInputCanvas
+Inherits DesktopTextInputCanvas
 	#tag Event
-		Function BaselineAtIndex(index as integer) As integer
+		Function BaselineAtIndex(index As Integer) As Integer
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -45,7 +45,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function CharacterAtPoint(x as integer, y as integer) As integer
+		Function CharacterAtPoint(x As Integer, y As Integer) As Integer
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -69,18 +69,18 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub Close()
+		Sub Closing()
 		  
-		  #if not DebugBuild
+		  #If Not DebugBuild
 		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    #Pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #Pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #Pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
 		    
-		  #endif
+		  #EndIf
 		  
 		  ' Is there anything to do?
-		  if doc is nil then return
+		  If doc Is Nil Then Return
 		  
 		  ' Turn off the threads.
 		  doc.releaseThreads
@@ -91,28 +91,28 @@ Inherits TextInputCanvas
 		  ' Release all the data.
 		  doc.dispose
 		  undo.dispose
-		  anchorLeft = nil
-		  anchorOffset = nil
-		  anchorRight = nil
-		  currentInsertionOffset = nil
-		  picDisplay = nil
-		  doc = nil
-		  imageResizeOffset = nil
-		  insertionPointTimer = nil
-		  lastEndPosition = nil
-		  contextualInsertionOffset = nil
-		  styleBinding = nil
-		  undo = nil
-		  updateTimer = nil
+		  anchorLeft = Nil
+		  anchorOffset = Nil
+		  anchorRight = Nil
+		  currentInsertionOffset = Nil
+		  picDisplay = Nil
+		  doc = Nil
+		  imageResizeOffset = Nil
+		  insertionPointTimer = Nil
+		  lastEndPosition = Nil
+		  contextualInsertionOffset = Nil
+		  styleBinding = Nil
+		  undo = Nil
+		  updateTimer = Nil
 		  
 		  ' Show the cursor.
-		  setVisibleCursorState(true)
+		  setVisibleCursorState(True)
 		  
 		End Sub
 	#tag EndEvent
 
 	#tag Event
-		Function ConstructContextualMenu(base as MenuItem, x as Integer, y as Integer) As Boolean
+		Function ConstructContextualMenu(base As DesktopMenuItem, x As Integer, y As Integer) As Boolean
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -131,17 +131,17 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function ContextualMenuAction(hitItem as MenuItem) As Boolean
-		  #if not DebugBuild
+		Function ContextualMenuItemSelected(selectedItem As DesktopMenuItem) As Boolean
+		  #If Not DebugBuild
 		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    #Pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #Pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #Pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
 		    
-		  #endif
+		  #EndIf
 		  
 		  ' Process the contextual menu event.
-		  return callContextualMenuAction(hitItem)
+		  Return callContextualMenuAction(selectedItem)
 		  
 		End Function
 	#tag EndEvent
@@ -163,7 +163,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function DoCommand(command as string) As boolean
+		Function DoCommand(command As String) As Boolean
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -181,7 +181,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function DragEnter(obj As DragItem, action As Integer) As Boolean
+		Function DragEnter(obj As DragItem, action As DragItem.Types) As Boolean
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -204,7 +204,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub DragExit(obj As DragItem, action As Integer)
+		Sub DragExit(obj As DragItem, action As DragItem.Types)
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -227,7 +227,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub DropObject(obj As DragItem, action As Integer)
+		Sub DropObject(obj As DragItem, action As DragItem.Types)
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -266,7 +266,45 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function FontNameAtLocation(location as integer) As string
+		Sub FocusLost()
+		  #If Not DebugBuild
+		    
+		    #Pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #Pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #Pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #EndIf
+		  
+		  If AutoComplete Then
+		    If m_bAutoCompleteVisible Then
+		      Return
+		    End If
+		  End If
+		  
+		  ' Process the lost focus event.
+		  callLostFocus
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Sub FocusReceived()
+		  #If Not DebugBuild
+		    
+		    #Pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #Pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #Pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #EndIf
+		  
+		  ' Process the focus event.
+		  callGotFocus
+		  
+		End Sub
+	#tag EndEvent
+
+	#tag Event
+		Function FontNameAtLocation(location As Integer) As String
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -286,7 +324,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function FontSizeAtLocation(location as integer) As integer
+		Function FontSizeAtLocation(location As Integer) As Integer
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -306,22 +344,6 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub GotFocus()
-		  #if not DebugBuild
-		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
-		    
-		  #endif
-		  
-		  ' Process the focus event.
-		  callGotFocus
-		  
-		End Sub
-	#tag EndEvent
-
-	#tag Event
 		Function IncompleteTextRange() As TextRange
 		  #if not DebugBuild
 		    
@@ -336,7 +358,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub InsertText(text as string, range as TextRange)
+		Sub InsertText(text As String, range As TextRange)
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -356,35 +378,13 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function IsEditable() As boolean
+		Function IsEditable() As Boolean
 		  return true
 		End Function
 	#tag EndEvent
 
 	#tag Event
-		Sub LostFocus()
-		  #if not DebugBuild
-		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
-		    
-		  #endif
-		  
-		  if AutoComplete then
-		    if m_bAutoCompleteVisible then
-		      return
-		    end if
-		  end if
-		  
-		  ' Process the lost focus event.
-		  callLostFocus
-		  
-		End Sub
-	#tag EndEvent
-
-	#tag Event
-		Function MouseDown(x as Integer, y as Integer) As Boolean
+		Function MouseDown(x As Integer, y As Integer) As Boolean
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -404,7 +404,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub MouseDrag(x as Integer, y as Integer)
+		Sub MouseDrag(x As Integer, y As Integer)
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -456,7 +456,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub MouseMove(X As Integer, Y As Integer)
+		Sub MouseMove(x As Integer, y As Integer)
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -476,7 +476,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub MouseUp(x as Integer, y as Integer)
+		Sub MouseUp(x As Integer, y As Integer)
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -496,7 +496,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function MouseWheel(X As Integer, Y As Integer, deltaX as Integer, deltaY as Integer) As Boolean
+		Function MouseWheel(x As Integer, y As Integer, deltaX As Integer, deltaY As Integer) As Boolean
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -516,67 +516,67 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub Open()
-		  #pragma DisableBackgroundTasks
+		Sub Opening()
+		  #Pragma DisableBackgroundTasks
 		  
-		  #if not DebugBuild
+		  #If Not DebugBuild
 		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    #Pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #Pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #Pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
 		    
-		  #endif
+		  #EndIf
 		  
 		  ' Initialize the utilities module.
 		  FTUtilities.initialize
 		  
-		  #if DebugBuild
+		  #If DebugBuild
 		    
 		    ' Set up the ID.
 		    objectCountId = FTUtilities.getNewID
 		    
-		  #endif
+		  #EndIf
 		  
 		  ' Turn off any updates.
-		  call setInhibitUpdates(true)
+		  Call setInhibitUpdates(True)
 		  
 		  ' Get the double click time.
 		  tripleClickTime = FTUtilities.getDoubleClickTime * 2
 		  
-		  #if false
+		  #If False
 		    ' Turn off erasure of the background to prevent
 		    ' flickering under Win32.
-		    EraseBackground = false
+		    EraseBackground = False
 		    
 		    ' Ignore scrollbar events during initialization.
-		    inhibitScroll = true
+		    inhibitScroll = True
 		    
 		    ' Adjust the display picture.
 		    adjustDisplayPicture
 		    
 		    ' Set Accept Tabs = true
-		    AcceptTabs = true
+		    AcceptTabs = True
 		    
 		    ' Set AcceptFocus = true
-		    AcceptFocus = true
-		  #else
+		    AcceptFocus = True
+		  #Else
 		    ' Ignore scrollbar events during initialization.
-		    inhibitScroll = true
+		    inhibitScroll = True
 		    
 		    ' Adjust the display picture.
 		    adjustDisplayPicture
-		  #endif
+		  #EndIf
 		  
 		  ' Get the custom document.
 		  doc = newDocument
 		  
 		  ' Was a custom document created?
-		  if doc is nil then
+		  If doc Is Nil Then
 		    
 		    ' Create the document.
-		    doc = new FTDocument(self, backgroundColor)
+		    doc = New FTDocument(Self, backgroundColor)
 		    
-		  end if
+		  End If
 		  
 		  ' Create the anchors.
 		  anchorLeft = doc.newInsertionOffset(0, 0)
@@ -585,7 +585,7 @@ Inherits TextInputCanvas
 		  lastEndPosition = doc.newInsertionOffset(0, 0)
 		  
 		  ' Create the undo manager.
-		  undo = new FTCUndoManager(self, UndoLimit)
+		  undo = New FTCUndoManager(Self, UndoLimit)
 		  
 		  ' Get the scrollbars.
 		  openScrollbars
@@ -609,22 +609,22 @@ Inherits TextInputCanvas
 		  draw
 		  
 		  ' Allow scrollbar events.
-		  inhibitScroll = false
+		  inhibitScroll = False
 		  
 		  ' Set the default tab stops.
 		  getDoc.addDefaultTabStops(FTTabStop.TabStopType.Left, DefaultTabStop)
 		  
 		  ' Turn on updates.
-		  call setInhibitUpdates(false)
+		  Call setInhibitUpdates(False)
 		  
 		  ' Create the insertion point timer to blink the insertion caret.
-		  insertionPointTimer = new FTInsertionPointTimer(self)
+		  insertionPointTimer = New FTInsertionPointTimer(Self)
 		  
 		  ' Create the update timer.
-		  updateTimer = new FTUpdateTimer(self)
+		  updateTimer = New FTUpdateTimer(Self)
 		  
 		  ' Make sure the caret is off.
-		  blinkCaret(false)
+		  blinkCaret(False)
 		  
 		  ' Clear any undo activity.
 		  undo.clear
@@ -633,7 +633,7 @@ Inherits TextInputCanvas
 		  undo.startNewInsertion
 		  
 		  ' Flag the initialization period is over.
-		  initialized = true
+		  initialized = True
 		  
 		  ' Get everything started.
 		  doc.markAllParagraphsDirty
@@ -650,7 +650,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub Paint(g as Graphics, areas() as object)
+		Sub Paint(g As Graphics, areas() As Xojo.Rect)
 		  #pragma unused areas
 		  
 		  #if not DebugBuild
@@ -659,32 +659,34 @@ Inherits TextInputCanvas
 		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
 		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
 		    
-		  #endif
+		  #EndIf
 		  
-		  // -- Code modified by Sam Rowlands on May 2nd
-		  Try
-		    Dim isHIDPIMode as boolean = g.ScalingFactor <> 1
-		    if isHIDPIMode <> isHIDPT then
-		      // -- When changing, this is a bit of a nightmare, took me ages to track down
-		      //    that the doc.resolution also needed updating. But finally it's done and
-		      //    now it works correctly for me :)
-		      
-		      isHIDPT = isHIDPIMode
-		      doc.setMonitorPixelsPerInch GetMonitorPixelsPerInch
-		      resize
-		    end if
-		  end Try
-		  // -- End Sam's modification
+		  g.DrawPicture(picDisplay, 1, 1, picDisplay.Width/g.ScaleX, picDisplay.Height/g.ScaleY, 0, 0, picDisplay.Width, picDisplay.Height)
 		  
-		  ' Update the display.
-		  if IsHiDPT then
-		    'scale down the picture for rendering.
-		    'Since adjustDisplayPicture scales by 2 for retina displays, we're always guaranteed
-		    'to get an integer result when we divide by 2 here.
-		    g.DrawPicture(picDisplay, 1, 1, picDisplay.Width/2, picDisplay.Height/2, 0, 0, picDisplay.Width, picDisplay.Height)
-		  else
-		    g.DrawPicture(picDisplay, 1, 1)
-		  end
+		  ' // -- Code modified by Sam Rowlands on May 2nd
+		  ' Try
+		  ' Dim isHIDPIMode As Boolean = g.ScaleFactor <> 1
+		  ' if isHIDPIMode <> isHIDPT then
+		  ' // -- When changing, this is a bit of a nightmare, took me ages to track down
+		  ' //    that the doc.resolution also needed updating. But finally it's done and
+		  ' //    now it works correctly for me :)
+		  ' 
+		  ' isHIDPT = isHIDPIMode
+		  ' doc.setMonitorPixelsPerInch GetMonitorPixelsPerInch
+		  ' resize
+		  ' end if
+		  ' end Try
+		  ' // -- End Sam's modification
+		  ' 
+		  ' ' Update the display.
+		  ' if IsHiDPT then
+		  ' 'scale down the picture for rendering.
+		  ' 'Since adjustDisplayPicture scales by 2 for retina displays, we're always guaranteed
+		  ' 'to get an integer result when we divide by 2 here.
+		  ' g.DrawPicture(picDisplay, 1, 1, picDisplay.Width/2, picDisplay.Height/2, 0, 0, picDisplay.Width, picDisplay.Height)
+		  ' else
+		  ' g.DrawPicture(picDisplay, 1, 1)
+		  ' end
 		  
 		  ' Fill in the corner between the scrollbars.
 		  drawCorner(g)
@@ -699,7 +701,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function RectForRange(byref range as TextRange) As REALbasic.Rect
+		Function RectForRange(ByRef range As TextRange) As Xojo.Rect
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -743,7 +745,7 @@ Inherits TextInputCanvas
 		  //        If you find an instance where it doesn't work please let us know!  - BKeeney Software
 		  
 		  Dim x, y As Integer
-		  dim r as new REALbasic.Rect
+		  dim r as new xojo.Rect
 		  
 		  // Get the page.
 		  Dim iPage As Integer = doc.getInsertionPoint.getCurrentProxyParagraph.getAbsolutePage
@@ -834,7 +836,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Sub SetIncompleteText(text as string, replacementRange as TextRange, relativeSelection as TextRange)
+		Sub SetIncompleteText(text As String, replacementRange As TextRange, relativeSelection As TextRange)
 		  #pragma Unused replacementRange
 		  #pragma Unused relativeSelection
 		  
@@ -862,7 +864,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function TextForRange(range as TextRange) As string
+		Function TextForRange(range As TextRange) As String
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -888,7 +890,7 @@ Inherits TextInputCanvas
 	#tag EndEvent
 
 	#tag Event
-		Function TextLength() As integer
+		Function TextLength() As Integer
 		  #if not DebugBuild
 		    
 		    #pragma BoundsChecking FTC_BOUNDSCHECKING
@@ -1049,7 +1051,7 @@ Inherits TextInputCanvas
 		  
 		  const DISPLAY_ADJUST = 2
 		  
-		  if self.Window.ScalingFactor <> 1 then
+		  if self.Window.ScaleFactor <> 1 then
 		    IsHiDPT = true
 		  else
 		    IsHiDPT = false
@@ -1161,7 +1163,7 @@ Inherits TextInputCanvas
 		    if total > picDisplay.height then
 		      
 		      ' Set the vertical scrollbar limits.
-		      vScrollbar.Maximum = total - picDisplay.height
+		      vScrollbar.MaximumValue = total - picDisplay.height
 		      vScrollbar.PageStep = picDisplay.height * 0.75
 		      
 		      ' Is the scrollbar invisible?
@@ -1176,7 +1178,7 @@ Inherits TextInputCanvas
 		    else
 		      
 		      ' Turn off the scroll bar.
-		      vScrollbar.Maximum = 0
+		      vScrollbar.MaximumValue = 0
 		      vScrollbar.PageStep = 0
 		      
 		      ' Are we hiding the scrollbar?
@@ -1211,7 +1213,7 @@ Inherits TextInputCanvas
 		    if total > picDisplay.width then
 		      
 		      ' Set the horizontal scrollbar limits.
-		      hScrollbar.Maximum = total - picDisplay.width
+		      hScrollbar.MaximumValue = total - picDisplay.width
 		      hScrollbar.PageStep = total / 2
 		      
 		      ' Is the scrollbar invisible?
@@ -1226,7 +1228,7 @@ Inherits TextInputCanvas
 		    else
 		      
 		      ' Turn off the scroll bar.
-		      hScrollbar.Maximum = 0
+		      hScrollbar.MaximumValue = 0
 		      hScrollbar.PageStep = 0
 		      
 		      ' Are we hiding the scrollbar?
@@ -1575,7 +1577,7 @@ Inherits TextInputCanvas
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function callConstructContexualMenu(base as MenuItem, x as integer, y as integer) As boolean
+		Function callConstructContexualMenu(base as DesktopMenuItem, x as integer, y as integer) As boolean
 		  
 		  #if not DebugBuild
 		    
@@ -1642,7 +1644,7 @@ Inherits TextInputCanvas
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function callContextualMenuAction(hitItem as MenuItem) As boolean
+		Function callContextualMenuAction(selectedItem as DesktopMenuItem) As boolean
 		  
 		  #if not DebugBuild
 		    
@@ -1669,7 +1671,7 @@ Inherits TextInputCanvas
 		  if not (targetContextualMenuPicture is nil) then
 		    
 		    ' Call the event on the object.
-		    if targetContextualMenuPicture.callContextualMenuAction(hitItem) then return true
+		    if targetContextualMenuPicture.callContextualMenuAction(selectedItem) then return true
 		    
 		  end if
 		  
@@ -1677,7 +1679,7 @@ Inherits TextInputCanvas
 		  doc.setInsertionPoint(contextualInsertionOffset, false)
 		  
 		  ' Pass the call through.
-		  result = ContextualMenuAction(hitItem)
+		  result = ContextualMenuAction(selectedItem)
 		  
 		  ' We are done doing the mouse event.
 		  inMouseDownEvent = false
@@ -1742,7 +1744,7 @@ Inherits TextInputCanvas
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Sub callDropObject(obj as DragItem, action as integer)
+		Sub callDropObject(obj as DragItem, action as DragItem.Types)
 		  
 		  #pragma DisableBackgroundTasks
 		  
@@ -1778,12 +1780,12 @@ Inherits TextInputCanvas
 		  if IsHiDPT then
 		    //BK TODO
 		    'RAS: 9 Jan 15 We need to offset the control from the mouse position
-		    x = (me.MouseX * 2) - (me.left * 2)
-		    y = (me.MouseY * 2) - (me.Top * 2)
+		    x = (Me.mouseDragX * 2) - (Me.Left * 2)
+		    y = (Me.mouseDragY * 2) - (Me.Top * 2)
 		  else
 		    'RAS: 9 Jan 15 We need to offset the control from the mouse position
-		    x = me.MouseX - me.left
-		    y = me.MouseY - me.Top
+		    x = Me.mouseDragX - Me.Left
+		    y = me.mouseDragY - me.Top
 		  end if
 		  
 		  ' Are we in a picture?
@@ -1995,10 +1997,10 @@ Inherits TextInputCanvas
 		  '--------------------------------------
 		  
 		  ' Enable the menu items.
-		  if isClearActionAvailable then EditClear.Enable
-		  if isCopyActionAvailable then EditCopy.Enable
-		  if isCutActionAvailable then EditCut.Enable
-		  if isPasteActionAvailable then EditPaste.Enable
+		  If isClearActionAvailable Then EditClear.Enabled = True
+		  if isCopyActionAvailable then EditCopy.Enabled = True
+		  if isCutActionAvailable then EditCut.Enabled = True
+		  if isPasteActionAvailable then EditPaste.Enabled = True
 		  
 		  '--------------------------------------
 		  ' Undo.
@@ -2008,7 +2010,7 @@ Inherits TextInputCanvas
 		  if isUndoActionAvailable then
 		    
 		    ' Enable the menu item.
-		    EditUndo.Enable
+		    EditUndo.Enabled = True
 		    
 		    ' Set up the name of the undo menu item.
 		    EditUndo.Text = Trim(FTCStrings.UNDO + " " + undo.getUndoName)
@@ -2035,7 +2037,7 @@ Inherits TextInputCanvas
 		  if isRedoActionAvailable then
 		    
 		    ' Enable the menu item.
-		    EditRedo.Enable
+		    EditRedo.Enabled = True
 		    
 		    ' Set up the name of the redo menu item.
 		    EditRedo.Text = Trim(FTCStrings.REDO + " " + undo.getRedoName)
@@ -6252,6 +6254,14 @@ Inherits TextInputCanvas
 
 	#tag Method, Flags = &h0
 		Sub editPasteAction()
+		  ' Summary: 
+		  '
+		  ' history:
+		  ' date       developer           description 
+		  ' 16.07.2022 Daniel Fritzsche    creation 
+		  ' 16.07.2022 Daniel Fritzsche    1.0.0 - vcDocEditor - insert pic before text because a picture can have an url
+		  '
+		  ' HeaderEnd
 		  
 		  #if not DebugBuild
 		    
@@ -6344,17 +6354,8 @@ Inherits TextInputCanvas
 		      end if
 		      
 		      
-		      ' Is there text available?
-		    elseif cb.TextAvailable then
-		      
-		      '--------------------------------------------
-		      ' Text.
-		      '--------------------------------------------
-		      
-		      insertText(cb.text)
-		      
 		      ' Is there a picture available?
-		    elseif cb.PictureAvailable then
+		    ElseIf cb.PictureAvailable Then
 		      
 		      '--------------------------------------------
 		      ' Picture.
@@ -6362,7 +6363,18 @@ Inherits TextInputCanvas
 		      
 		      insertPicture(cb.Picture)
 		      
-		    end if
+		      ' Is there text available?
+		    ElseIf cb.TextAvailable Then
+		      
+		      '--------------------------------------------
+		      ' Text.
+		      '--------------------------------------------
+		      
+		      insertText(cb.Text)
+		      
+		      
+		      
+		    End If
 		    
 		    ' Close the clipboard.
 		    cb.close
@@ -7736,7 +7748,7 @@ Inherits TextInputCanvas
 		  else
 		    
 		    ' Create the drag item.
-		    d = New DragItem(self.TrueWindow, x, y, width, height)
+		    d = New DragItem(self.Window, x, y, width, height)
 		    
 		  end if
 		  
@@ -9370,7 +9382,7 @@ Inherits TextInputCanvas
 		  dim position as integer = vScrollbar.value + picDisplay.height
 		  
 		  ' Check the page range.
-		  if position > vScrollbar.maximum then position = vScrollbar.maximum
+		  if position > vScrollbar.MaximumValue then position = vScrollbar.MaximumValue
 		  
 		  ' Set flag so we don't scroll back to cursor position
 		  scrollToCaretFlag = false
@@ -9467,7 +9479,7 @@ Inherits TextInputCanvas
 		    position = vScrollbar.value + picDisplay.height
 		    
 		    ' Check the page range.
-		    if position > vScrollbar.maximum then position = vScrollbar.maximum
+		    if position > vScrollbar.MaximumValue then position = vScrollbar.MaximumValue
 		    
 		    ' Move up on page.
 		    vScrollbar.value = position
@@ -9553,7 +9565,7 @@ Inherits TextInputCanvas
 		  y = y + (recY - mouseDownY)
 		  
 		  ' Create the drag item.
-		  d = New DragItem(self.trueWindow, x, y, width, height)
+		  d = New DragItem(self.Window, x, y, width, height)
 		  
 		  ' Get the picture offset.
 		  offset = doc.getInsertionOffset
@@ -10375,7 +10387,7 @@ Inherits TextInputCanvas
 		    
 		    ' Check the range.
 		    position = Max(position, 0)
-		    position = Min(position, hScrollbar.Maximum)
+		    position = Min(position, hScrollbar.MaximumValue)
 		    
 		    ' Did anything change?
 		    if hScrollbar.Value <> position then
@@ -10531,6 +10543,14 @@ Inherits TextInputCanvas
 
 	#tag Method, Flags = &h0
 		Sub insertPicture(targetPicture as Picture, fi as FolderItem = nil)
+		  ' Summary: 
+		  '
+		  ' history:
+		  ' date       developer           description 
+		  ' 16.07.2022 Daniel Fritzsche    creation 
+		  ' 16.07.2022 Daniel Fritzsche    1.0.0 - vcDocEditor - bugfix retina images
+		  '
+		  ' HeaderEnd
 		  
 		  #if not DebugBuild
 		    
@@ -10547,10 +10567,11 @@ Inherits TextInputCanvas
 		  if targetPicture is nil then return
 		  
 		  ' Create the picture.
-		  p = new Picture(targetPicture.Width, targetPicture.Height, BIT_DEPTH)
+		  
+		  p = New Picture(targetPicture.Width, targetPicture.Height, BIT_DEPTH)
 		  
 		  ' Copy over the picture.
-		  p.Graphics.DrawPicture(targetPicture, 0, 0)
+		  p.Graphics.DrawPicture(targetPicture, 0, 0, p.Width, p.Height, 0, 0, p.Width, p.Height)
 		  
 		  ' Create the container.
 		  ftp = new FTPicture(self, p, true)
@@ -11618,7 +11639,7 @@ Inherits TextInputCanvas
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
-		Protected Sub mouseWheelScroll(hScrollbar as Scrollbar, vScrollbar as Scrollbar, deltaX as Integer, deltaY as integer, speed as integer = 4)
+		Protected Sub mouseWheelScroll(hScrollbar as DesktopScrollbar, vScrollbar as DesktopScrollbar, deltaX as Integer, deltaY as integer, speed as integer = 4)
 		  
 		  #if not DebugBuild
 		    
@@ -11740,12 +11761,12 @@ Inherits TextInputCanvas
 		  x = x + self.Left
 		  y = y + self.Top
 		  
-		  dim w as Window = self.Window
+		  dim w As DesktopWindow = self.Window
 		  while true
 		    x = x + w.Left
 		    y = y + w.Top
-		    if w isa ContainerControl then
-		      w = ContainerControl(w).Window
+		    If w IsA DesktopContainer Then
+		      w = DesktopContainer(w).Window
 		    else
 		      exit while
 		    end if
@@ -11898,7 +11919,7 @@ Inherits TextInputCanvas
 		    
 		  End If
 		  
-		  #If TargetWin32
+		  #If TargetWindows
 		    
 		    ' Set the page boundaries to print.
 		    firstPage = firstPage - 1
@@ -11929,21 +11950,10 @@ Inherits TextInputCanvas
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub Refresh(eraseBackground as boolean = true)
-		  
-		  #if not DebugBuild
-		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
-		    
-		  #endif
-		  
-		  #pragma Unused eraseBackground
-		  
-		  ' Perform an update.
-		  update(true, true)
+	#tag Method, Flags = &h21
+		Private Sub Refresh(immediately As Boolean = False)
+		  // Calling the overridden superclass method.
+		  Super.Refresh(immediately)
 		  
 		End Sub
 	#tag EndMethod
@@ -13151,30 +13161,30 @@ Inherits TextInputCanvas
 		  if state then
 		    
 		    ' Restore the auto enable state.
-		    EditUndo.AutoEnable = editMenuAutoEnableState.undo
-		    EditRedo.AutoEnable = editMenuAutoEnableState.redo //Comment out if no Redo Menu
-		    EditCut.AutoEnable = editMenuAutoEnableState.cut
-		    EditCopy.AutoEnable = editMenuAutoEnableState.copy
-		    EditPaste.AutoEnable = editMenuAutoEnableState.paste
-		    EditClear.AutoEnable = editMenuAutoEnableState.clear
+		    EditUndo.AutoEnabled = editMenuAutoEnableState.undo
+		    EditRedo.AutoEnabled = editMenuAutoEnableState.redo //Comment out if no Redo Menu
+		    EditCut.AutoEnabled = editMenuAutoEnableState.cut
+		    EditCopy.AutoEnabled = editMenuAutoEnableState.copy
+		    EditPaste.AutoEnabled = editMenuAutoEnableState.paste
+		    EditClear.AutoEnabled = editMenuAutoEnableState.clear
 		    
 		  else
 		    
 		    ' Save the current auto enable state.
-		    editMenuAutoEnableState.undo = EditUndo.AutoEnable
-		    editMenuAutoEnableState.redo = EditRedo.AutoEnable //Comment out if no Redo Menu
-		    editMenuAutoEnableState.cut = EditCut.AutoEnable
-		    editMenuAutoEnableState.copy = EditCopy.AutoEnable
-		    editMenuAutoEnableState.paste = EditPaste.AutoEnable
-		    editMenuAutoEnableState.clear = EditClear.AutoEnable
+		    editMenuAutoEnableState.undo = EditUndo.AutoEnabled
+		    editMenuAutoEnableState.redo = EditRedo.AutoEnabled //Comment out if no Redo Menu
+		    editMenuAutoEnableState.cut = EditCut.AutoEnabled
+		    editMenuAutoEnableState.copy = EditCopy.AutoEnabled
+		    editMenuAutoEnableState.paste = EditPaste.AutoEnabled
+		    editMenuAutoEnableState.clear = EditClear.AutoEnabled
 		    
 		    ' Turn off the auto enable state.
-		    EditUndo.AutoEnable = state
-		    EditRedo.AutoEnable = state //Comment out if no Redo Menu
-		    EditCut.AutoEnable = state
-		    EditCopy.AutoEnable = state
-		    EditPaste.AutoEnable = state
-		    EditClear.AutoEnable = state
+		    EditUndo.AutoEnabled = state
+		    EditRedo.AutoEnabled = state //Comment out if no Redo Menu
+		    EditCut.AutoEnabled = state
+		    EditCopy.AutoEnabled = state
+		    EditPaste.AutoEnabled = state
+		    EditClear.AutoEnabled = state
 		    
 		  end if
 		  
@@ -13415,7 +13425,7 @@ Inherits TextInputCanvas
 		  if not (vScrollbar is nil) then
 		    
 		    ' Are we within the vertical scroll bar?
-		    if x/self.Window.ScalingFactor >= (me.width - vScrollbar.width) then
+		    if x/self.Window.ScaleFactor >= (me.width - vScrollbar.width) then
 		      
 		      ' Use the arrow cursor.
 		      setMouseCursor(nil)
@@ -13435,7 +13445,7 @@ Inherits TextInputCanvas
 		  if not (hScrollbar is nil) then
 		    
 		    ' Are we within the vertical scroll bar?
-		    if y/self.Window.ScalingFactor >= (me.height * 2 - hScrollbar.height) then
+		    if y/self.Window.ScaleFactor >= (me.height * 2 - hScrollbar.height) then
 		      
 		      ' Use the arrow cursor.
 		      setMouseCursor(nil)
@@ -14009,8 +14019,8 @@ Inherits TextInputCanvas
 		  Dim y as integer
 		  
 		  ' Get the current mouse coordinates.
-		  x = me.MouseX - me.Left
-		  y = me.MouseY - me.Top
+		  x = Me.mouseDragX - Me.Left
+		  y = me.mouseDragY - me.Top
 		  
 		  ' Are we outside the control?
 		  if (x < 0) or (x > me.Width) or (y < 0) or (y > me.Height) then
@@ -14074,7 +14084,7 @@ Inherits TextInputCanvas
 		  TextChanged
 		  
 		  ' Restore the update state.
-		  call setInhibitUpdates(state)
+		  call setInhibitUpdates(False)
 		  
 		  ' Update the display.
 		  updateFull
@@ -14801,7 +14811,7 @@ Inherits TextInputCanvas
 		  #endif
 		  
 		  ' Do we need to compose the text?
-		  if compose then
+		  If compose Then
 		    
 		    ' Compose the pages.
 		    doc.compose
@@ -14820,7 +14830,7 @@ Inherits TextInputCanvas
 		  end if
 		  
 		  ' Draw the entire display.
-		  Invalidate(false)
+		  Refresh(false)
 		  
 		  #if DebugBuild
 		    
@@ -14989,7 +14999,7 @@ Inherits TextInputCanvas
 		    
 		    ' Check the range.
 		    position = Max(position, 0)
-		    position = Min(position, vScrollbar.Maximum)
+		    position = Min(position, vScrollbar.MaximumValue)
 		    
 		    ' Did anything change?
 		    if vScrollbar.Value <> position then
@@ -15014,11 +15024,11 @@ Inherits TextInputCanvas
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event ConstructContextualMenu(base as MenuItem, x as integer, y as integer) As boolean
+		Event ConstructContextualMenu(base as DesktopMenuItem, x as integer, y as integer) As boolean
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event ContextualMenuAction(hitItem as MenuItem) As boolean
+		Event ContextualMenuAction(selectedItem As DesktopMenuItem) As boolean
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -15034,11 +15044,11 @@ Inherits TextInputCanvas
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event DragEnter(obj as DragItem, action as integer) As boolean
+		Event DragEnter(obj As DragItem, action As DragItem.Types) As Boolean
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event DragExit(obj as DragItem, action as integer)
+		Event DragExit(obj As DragItem, action As DragItem.Types)
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -15050,7 +15060,7 @@ Inherits TextInputCanvas
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
-		Event DropObject(obj as DragItem, action as integer) As boolean
+		Event DropObject(obj As DragItem, action As DragItem.Types) As Boolean
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -15826,9 +15836,18 @@ Inherits TextInputCanvas
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="Tooltip"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -15836,6 +15855,7 @@ Inherits TextInputCanvas
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
 			EditorType="String"
 		#tag EndViewProperty
@@ -15843,6 +15863,7 @@ Inherits TextInputCanvas
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
 			EditorType="String"
 		#tag EndViewProperty
@@ -15856,13 +15877,17 @@ Inherits TextInputCanvas
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InitialParent"
+			Visible=false
 			Group="Position"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -15870,6 +15895,7 @@ Inherits TextInputCanvas
 			Name="LockBottom"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -15877,6 +15903,7 @@ Inherits TextInputCanvas
 			Name="LockLeft"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -15884,6 +15911,7 @@ Inherits TextInputCanvas
 			Name="LockRight"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -15891,6 +15919,7 @@ Inherits TextInputCanvas
 			Name="LockTop"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -15904,6 +15933,7 @@ Inherits TextInputCanvas
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TabPanelIndex"
+			Visible=false
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
@@ -15921,6 +15951,7 @@ Inherits TextInputCanvas
 			Name="Top"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -15949,13 +15980,6 @@ Inherits TextInputCanvas
 			EditorType="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="HelpTag"
-			Visible=true
-			Group="Appearance"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="Visible"
 			Visible=true
 			Group="Appearance"
@@ -15967,68 +15991,97 @@ Inherits TextInputCanvas
 			Name="AutoComplete"
 			Visible=true
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorDisabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&ccccccc"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorRollover"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorVisited"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="IsHiDPT"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="objectCountId"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_PageTop"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_xCaret"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_yCaret"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="updateFlag"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="xDisplayAlignmentOffset"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowBackgroundUpdates"
@@ -16036,6 +16089,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowPictures"
@@ -16043,6 +16097,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="BackgroundColor"
@@ -16050,6 +16105,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&cA0ADCD"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="BorderColor"
@@ -16057,6 +16113,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&ca0a0a0"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="CaretColor"
@@ -16064,6 +16121,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="CornerColor"
@@ -16071,6 +16129,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&cFFFFFF00"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DragAndDrop"
@@ -16078,6 +16137,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DrawControlBorder"
@@ -16085,6 +16145,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="true"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HScrollbarAutoHide"
@@ -16092,6 +16153,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InhibitSelections"
@@ -16099,6 +16161,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InvisiblesColor"
@@ -16106,6 +16169,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&c526AFF"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="MarginGuideColor"
@@ -16113,11 +16177,13 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="&cCACACA"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Mode"
 			Visible=true
 			Group="FT Behavior"
+			InitialValue=""
 			Type="Display_Mode"
 			EditorType="Enum"
 			#tag EnumValues
@@ -16133,6 +16199,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowInvisibles"
@@ -16140,6 +16207,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowMarginGuides"
@@ -16147,6 +16215,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowPilcrows"
@@ -16154,6 +16223,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="SpellCheckWhileTyping"
@@ -16161,6 +16231,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UndoLimit"
@@ -16168,6 +16239,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="128"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UsePageShadow"
@@ -16175,6 +16247,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="VScrollbarAutoHide"
@@ -16182,6 +16255,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="WordParagraphBackground"
@@ -16189,6 +16263,7 @@ Inherits TextInputCanvas
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="BottomMargin"
@@ -16196,6 +16271,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LeftMargin"
@@ -16203,6 +16279,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="PageHeight"
@@ -16210,6 +16287,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="11.0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="PageWidth"
@@ -16217,6 +16295,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="8.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="RightMargin"
@@ -16224,6 +16303,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TopMargin"
@@ -16231,6 +16311,7 @@ Inherits TextInputCanvas
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultFont"
@@ -16246,6 +16327,7 @@ Inherits TextInputCanvas
 			Group="FT Defaults"
 			InitialValue="12"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultTabStop"
@@ -16253,6 +16335,7 @@ Inherits TextInputCanvas
 			Group="FT Defaults"
 			InitialValue="0.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultTextColor"
@@ -16260,6 +16343,7 @@ Inherits TextInputCanvas
 			Group="FT Defaults"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DisplayAlignment"
@@ -16280,6 +16364,7 @@ Inherits TextInputCanvas
 			Group="FT Edit Mode"
 			InitialValue="0.06"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="EditViewPrintMargin"
@@ -16287,6 +16372,7 @@ Inherits TextInputCanvas
 			Group="FT Edit Mode"
 			InitialValue="0.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

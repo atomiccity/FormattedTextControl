@@ -66,7 +66,7 @@ Inherits FTPicture
 
 
 	#tag Method, Flags = &h0
-		Sub callDropObject(obj as DragItem, action as integer)
+		Sub callDropObject(obj as DragItem, action as DragItem.Types)
 		  
 		  #if not DebugBuild
 		    
@@ -364,10 +364,10 @@ Inherits FTPicture
 		  #endif
 		  
 		  ' Set the color to white.
-		  g.ForeColor = &cFFFFFF
+		  g.DrawingColor = &cFFFFFF
 		  
 		  ' Erase the picture.
-		  g.FillRect(0, 0, g.width, g.height)
+		  g.FillRectangle(0, 0, g.width, g.height)
 		  
 		  ' Call the event.
 		  Paint(g, print, printScale)
@@ -654,7 +654,7 @@ Inherits FTPicture
 
 
 	#tag Hook, Flags = &h0
-		Event DropObject(obj as DragItem, action as integer)
+		Event DropObject(obj as DragItem, action as DragItem.Types)
 	#tag EndHook
 
 	#tag Hook, Flags = &h0
@@ -746,57 +746,67 @@ Inherits FTPicture
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="borderColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
-			InheritedFrom="FTPicture"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="colorOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hasShadow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HyperLink"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="color"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorDisabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cC0C0C0"
 			Type="color"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorRollover"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="color"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorVisited"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="color"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -804,13 +814,15 @@ Inherits FTPicture
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="inNewWindow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -818,80 +830,95 @@ Inherits FTPicture
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="markColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="marked"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowAngle"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="double"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowBlur"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
 			Type="Color"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOffset"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="strikeThrough"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="textColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="color"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -899,20 +926,23 @@ Inherits FTPicture
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Object"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="underline"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="useCustomHyperLinkColor"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
-			InheritedFrom="FTObject"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

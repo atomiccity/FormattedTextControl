@@ -63,7 +63,7 @@ Inherits FTObject
 		    lineWidth = getWidth(getObjectScale(printing, printScale), currentWidth)
 		    
 		    ' Get the color.
-		    g.ForeColor = getObjectColor
+		    g.DrawingColor = getObjectColor
 		    
 		    ' Save the dimensions.
 		    saveSelectDimensions(x, lineTop, lineWidth, lineHeight)
@@ -75,7 +75,7 @@ Inherits FTObject
 		    lineWidth = getWidth(getObjectScale(printing, printScale), currentWidth)
 		    
 		    ' Use the background color.
-		    g.ForeColor = getBackgroundColor
+		    g.DrawingColor = getBackgroundColor
 		    
 		  else
 		    
@@ -93,7 +93,7 @@ Inherits FTObject
 		  end if
 		  
 		  ' Draw the background color.
-		  g.FillRect(x, lineTop, lineWidth, lineHeight)
+		  g.FillRectangle(x, lineTop, lineWidth, lineHeight)
 		  
 		  
 		End Sub
@@ -146,8 +146,8 @@ Inherits FTObject
 		    If Not printing Then
 		      
 		      ' Show the tab indicator.
-		      g.ForeColor = parentControl.InvisiblesColor
-		      g.TextFont = "Arial"
+		      g.DrawingColor = parentControl.InvisiblesColor
+		      g.FontName = "Arial"
 		      g.TextSize = 10 * printScale
 		      ' g.TextSize = 24 * printScale
 		      g.Underline = False
@@ -169,7 +169,7 @@ Inherits FTObject
 		  ' Scale the width for printing.
 		  Dim lineWidth As Double = getWidth(getObjectScale(printing, printScale), currentWidth)
 		  
-		  g.ForeColor = Me.TextColor
+		  g.DrawingColor = Me.TextColor
 		  
 		  Dim myScale As Double = 1.5 * Me.parentControl.getDisplayScale ' printScale
 		  Dim myPrintScale As Double = 1.5 * printScale
@@ -202,7 +202,7 @@ Inherits FTObject
 		      Dim newStep As Double = myStep / 1.5
 		      
 		      For i As Integer = 2 To width - .1 Step newStep
-		        g.FillRect(x + (stepWidth * i), y - (Me.getDescent(If(printing, myPrintScale, myScale))) + myscale, myWidth , myHeight)
+		        g.FillRectangle(x + (stepWidth * i), y - (Me.getDescent(If(printing, myPrintScale, myScale))) + myscale, myWidth , myHeight)
 		      Next
 		      
 		    Case Tab_Leader_Type.MiddleDot
@@ -223,7 +223,7 @@ Inherits FTObject
 		  Case Tab_Leader_Type.Underscore
 		    
 		    ' Draws Line with Fill Sign "_"
-		    g.FillRect(x + 5, y + (Me.getDescent(If(printing, myPrintScale, myScale)) / 3), lineWidth - 10,  myHeight-(.2* If(printing, myPrintScale, myScale)))
+		    g.FillRectangle(x + 5, y + (Me.getDescent(If(printing, myPrintScale, myScale)) / 3), lineWidth - 10,  myHeight-(.2* If(printing, myPrintScale, myScale)))
 		    
 		  End Select
 		  
@@ -584,43 +584,59 @@ Inherits FTObject
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="colorOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hasShadow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HyperLink"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorDisabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cC0C0C0"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorRollover"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorVisited"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -628,11 +644,15 @@ Inherits FTObject
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="inNewWindow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -640,68 +660,95 @@ Inherits FTObject
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="markColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="marked"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowAngle"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowBlur"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOffset"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="strikeThrough"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="textColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -709,20 +756,27 @@ Inherits FTObject
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="underline"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="useCustomHyperLinkColor"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Leader"
+			Visible=false
 			Group="Behavior"
 			InitialValue="Tab_Leader_Type.None"
 			Type="Tab_Leader_Type"

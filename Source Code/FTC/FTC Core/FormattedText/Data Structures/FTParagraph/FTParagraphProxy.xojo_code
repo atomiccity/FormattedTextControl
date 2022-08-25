@@ -552,6 +552,232 @@ Inherits FTBase
 		End Function
 	#tag EndMethod
 
+	#tag Method, Flags = &h21
+		Private Function drawLinesToPDF(g as PDFgraphics, y as double, printScale as double) As integer
+		  
+		  #pragma DisableBackgroundTasks
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim i as integer
+		  Dim scale as double
+		  Dim shiftedX as double
+		  Dim lineLength as double
+		  Dim wrapLength as double
+		  Dim rightlength as double
+		  Dim leftlength as double
+		  Dim firstLength as double
+		  Dim xCaret as double
+		  Dim yCaret as double
+		  Dim proxyHeight as integer
+		  Dim lineHeight as integer
+		  Dim endOfDoc as boolean
+		  
+		  ' Is there anything to do?
+		  if parent.getLineCount = 0 then return 0
+		  
+		  '----------------------------------------------
+		  ' Precalculate some values.
+		  '----------------------------------------------
+		  
+		  ' Is this the last paragraph?
+		  endOfDoc = (parent.getAbsoluteIndex = (doc.getParagraphCount - 1))
+		  
+		  ' Are we printing?
+		  'if printing then
+		  
+		  ' Use the print scale.
+		  scale = printScale
+		  
+		  ' else
+		  ' 
+		  ' ' Get the display scale.
+		  ' scale = parentControl.getDisplayScale
+		  ' 
+		  ' end if
+		  
+		  ' Calculate the lengths.
+		  leftlength = (doc.getLeftMarginWidth + parent.getLeftMarginWidth) * scale
+		  
+		  ' Are we in the normal or single view mode?
+		  if parentControl.isNormalViewMode or _
+		    parentControl.isSingleViewMode then
+		    
+		    ' Add in the horizontal offset.
+		    leftlength = leftlength + parentControl.getXDisplayPosition
+		    
+		  end if
+		  
+		  ' First length.
+		  firstLength = parent.getFirstIndentWidth(scale)
+		  
+		  ' Right length.
+		  rightlength = (doc.getPageWidthLength - doc.getRightMarginWidth) * scale
+		  
+		  ' Wrap length.
+		  wrapLength = parent.getWrapWidth * scale
+		  
+		  ' Set the position of the paragraph.
+		  setXPosition(leftlength)
+		  
+		  ' Are we in page view mode?
+		  if parentControl.isPageViewMode then
+		    
+		    ' Save the Y position.
+		    setYPosition(y)
+		    
+		  end if
+		  
+		  ' Are there any lines to draw.
+		  if lineEnd >= lineStart then
+		    
+		    ' Draw the background color.
+		    drawBackground(g, xPos, y, True, printScale)
+		    
+		  end if
+		  
+		  ' Set the position of the top left corner of the paragraph.
+		  xCaret = leftlength + 1
+		  
+		  // Mantis Ticket 3805: Wrong Caret y-Position in FTParagraph with BeforeSpace if Paragraph (continued Paragraph) breaks into two of more pages
+		  // Mantis Ticket 3821: Wrong y-Caret Position in very last FTParagraph if BeforeSpace > 0
+		  yCaret = y + parent.getLine(lineStart).getAscent(scale) _
+		  - If(Me.getAbsolutePage > 0, parent.getBeforeParagraphSpaceLength * scale, 0) _
+		  + If(Me.getAbsolutePage = 0, 0, parent.getBeforeParagraphSpaceLength * scale)
+		  
+		  '----------------------------------------------
+		  ' Draw the lines.
+		  '----------------------------------------------
+		  
+		  ' Are there any lines to draw?
+		  if parent.getLineCount > 0 then
+		    
+		    select case parent.getAlignment
+		      
+		    case FTParagraph.Alignment_Type.Left
+		      
+		      ' Draw the content.
+		      for i = lineStart to lineEnd
+		        
+		        'check page break
+		        lineHeight = parent.getLine(i).getLineHeight(drawBeforeSpace, scale)
+		        If y + lineHeight > g.Height Then
+		          g.NextPage
+		          y = parent.doc.getTopMargin
+		        End If
+		        
+		        ' Draw the item.
+		        lineHeight = parent.getLine(i).drawToPDF(Self, g, drawBeforeSpace, firstLength, _
+		        page, leftlength, y, leftLength, rightLength, FTParagraph.Alignment_Type.Left, _
+		        printScale, endOfDoc, parent.selectPilcrow)
+		        
+		        ' Move to the next line.
+		        y = y + lineHeight
+		        
+		        ' Add in the line height.
+		        proxyHeight = proxyHeight + lineHeight
+		        
+		      next
+		      
+		      '---------------------
+		      
+		    case FTParagraph.Alignment_Type.Center
+		      
+		      ' Draw the content.
+		      for i = lineStart to lineEnd
+		        
+		        ' Get the length of the line.
+		        lineLength = parent.getLine(i).getWidth(scale)
+		        
+		        ' Is this the first line?
+		        if i = lineStart then
+		          
+		          ' Center aligned.
+		          shiftedX = (leftlength + firstLength) + _
+		          (((wrapLength - firstLength) - lineLength) / 2)
+		          
+		        else
+		          
+		          ' Center aligned.
+		          shiftedX = leftlength + ((wrapLength - lineLength) / 2)
+		          
+		        end if
+		        
+		        ' Are past the left margin?
+		        if shiftedX < leftlength then shiftedX = leftlength
+		        
+		        'check page break
+		        lineHeight = parent.getLine(i).getLineHeight(drawBeforeSpace, scale)
+		        If y + lineHeight > g.Height Then
+		          g.NextPage
+		          y = parent.doc.getTopMargin
+		        End If
+		        
+		        ' Draw the item.
+		        lineHeight = parent.getLine(i).drawToPDF(Self, g, drawBeforeSpace, firstLength, _
+		        page, shiftedX, y, leftLength, rightLength, FTParagraph.Alignment_Type.Center, _
+		        printScale, endOfDoc, parent.selectPilcrow)
+		        
+		        ' Move to the next line.
+		        y = y + lineHeight
+		        
+		        ' Add in the line height.
+		        proxyHeight = proxyHeight + lineHeight
+		        
+		      next
+		      
+		      '---------------------
+		      
+		    case FTParagraph.Alignment_Type.Right
+		      
+		      ' Draw the content.
+		      for i = lineStart to lineEnd
+		        
+		        ' Get the length of the line.
+		        lineLength = parent.getLine(i).getWidth(scale)
+		        
+		        ' Right aligned.
+		        shiftedX = leftlength + (wrapLength - lineLength)
+		        
+		        'check page break
+		        lineHeight = parent.getLine(i).getLineHeight(drawBeforeSpace, scale)
+		        If y + lineHeight > g.Height Then
+		          g.NextPage
+		          y = parent.doc.getTopMargin
+		        End If
+		        
+		        ' Draw the item.
+		        lineHeight = parent.getLine(i).drawToPDF(Self, g, drawBeforeSpace, firstLength, _
+		        page, shiftedX, y, leftLength, rightLength, FTParagraph.Alignment_Type.Right, _
+		        printScale, endOfDoc, parent.selectPilcrow)
+		        
+		        ' Move to the next line.
+		        y = y + lineHeight
+		        
+		        ' Add in the line height.
+		        proxyHeight = proxyHeight + lineHeight
+		        
+		      next
+		      
+		    end select
+		    
+		    ' Draw the insertion point.
+		    'drawInsertionPoint(g, xCaret, yCaret, rightLength, insertionPoint)
+		    
+		  end if
+		  
+		  ' Return the height of the proxy.
+		  return proxyHeight
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h0
 		Function drawNormalView(g as graphics, drawBeforeSpace as boolean, y as double, insertionPoint as FTInsertionPoint) As integer
 		  
@@ -588,6 +814,26 @@ Inherits FTBase
 		  
 		  ' Draw the lines.
 		  return drawLines(g, y, printing, printScale, insertionPoint)
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function drawPageViewToPDF(g as PDFgraphics, drawBeforeSpace as boolean, y as double, printScale as double) As integer
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  ' Save the space before state.
+		  me.drawBeforeSpace = drawBeforeSpace
+		  
+		  ' Draw the lines.
+		  Return drawLinesToPDF(g, y, printScale)
 		  
 		End Function
 	#tag EndMethod
@@ -1464,6 +1710,7 @@ Inherits FTBase
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -1471,18 +1718,23 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -1490,6 +1742,7 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

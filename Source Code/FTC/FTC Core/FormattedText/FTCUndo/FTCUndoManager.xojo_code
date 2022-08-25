@@ -971,16 +971,23 @@ Protected Class FTCUndoManager
 		  state = parentControl.setInhibitUpdates(true)
 		  
 		  ' Get the undo item.
-		  item = undoStack.pop
-		  item.finish
-		  item.undo
-		  
-		  'Put the redo item at the top of the Redo Stack
-		  if item.isRedoable then
-		    redoStack.Append(item)
-		  else
-		    break
-		  end if
+		  Try
+		    item = undoStack.pop
+		    item.finish
+		    item.undo
+		    
+		    
+		    'Put the redo item at the top of the Redo Stack
+		    if item.isRedoable then
+		      redoStack.Append(item)
+		    else
+		      break
+		    end if
+		    
+		  Catch oobe As OutOfBoundsException
+		    'There is no mor element to pop
+		    'just ignore an go on
+		  End Try
 		  
 		  ' Allow updates to happen.
 		  call parentControl.setInhibitUpdates(state)
@@ -1026,6 +1033,7 @@ Protected Class FTCUndoManager
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -1033,18 +1041,23 @@ Protected Class FTCUndoManager
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -1052,6 +1065,7 @@ Protected Class FTCUndoManager
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

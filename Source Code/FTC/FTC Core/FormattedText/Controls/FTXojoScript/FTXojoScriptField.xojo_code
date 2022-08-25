@@ -192,8 +192,8 @@ Inherits FormattedText
 		  scratchGraphic = scratchPicture.Graphics
 		  
 		  ' Set the font characteristics.
-		  scratchGraphic.TextFont = DefaultFont
-		  scratchGraphic.TextSize = DefaultFontSize
+		  scratchGraphic.FontName = DefaultFont
+		  scratchGraphic.FontSize = DefaultFontSize
 		  
 		  ' Set the wrapping mode.
 		  setSoftwrap(Softwrap, true)
@@ -282,7 +282,7 @@ Inherits FormattedText
 		    
 		    ' Set the font drawing environment.
 		    g.ForeColor = LineNumberColor
-		    g.TextFont = DefaultFont
+		    g.FontName = DefaultFont
 		    
 		    Dim iTextSize As Integer
 		    If IsHiDPT Then
@@ -1721,8 +1721,8 @@ Inherits FormattedText
 		Sub setupScratchGraphic()
 		  ' ScratchGraphic needs updating when font or size is changed
 		  
-		  scratchGraphic.TextFont = DefaultFont
-		  scratchGraphic.TextSize = DefaultFontSize
+		  scratchGraphic.FontName = DefaultFont
+		  scratchGraphic.FontSize = DefaultFontSize
 		End Sub
 	#tag EndMethod
 
@@ -2068,11 +2068,20 @@ Inherits FormattedText
 
 	#tag ViewBehavior
 		#tag ViewProperty
+			Name="Tooltip"
+			Visible=true
+			Group="Appearance"
+			InitialValue=""
+			Type="String"
+			EditorType="MultiLineEditor"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="CornerColor"
 			Visible=true
 			Group="FT Behavior"
 			InitialValue="&cFFFFFF00"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UsePageShadow"
@@ -2080,6 +2089,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="WordParagraphBackground"
@@ -2087,6 +2097,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowBackgroundUpdates"
@@ -2094,6 +2105,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AllowPictures"
@@ -2101,12 +2113,15 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AutoComplete"
 			Visible=true
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="AutoDeactivate"
@@ -2122,6 +2137,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="&cA0ADCD"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="BorderColor"
@@ -2129,6 +2145,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="&ca0a0a0"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="BottomMargin"
@@ -2136,6 +2153,7 @@ Inherits FormattedText
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="CaretColor"
@@ -2143,6 +2161,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Comments"
@@ -2150,6 +2169,7 @@ Inherits FormattedText
 			Group="Keyword Colors"
 			InitialValue="&c7F0000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultFont"
@@ -2165,30 +2185,39 @@ Inherits FormattedText
 			Group="FT Defaults"
 			InitialValue="12"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorDisabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&ccccccc"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorRollover"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="defaultHyperLinkColorVisited"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultTabStop"
@@ -2196,6 +2225,7 @@ Inherits FormattedText
 			Group="FT Defaults"
 			InitialValue="0.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DefaultTextColor"
@@ -2203,6 +2233,7 @@ Inherits FormattedText
 			Group="FT Defaults"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DisplayAlignment"
@@ -2223,6 +2254,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="True"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="DrawControlBorder"
@@ -2230,6 +2262,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="true"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="EditViewMargin"
@@ -2237,6 +2270,7 @@ Inherits FormattedText
 			Group="FT Edit Mode"
 			InitialValue="0.06"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="EditViewPrintMargin"
@@ -2244,6 +2278,7 @@ Inherits FormattedText
 			Group="FT Edit Mode"
 			InitialValue="0.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Enabled"
@@ -2259,6 +2294,7 @@ Inherits FormattedText
 			Group="Keyword Colors"
 			InitialValue="&cFF86A4"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Floating"
@@ -2266,6 +2302,7 @@ Inherits FormattedText
 			Group="Keyword Colors"
 			InitialValue="&c006532"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Height"
@@ -2276,18 +2313,12 @@ Inherits FormattedText
 			EditorType="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
-			Name="HelpTag"
-			Visible=true
-			Group="Appearance"
-			Type="String"
-			EditorType="MultiLineEditor"
-		#tag EndViewProperty
-		#tag ViewProperty
 			Name="HScrollbarAutoHide"
 			Visible=true
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Indent"
@@ -2295,11 +2326,13 @@ Inherits FormattedText
 			Group="RBScript"
 			InitialValue="0.25"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -2309,11 +2342,15 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InitialParent"
+			Visible=false
 			Group="Position"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Integers"
@@ -2321,6 +2358,7 @@ Inherits FormattedText
 			Group="Keyword Colors"
 			InitialValue="&c326598"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="InvisiblesColor"
@@ -2328,11 +2366,15 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="&c526AFF"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="IsHiDPT"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Keywords"
@@ -2340,11 +2382,13 @@ Inherits FormattedText
 			Group="Keyword Colors"
 			InitialValue="&c0000FF"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -2354,6 +2398,7 @@ Inherits FormattedText
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LineNumberBackground"
@@ -2361,6 +2406,7 @@ Inherits FormattedText
 			Group="Line Numbers"
 			InitialValue="&cF0F0F0"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LineNumberColor"
@@ -2368,6 +2414,7 @@ Inherits FormattedText
 			Group="Line Numbers"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LineSeparator"
@@ -2375,11 +2422,13 @@ Inherits FormattedText
 			Group="Line Numbers"
 			InitialValue="&cAAAAAA"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="LockBottom"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -2387,6 +2436,7 @@ Inherits FormattedText
 			Name="LockLeft"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -2394,6 +2444,7 @@ Inherits FormattedText
 			Name="LockRight"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -2401,6 +2452,7 @@ Inherits FormattedText
 			Name="LockTop"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Boolean"
 			EditorType="Boolean"
 		#tag EndViewProperty
@@ -2410,11 +2462,13 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="&cCACACA"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Mode"
 			Visible=true
 			Group="FT Behavior"
+			InitialValue=""
 			Type="Display_Mode"
 			EditorType="Enum"
 			#tag EnumValues
@@ -2428,14 +2482,17 @@ Inherits FormattedText
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
 			EditorType="String"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="objectCountId"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="PageHeight"
@@ -2443,6 +2500,7 @@ Inherits FormattedText
 			Group="FT Page Mode"
 			InitialValue="11.0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="PageWidth"
@@ -2450,6 +2508,7 @@ Inherits FormattedText
 			Group="FT Page Mode"
 			InitialValue="8.5"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ReadOnly"
@@ -2457,6 +2516,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="RightMargin"
@@ -2464,6 +2524,7 @@ Inherits FormattedText
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowInvisibles"
@@ -2471,6 +2532,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowLineNumbers"
@@ -2478,6 +2540,7 @@ Inherits FormattedText
 			Group="Line Numbers"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowMarginGuides"
@@ -2485,6 +2548,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="ShowPilcrows"
@@ -2492,12 +2556,15 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Softwrap"
 			Visible=true
 			Group="FT Behavior"
+			InitialValue=""
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Source"
@@ -2505,6 +2572,7 @@ Inherits FormattedText
 			Group="Keyword Colors"
 			InitialValue="&c000000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="SpellCheckWhileTyping"
@@ -2512,6 +2580,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Strings"
@@ -2519,11 +2588,13 @@ Inherits FormattedText
 			Group="Keyword Colors"
 			InitialValue="&c6500FE"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
 			EditorType="String"
 		#tag EndViewProperty
@@ -2537,6 +2608,7 @@ Inherits FormattedText
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TabPanelIndex"
+			Visible=false
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
@@ -2552,23 +2624,33 @@ Inherits FormattedText
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_PageTop"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_xCaret"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="TIC_yCaret"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
 			Visible=true
 			Group="Position"
+			InitialValue=""
 			Type="Integer"
 			EditorType="Integer"
 		#tag EndViewProperty
@@ -2578,6 +2660,7 @@ Inherits FormattedText
 			Group="FT Page Mode"
 			InitialValue="0"
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="UndoLimit"
@@ -2585,12 +2668,15 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="128"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="updateFlag"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Visible"
@@ -2606,6 +2692,7 @@ Inherits FormattedText
 			Group="FT Behavior"
 			InitialValue="False"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Width"
@@ -2617,8 +2704,11 @@ Inherits FormattedText
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="xDisplayAlignmentOffset"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

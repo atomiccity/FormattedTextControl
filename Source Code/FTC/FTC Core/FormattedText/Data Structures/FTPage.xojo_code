@@ -455,6 +455,158 @@ Inherits FTBase
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function drawPageToPDF(g As PDFgraphics, doc As FTDocument, printScale As double, pTop As Double) As Double
+		  
+		  #pragma DisableBackgroundTasks
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim i as integer
+		  Dim count as integer
+		  Dim width as double
+		  Dim height as double
+		  Dim y As Double = pTop
+		  Dim pageImageGraphics As Graphics
+		  Dim scale as double
+		  Dim displayScale as double
+		  
+		  ' Are we printing?
+		  'if printing then
+		  
+		  ' Use the scale.
+		  scale = printScale
+		  displayScale = printScale
+		  
+		  ' else
+		  ' 
+		  ' ' Use the display scale.
+		  ' scale = parentControl.getScale
+		  ' displayScale = parentControl.getDisplayScale
+		  ' 
+		  ' end if
+		  
+		  '---------------------------------------
+		  ' Draw the page border.
+		  '---------------------------------------
+		  
+		  ' Has the display been scrolled?
+		  // Mantis Ticket 3777: Implement Page Shadow Property in Formatted Text
+		  ' if parentControl.displayMoved and (not printing) and parentControl.UsePageShadow then
+		  ' 
+		  ' ' Get the dimensions of the page.
+		  ' width = doc.getPageWidthLength * scale
+		  ' height = doc.getPageHeightLength * scale
+		  ' 
+		  ' ' Draw the gradient shadow.
+		  ' For i = 0 To 6 ' for i = 0 to 6
+		  ' 
+		  ' ' Get the border color.
+		  ' g.ForeColor = doc.getPageBorderColor(i)
+		  ' 
+		  ' ' Draw the step of the border.
+		  ' g.DrawRect(pageLeft- i, pageTop - i, width + (i*2), height + (i*2))
+		  ' 
+		  ' Next
+		  ' 
+		  ' ' Set the pen width.
+		  ' g.PenHeight = 1
+		  ' g.PenWidth = 1
+		  ' 
+		  ' end if
+		  
+		  '---------------------------------------
+		  ' Draw the page background.
+		  '---------------------------------------
+		  
+		  ' Are we printing?
+		  'if printing then
+		  
+		  ' ' Just use the provided printing port.
+		  ' pageImageGraphics = g
+		  
+		  ' else
+		  ' 
+		  ' ' Extract the graphics for the clipping corner.
+		  ' pageImageGraphics = doc.getClippingPage.Graphics
+		  ' 
+		  ' end if
+		  
+		  ' ' Get the color for the page background.
+		  ' pageImageGraphics.ForeColor = doc.getPageBackgroundColor
+		  ' 
+		  ' ' Draw the page background.
+		  ' pageImageGraphics.FillRect(0, 0, pageImageGraphics.width, pageImageGraphics.height)
+		  
+		  ' Call the user pre-page drawing event.
+		  'parentControl.callPrePageDraw(pageImageGraphics, self, printing, printScale)
+		  ' 
+		  '---------------------------------------
+		  ' Draw the content.
+		  '---------------------------------------
+		  
+		  ' Set the starting position.
+		  'y = FTUtilities.getScaledLength(doc.getTopMargin, displayScale)
+		  
+		  ' Get the number of paragraphs.
+		  count = Ubound(paragraphs)
+		  
+		  ' Draw all the paragraphs.
+		  For i = 0 To count
+		    
+		    ' Draw the paragraph.
+		    y = y + paragraphs(i).drawPageViewToPDF(g, (i <> 0), y, displayScale)
+		    
+		  next
+		  
+		  '---------------------------------------
+		  ' Draw the margin guides.
+		  '---------------------------------------
+		  
+		  ' Should we show the margin guides?
+		  ' if doc.showMarginGuides and (not printing) then
+		  ' 
+		  ' ' Set the margin guide color.
+		  ' pageImageGraphics.ForeColor = parentControl.marginGuideColor
+		  ' 
+		  ' ' Set the pen dimensions.
+		  ' pageImageGraphics.PenWidth = 1
+		  ' pageImageGraphics.PenHeight = 1
+		  ' 
+		  ' ' Draw the margin guides slightly wider than the content.
+		  ' pageImageGraphics.DrawRect(FTUtilities.getScaledLength(doc.getLeftMargin, parentControl.getDisplayScale) - BORDER_OFFSET, _
+		  ' FTUtilities.getScaledLength(doc.getTopMargin, parentControl.getDisplayScale) - BORDER_OFFSET, _
+		  ' FTUtilities.getScaledLength(doc.getMarginWidth, parentControl.getDisplayScale) + (2 * BORDER_OFFSET), _
+		  ' FTUtilities.getScaledLength(doc.getMarginHeight, parentControl.getDisplayScale) + (2 * BORDER_OFFSET))
+		  ' 
+		  ' end if
+		  
+		  ' Call the user post-page drawing event.
+		  'parentControl.callPostPageDraw(pageImageGraphics, self, printing, printScale)
+		  ' 
+		  '---------------------------------------
+		  ' Copy over the page.
+		  '---------------------------------------
+		  
+		  ' Are we outputting to the display?
+		  ' if not printing then
+		  ' 
+		  ' ' Copy the picture to the display.
+		  ' drawPage(g, doc.getClippingPage, pageLeft, pageTop, scale)
+		  ' 
+		  ' end if
+		  
+		  Return y
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub drawPageViewMode(g as graphics, doc as FTDocument, pageLeft as integer, pageTop as integer, insertionPoint as FTInsertionPoint, printing as boolean, printScale as double)
 		  
 		  #pragma DisableBackgroundTasks
@@ -1248,6 +1400,7 @@ Inherits FTBase
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -1255,18 +1408,23 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -1274,6 +1432,7 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

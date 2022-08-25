@@ -3837,7 +3837,7 @@ Inherits FTBase
 		  end if
 		  
 		  '--------------------------------------------
-		  ' Invalidate the background.
+		  ' Refresh the background.
 		  '--------------------------------------------
 		  
 		  ' Has the page count changed?
@@ -4927,6 +4927,27 @@ Inherits FTBase
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub DeleteCharacterStyle(pName As String)
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  ' delete the style.
+		  Var cs As FTCharacterStyle = getCharacterStyle(pName)
+		  
+		  If characterStyles.HasKey(cs.getId) Then
+		    characterStyles.Remove(cs.getId) 
+		  End If
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub deleteParagraph(id as integer)
 		  
 		  #pragma DisableBackgroundTasks
@@ -5348,6 +5369,63 @@ Inherits FTBase
 		    
 		    ' Move to the next page position.
 		    pageTop = pageTop + pageLength
+		    
+		  next
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub drawToPDF(g As PDFGraphics, pTop As Integer)
+		  
+		  #pragma DisableBackgroundTasks
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim i As Integer
+		  
+		  ' Reset the scale to 100%.
+		  parentControl.setScale(1.0, False)
+		  
+		  ' Dim firstPage as integer
+		  ' Dim lastPage as integer
+		  ' Dim pageTop as integer
+		  ' Dim pageLength as integer
+		  ' Dim g as Graphics
+		  
+		  ' ' Find the first visible page.
+		  ' firstPage = findVisiblePage(abs(vScrollValue))
+		  ' 
+		  ' ' Find the last visible page.
+		  ' lastPage = findVisiblePage(abs(vScrollValue) + displayHeight)
+		  ' 
+		  ' ' Check the range of the last page.
+		  ' if lastPage > Ubound(pages) then lastPage = Ubound(pages)
+		  ' 
+		  ' ' Get the length of a page.
+		  ' pageLength = (parentControl.getScale * getPageHeightLength) + pageSpace
+		  ' 
+		  ' ' Set the starting position.
+		  ' pageTop = vScrollValue mod pageLength
+		  ' parentControl.TIC_PageTop = PageTop
+		  
+		  ' ' Get the display.
+		  ' g = parentControl.getDisplay
+		  
+		  ' Draw all the visible pages.
+		  For i = 0 To pages.LastIndex
+		    
+		    ' Draw the page.
+		    pTop = pages(i).drawPageToPDF(g, Self, 1.0, pTop)
+		    
+		    ' ' Move to the next page position.
+		    ' pageTop = pageTop + pageLength
 		    
 		  next
 		  
@@ -7215,6 +7293,13 @@ Inherits FTBase
 		  
 		  ' Return the horizontal printable height.
 		  return (docMargins.pageWidth - margins.rightMargin - margins.leftMargin)
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function GetGraphics() As Graphics
+		  Return mGraphics
 		  
 		End Function
 	#tag EndMethod
@@ -11085,7 +11170,7 @@ Inherits FTBase
 		  position = (getPageHeightLength + getPageSpace) * page
 		  
 		  ' Check the range.
-		  if position > parentControl.getVScrollbar.Maximum then position = parentControl.getVScrollbar.Maximum
+		  if position > parentControl.getVScrollbar.MaximumValue then position = parentControl.getVScrollbar.MaximumValue
 		  
 		  ' Scroll to the page.
 		  parentControl.getVScrollbar.Value = position
@@ -11665,6 +11750,99 @@ Inherits FTBase
 		  next
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function search(target as string, searchStart as FTInsertionOffset, searchEnd as FTInsertionOffset, ByRef selectStart as FTInsertionOffset, ByRef selectEnd as FTInsertionOffset) As boolean
+		  
+		  #pragma DisableBackgroundTasks
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim i as integer
+		  Dim index as integer
+		  Dim text as string
+		  Dim startIndex as integer
+		  
+		  '----------------------------------------
+		  
+		  ' Was the start position specified?
+		  if searchStart is nil then
+		    
+		    ' Use the beginning of the document.
+		    searchStart = New FTInsertionOffset(Self, 0, 0)
+		    
+		  end if
+		  
+		  '----------------------------------------
+		  
+		  ' Was the end position specified?
+		  if searchEnd is nil then
+		    
+		    ' Get the index to the last paragraph.
+		    i = Self.getParagraphCount - 1
+		    
+		    ' Use the end of the document.
+		    searchEnd = New FTInsertionOffset(Self, i, Self.getParagraph(i).getLength)
+		    
+		  end if
+		  
+		  '----------------------------------------
+		  
+		  ' Is there anything to search?
+		  if searchStart >= searchEnd then return false
+		  
+		  ' Start searching at the insertion point offset.
+		  startIndex = searchStart.offset + 1
+		  
+		  ' Search the paragraphs.
+		  for i = searchStart.paragraph to searchEnd.paragraph
+		    
+		    ' Get the text from the paragraph.
+		    Text = Self.getParagraph(i).getText(True)
+		    
+		    ' Look for the string in the paragraph.
+		    index = InStr(startIndex, text, target)
+		    
+		    ' Is the target string in the paragraph?
+		    if ((index > 0) and (i < searchEnd.paragraph)) or _
+		      ((index > 0) and (index + target.len <= searchEnd.offset) and (i = searchEnd.paragraph)) then
+		      
+		      ' Make it zero based.
+		      index = index - 1
+		      
+		      ' Set the selection range.
+		      selectStart = New FTInsertionOffset(Self, i, index)
+		      selectEnd = New FTInsertionOffset(Self, i, index + target.Len)
+		      
+		      ' We found it.
+		      return true
+		      
+		    else
+		      
+		      ' Reset to the beginning of the paragraph.
+		      startIndex = 1
+		      
+		    end if
+		    
+		  next
+		  
+		  '----------------------------------------
+		  
+		  ' Clear the selection.
+		  selectStart = nil
+		  selectEnd = nil
+		  
+		  ' Target not found.
+		  return false
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h1
@@ -14051,6 +14229,13 @@ Inherits FTBase
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub SetGraphics(g As Graphics)
+		  mGraphics = g
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub setInsertionPoint(io as FTInsertionOffset, calculateOffset as boolean)
 		  
 		  #if not DebugBuild
@@ -15227,6 +15412,176 @@ Inherits FTBase
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub ToPDF(g As PDFgraphics, printer As PrinterSetup, pTop As Integer)
+		  
+		  #pragma DisableBackgroundTasks
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim i as integer
+		  Dim saveState as boolean
+		  Dim printScale As Double
+		  Dim scale as double
+		  Dim pageWidth as double
+		  Dim pageHeight as double
+		  Dim lm as double
+		  Dim rm as double
+		  Dim tm as double
+		  Dim bm as double
+		  Dim origLm as double
+		  Dim origRm as double
+		  Dim origTm as double
+		  Dim origBm as double
+		  Dim resolution As Integer
+		  Var firstPage As Integer
+		  Var lastPage As Integer
+		  
+		  '-------------------------------------------------
+		  ' Save the settings.
+		  '-------------------------------------------------
+		  
+		  ' Save the printer setup.
+		  me.printer = printer
+		  
+		  ' Turn off updates.
+		  saveState = parentControl.setInhibitUpdates(true)
+		  
+		  ' Get the printer resolution.
+		  resolution = printer.HorizontalResolution
+		  
+		  ' Save the current parameters.
+		  pageWidth = getPageWidth
+		  pageHeight = getPageHeight
+		  scale = parentControl.getScale
+		  
+		  ' Save the margins.
+		  origLm = getLeftMargin
+		  origRm = getRightMargin
+		  origTm = getTopMargin
+		  origBm = getBottomMargin
+		  
+		  '-------------------------------------------------
+		  ' Set up for printing.
+		  '-------------------------------------------------
+		  
+		  ' Reset the scale to 100%.
+		  parentControl.setScale(1.0, false)
+		  
+		  ' Set the page size.
+		  setPageSize(g.Width / resolution, g.Height / resolution)
+		  
+		  ' Calculate the margins.
+		  lm = origLm - (abs(printer.PageLeft) / resolution) + printOffset.left
+		  rm = origRm - ((printer.PageWidth - printer.Width - abs(printer.PageLeft)) / resolution) + printOffset.right
+		  tm = origTm - (abs(printer.PageTop) / resolution) + printOffset.top
+		  bm = origBm - ((printer.PageHeight - printer.Height - abs(printer.PageTop)) / resolution) + printOffset.bottom
+		  
+		  ' Adjust margins for the printable area.
+		  setMargins(lm, rm, tm, bm)
+		  
+		  ' Set the print scale.
+		  printScale = printer.HorizontalResolution / 72
+		  
+		  '-------------------------------------------------
+		  ' Print the pages.
+		  '-------------------------------------------------
+		  
+		  ' Compose the document.
+		  markAllParagraphsDirty
+		  compose
+		  
+		  ' This is the proper way to do printing
+		  firstPage = g.FirstPage-1
+		  lastPage = g.LastPage-1
+		  
+		  ' Check the ranges.
+		  If firstPage < 0 Then firstPage = 0
+		  if lastPage > Ubound(pages) then lastPage = Ubound(pages)
+		  
+		  ' ' Get the number of copies
+		  ' Dim iCopyMax As Integer = g.Copies
+		  ' dim iCopyCount as integer = 0
+		  
+		  ' ' On Mac OS X the OS handles the number of copies.
+		  ' #If TargetMacOS Then iCopyCount = iCopyMax - 1
+		  ' 
+		  ' While iCopyCount < iCopyMax
+		  ' Print all the visible pages.
+		  For i = 0 To pages.LastIndex
+		    
+		    ' ' Is this not the first page?
+		    ' if i <> firstPage then
+		    ' 
+		    ' ' Create a new page.
+		    ' g.NextPage
+		    ' 
+		    ' end if
+		    
+		    ' Draw the page.
+		    pTop = pages(i).drawPageToPDF(g, Self, printScale, pTop)
+		    
+		  next
+		  ' ' iCopyCount = iCopyCount + 1
+		  ' 
+		  ' ' #If TargetWindows Then
+		  ' ' ' If iCopyCount < iCopyMax Then
+		  ' ' ' ' g.NextPage
+		  ' ' ' End
+		  ' ' #EndIf
+		  ' 
+		  ' Wend
+		  
+		  //BK Note:  Leaving this commented out.  The above is the proper way to do printing.
+		  ' ' Check the ranges.
+		  ' if firstPage < 0 then firstPage = 0
+		  ' if lastPage > Ubound(pages) then lastPage = Ubound(pages)
+		  '
+		  '
+		  ' ' Print all the visible pages.
+		  ' for i = firstPage to lastPage
+		  '
+		  ' ' Is this not the first page?
+		  ' if i <> firstPage then
+		  '
+		  ' ' Create a new page.
+		  ' g.NextPage
+		  '
+		  ' end if
+		  '
+		  ' ' Draw the page.
+		  ' pages(i).drawPageViewMode(g, self, printer.PageLeft, printer.PageTop, nil, true, printScale)
+		  '
+		  ' next
+		  
+		  '-------------------------------------------------
+		  ' Restore the settings.
+		  '-------------------------------------------------
+		  
+		  ' Restore the page size.
+		  setPageSize(pageWidth, pageHeight)
+		  
+		  ' Restore the margins.
+		  setMargins(origLm, origRm, origTm, origBm)
+		  
+		  ' Reset the original state.
+		  call parentControl.setInhibitUpdates(saveState)
+		  
+		  ' Reset the original scale.
+		  parentControl.setScale(scale)
+		  
+		  ' Release the printer setup.
+		  me.printer = nil
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub updateParagraphIndexes(index as integer = 0)
 		  
 		  #pragma DisableBackgroundTasks
@@ -15767,6 +16122,10 @@ Inherits FTBase
 	#tag EndProperty
 
 	#tag Property, Flags = &h21
+		Private mGraphics As Graphics
+	#tag EndProperty
+
+	#tag Property, Flags = &h21
 		Private MonitorPixelsPerInch As double
 	#tag EndProperty
 
@@ -15868,11 +16227,15 @@ Inherits FTBase
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="isTyping"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -15880,18 +16243,23 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -15899,6 +16267,7 @@ Inherits FTBase
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

@@ -30,7 +30,7 @@ Inherits RTFReader
 		  #endif
 		  
 		  ' Add the new paragraph.
-		  ta.AppendText(EndOfLine.Macintosh)
+		  ta.AddText(EndOfLine.Macintosh)
 		  
 		  ' Move to the next insertion position.
 		  startIndex = startIndex +  1
@@ -84,7 +84,7 @@ Inherits RTFReader
 		  #endif
 		  
 		  ' Save the starting caret offset.
-		  startIndex = ta.SelStart
+		  startIndex = ta.SelectionStart
 		  
 		End Sub
 	#tag EndEvent
@@ -137,41 +137,41 @@ Inherits RTFReader
 		  rsa = getCurrentStyle
 		  
 		  ' Add the text to the control.
-		  ta.SelText = s
+		  ta.SelectedText = s
 		  
 		  ' Save the selection information.
-		  si = ta.SelStart
-		  sl = ta.SelLength
+		  si = ta.SelectionStart
+		  sl = ta.SelectionLength
 		  
 		  ' Select the text just added.
-		  ta.SelStart = startIndex
-		  ta.SelLength = length
+		  ta.SelectionStart = startIndex
+		  ta.SelectionLength = length
 		  
 		  ' Set the font information.
-		  ta.SelTextFont = rsa.font.font
-		  ta.SelTextSize = rsa.fontSize
+		  ta.SelectionFontName = rsa.Font.Font
+		  ta.SelectionFontSize = rsa.fontSize
 		  
 		  ' Set the style characteristics.
-		  ta.SelBold = rsa.bold
-		  ta.SelItalic = rsa.italic
-		  ta.SelUnderline = rsa.underline
+		  ta.SelectionBold = rsa.bold
+		  ta.SelectionItalic = rsa.italic
+		  ta.SelectionUnderline = rsa.underline
 		  
 		  ' Was a text color specified?
 		  if rsa.useForegroundColor then
 		    
 		    ' Use the specified color.
-		    ta.SelTextColor = rsa.textColor
+		    ta.SelectionTextColor = rsa.textColor
 		    
 		  else
 		    
 		    ' Use black.
-		    ta.SelTextColor = &c000000
+		    ta.SelectionTextColor = &c000000
 		    
 		  end if
 		  
 		  ' Restore the previous settings.
-		  ta.SelStart = si
-		  ta.SelLength = sl
+		  ta.SelectionStart = si
+		  ta.SelectionLength = sl
 		  
 		  ' Move to the next insertion position.
 		  startIndex = startIndex + length
@@ -180,7 +180,7 @@ Inherits RTFReader
 	#tag EndMethod
 
 	#tag Method, Flags = &h1000
-		Sub Constructor(ta as TextArea, applyStyles as boolean)
+		Sub Constructor(ta as DesktopTextArea, applyStyles as boolean)
 		  
 		  #if not DebugBuild
 		    
@@ -252,16 +252,18 @@ Inherits RTFReader
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
-		ta As TextArea
+		ta As DesktopTextArea
 	#tag EndProperty
 
 
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="currentAlignment"
+			Visible=false
 			Group="Behavior"
 			InitialValue="1"
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -269,6 +271,7 @@ Inherits RTFReader
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -276,28 +279,39 @@ Inherits RTFReader
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="paragraphCount"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="startIndex"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -305,6 +319,7 @@ Inherits RTFReader
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

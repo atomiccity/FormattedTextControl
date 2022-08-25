@@ -7,8 +7,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -109,8 +109,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim s as RGBSurface
@@ -141,8 +141,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim s as RGBSurface
@@ -169,8 +169,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -201,8 +201,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,w,h as Integer
@@ -257,8 +257,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil then
@@ -375,8 +375,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil then
@@ -473,8 +473,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  Return Blur(pic, Level, SpeedMode, 0, False, False )
@@ -490,8 +490,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  Return Blur(pic, Level, SpeedMode, Style, PostBlurFocus, False )
@@ -524,8 +524,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if level=0 then
@@ -662,8 +662,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -715,8 +715,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if Value=0 then
@@ -738,8 +738,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i,map(255) as Integer
@@ -775,8 +775,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim middle as Integer
@@ -818,8 +818,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p,t as Picture
@@ -893,8 +893,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -927,8 +927,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,w,h as Integer
@@ -987,9 +987,9 @@ Protected Module ImagePlayEffectsLibrary
 		Protected Sub ChromaKeyRGB(pInput as picture, OutColor as color, RGBRange as integer=0, OutputToMask as boolean= true)
 		  #if DebugBuild=false then
 		    #pragma BackgroundTasks false
-		    #pragma NilObjectChecking false
+		    '#Pragma NilObjectChecking False
 		    #pragma BoundsChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,w,h as Integer
@@ -1092,8 +1092,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if (cyan=0 and magenta=0 and yellow=0) or pic=nil then
@@ -1130,8 +1130,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim s as RGBSurface
@@ -1189,8 +1189,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim K,L as Double
@@ -1285,8 +1285,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim w,h,x,y as Integer
@@ -1374,8 +1374,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p,o as Picture
@@ -1484,8 +1484,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  d=Value/100
@@ -1511,8 +1511,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i,map(255) as Integer
@@ -1546,8 +1546,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -1586,8 +1586,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil then
@@ -1656,8 +1656,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pSource=nil then
@@ -1826,8 +1826,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if p=nil then
@@ -1890,8 +1890,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or pOverlay=nil then
@@ -1953,8 +1953,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim iWidth,iHeight as Integer
@@ -2007,8 +2007,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim s as String
@@ -2053,8 +2053,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x as Integer
@@ -2100,8 +2100,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  
@@ -2173,8 +2173,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim xx,yy,ww,hh, x,y,w,h as Integer
@@ -2264,8 +2264,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or (Horiz=kFlipModeNone and Vert=kFlipModeNone) then
@@ -2377,8 +2377,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -2410,8 +2410,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i,w,h as Integer
@@ -2442,8 +2442,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -2472,8 +2472,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  ImageWidth=max( ImageWidth , 16 )
@@ -2522,8 +2522,8 @@ Protected Module ImagePlayEffectsLibrary
 		        p.Graphics.DrawStopIcon rand.InRange(0,p.width),rand.InRange(0,p.height)
 		      case 20
 		        p.Graphics.ForeColor=rgb(rand.Number*255,rand.Number*255,rand.Number*255)
-		        p.Graphics.TextSize=rand.InRange(12,24)
-		        p.Graphics.TextFont=Font( rand.InRange(0, iFontUbound) )
+		        p.Graphics.FontSize=rand.InRange(12,24)
+		        p.Graphics.FontName=Font( rand.InRange(0, iFontUbound) )
 		        s=""
 		        n=rand.InRange(5,10)
 		        for t=0 to n
@@ -2549,8 +2549,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i,a as Integer
@@ -2655,8 +2655,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if UBound(ColorList)=0 then
@@ -2695,8 +2695,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  Return Gradient(width,height,Style,Utility_ColorStringToArray(ColorList),OriginX,OriginY)
@@ -2708,8 +2708,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -2850,8 +2850,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -2942,8 +2942,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  Return GradientRadial(width,height,ColorList,50,50)
@@ -2957,8 +2957,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim K,L as Double
@@ -3046,8 +3046,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p,m as Picture
@@ -3123,8 +3123,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim s as RGBSurface
@@ -3166,8 +3166,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -3201,8 +3201,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if (value=0 and hue=0 and saturation=0) or pic=nil then
@@ -3274,8 +3274,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if value=0 or pic=nil then
@@ -3316,8 +3316,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,w,h as integer
@@ -3422,8 +3422,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if value=0 or pic=nil then
@@ -3467,8 +3467,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if changeby=0 or pic=nil then
@@ -3508,8 +3508,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim c as Color
@@ -3648,8 +3648,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i,w,h as Integer
@@ -3695,8 +3695,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i as Integer
@@ -3727,8 +3727,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i,m(255) as Integer
@@ -3756,8 +3756,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim s as RGBSurface
@@ -3801,8 +3801,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim s as RGBSurface
@@ -3846,8 +3846,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if NewPic=nil or OldPic=nil or WeightTowardsNew>99 then
@@ -3878,8 +3878,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil then
@@ -3953,8 +3953,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim s as RGBSurface
@@ -4036,8 +4036,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i, ar, r(255), ag, g(255), ab, b(255) as Integer
@@ -4080,8 +4080,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,w,h as integer
@@ -4131,8 +4131,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pSource=nil or pOverlay=nil or pMask=nil then
@@ -4164,8 +4164,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if Level<=0 or Pic=nil then
@@ -4195,8 +4195,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or Change=0 then
@@ -4239,8 +4239,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -4284,8 +4284,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i as Integer
@@ -4315,8 +4315,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim i,map(255),Brit as Integer
@@ -4356,8 +4356,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p,t as Picture
@@ -4419,8 +4419,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p,t as Picture
@@ -4492,8 +4492,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim c as Color
@@ -4566,8 +4566,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  Return Resize(pic, percent, kResizeTypeNormal, False )
@@ -4579,8 +4579,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  Return Resize(pic, Percent, Type, False )
@@ -4607,8 +4607,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or Percent=100 then
@@ -4721,8 +4721,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  
@@ -4783,8 +4783,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  // Pre-Flight check
@@ -4838,8 +4838,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  // Note: kModeSmooth is actually done by doubling the image size, doing the rotate, and then halving the result
@@ -5155,8 +5155,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or Ammount=0 then
@@ -5206,8 +5206,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim pOut as Picture
@@ -5305,8 +5305,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim pOut as Picture
@@ -5370,8 +5370,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil then
@@ -5449,8 +5449,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,w,h as Integer
@@ -5505,8 +5505,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,w,h as Integer
@@ -5571,8 +5571,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p,t as Picture
@@ -5658,8 +5658,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p,t as Picture
@@ -5735,8 +5735,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,w,h,t,m() as integer
@@ -5806,8 +5806,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or Ammount=0 or Radius=0 then
@@ -5974,8 +5974,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,y,i,w,t,h as Integer
@@ -6052,8 +6052,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  
@@ -6177,8 +6177,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or (VerticalBy=0 and HorizontalBy=0) then
@@ -6264,8 +6264,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim y,z,n as Integer
@@ -6305,8 +6305,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim x,z,n as Integer
@@ -6356,8 +6356,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or (VerticalBy=0 and HorizontalBy=0) or SectionWidth=0 then
@@ -6449,8 +6449,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  
@@ -6527,8 +6527,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if pic=nil or text="" then
@@ -6538,8 +6538,8 @@ Protected Module ImagePlayEffectsLibrary
 		  iSize=pic.Width*(SizePrc/100)
 		  
 		  p=New Picture(1,1,32)
-		  p.Graphics.TextFont="System"
-		  p.Graphics.TextSize=iSize
+		  p.Graphics.FontName="System"
+		  p.Graphics.FontSize=iSize
 		  iW=p.Graphics.StringWidth( Text )
 		  iH=p.Graphics.TextHeight
 		  iA=p.Graphics.TextAscent
@@ -6560,8 +6560,8 @@ Protected Module ImagePlayEffectsLibrary
 		  'iX=pic.width-((pic.Width*.01)+iW)
 		  'end
 		  
-		  pic.Graphics.TextSize=iSize
-		  pic.Graphics.TextFont="System"
+		  pic.Graphics.FontSize=iSize
+		  pic.Graphics.FontName="System"
 		  
 		  if BlurShadow>0 then
 		    if BlurShadow=1 then
@@ -6573,8 +6573,8 @@ Protected Module ImagePlayEffectsLibrary
 		      iw=iW+(BlurShadow*6)
 		      if p=nil or p.Width<>iw or p.Height<>ih then
 		        p=New Picture(iw,iH,32)
-		        p.Graphics.TextSize=iSize
-		        p.Graphics.TextFont="System"
+		        p.Graphics.FontSize=iSize
+		        p.Graphics.FontName="System"
 		        p.Graphics.DrawString Text, BlurShadow*3, iA
 		        p.Mask.Graphics.DrawPicture Blur( p, BlurShadow, min( BlurShadow\2, 1 ) ),0,0
 		        p.Graphics.ForeColor=ShadowColor
@@ -6608,8 +6608,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  if text="" then
@@ -6628,7 +6628,7 @@ Protected Module ImagePlayEffectsLibrary
 		  
 		  p=New Picture(1,1,32)
 		  g=p.Graphics
-		  g.TextFont=FontName
+		  g.FontName=FontName
 		  g.TextSize=iSize
 		  g.Bold=TextBold
 		  g.Italic=TextItalic
@@ -6682,7 +6682,7 @@ Protected Module ImagePlayEffectsLibrary
 		  'end
 		  
 		  g.TextSize=iSize
-		  g.TextFont=FontName
+		  g.FontName=FontName
 		  g.Bold=TextBold
 		  g.Italic=TextItalic
 		  g.Underline=TextUnderline
@@ -6715,7 +6715,7 @@ Protected Module ImagePlayEffectsLibrary
 		        p=New Picture(iw+iEdge+iEdge,iH+iEdge+iEdge,32)
 		        g=p.Graphics
 		        g.TextSize=iSize
-		        g.TextFont=FontName
+		        g.FontName=FontName
 		        g.Bold=TextBold
 		        g.Italic=TextItalic
 		        g.Underline=TextUnderline
@@ -6748,8 +6748,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -6791,8 +6791,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -6846,8 +6846,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -6890,8 +6890,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  
@@ -6942,8 +6942,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -6962,8 +6962,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim r,g,b,s() as String
@@ -6996,8 +6996,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  Return Utility_ColorArrayToString(Colors)
@@ -7013,8 +7013,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim c() as Color
@@ -7044,8 +7044,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if not DebugBuild then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  dim p as Picture
@@ -7072,8 +7072,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  // keep the number Between the min and max
@@ -7113,8 +7113,8 @@ Protected Module ImagePlayEffectsLibrary
 		  #if DebugBuild=False and kUsePragmas then
 		    #pragma BackgroundTasks false
 		    #pragma BoundsChecking false
-		    #pragma NilObjectChecking false
-		    #pragma StackOverflowChecking false
+		    '#Pragma NilObjectChecking False
+		    '#Pragma StackOverflowChecking False
 		  #endif
 		  
 		  
@@ -7530,7 +7530,9 @@ Protected Module ImagePlayEffectsLibrary
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -7538,12 +7540,15 @@ Protected Module ImagePlayEffectsLibrary
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -7551,6 +7556,7 @@ Protected Module ImagePlayEffectsLibrary
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -7558,6 +7564,7 @@ Protected Module ImagePlayEffectsLibrary
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Module

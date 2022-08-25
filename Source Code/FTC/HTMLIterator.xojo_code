@@ -133,28 +133,47 @@ Inherits FTIteratorBase
 		    
 		  elseif fto isa FTCustom then
 		    dim p as picture = FTCustom(fto).getPicture
-		    if p <> nil then
-		      arImages.Append p
-		      
-		      dim sNumber as string = format(arImages.Ubound + 1, "00000")
-		      lines.append "<img src=" + chr(34) + "images/" + sNumber + ".png" + chr(34) + " height=" + chr(34) + cstr(p.height) + chr(34) + " width=" + chr(34) + cstr(p.Width) + chr(34) + ">"
-		      
-		    else
+		    If p <> Nil Then
+		      If EmbedPicture Then
+		        arImages.Append Nil
+		        Dim sNumber As String = Format(arImages.Ubound + 1, "00000")
+		        
+		        //<img src="data:image/png;base64,ElFTkSuQmCC" alt="Horizontal.png" height="100" width="500">
+		        Dim lPicString As String = EncodeBase64(p.GetData(p.FormatPNG))
+		        lines.Append "<img src=" + Chr(34) + "data:image/png;base64," + lPicString + Chr(34) + " alt=" + sNumber + ".png" + Chr(34) + " height=" + Chr(34) + CStr(p.height) + Chr(34) + " width=" + Chr(34) + CStr(p.Width) + Chr(34) + ">"
+		      Else
+		        arImages.Append p
+		        
+		        Dim sNumber As String = Format(arImages.Ubound + 1, "00000")
+		        lines.append "<img src=" + Chr(34) + "images/" + sNumber + ".png" + Chr(34) + " height=" + Chr(34) + CStr(p.height) + Chr(34) + " width=" + Chr(34) + CStr(p.Width) + Chr(34) + ">"
+		        
+		      End If
+		    Else
 		      Text = FTCustom(fto).getText
-		    end
+		    End
 		    
-		  elseif fto isa FTPicture then
-		    dim p as Picture = FTPicture(fto).getPicture
-		    if p <> nil then
+		  Elseif fto IsA FTPicture Then
+		    Dim p As Picture = FTPicture(fto).getPicture
+		    If p <> Nil Then
+		      If EmbedPicture Then
+		        arImages.Append Nil
+		        Dim sNumber As String = Format(arImages.Ubound + 1, "00000")
+		        
+		        //<img src="data:image/png;base64,ElFTkSuQmCC" alt="Horizontal.png" height="100" width="500">
+		        Dim lPicString As String = EncodeBase64(p.GetData(p.FormatPNG))
+		        lines.Append "<img src=" + Chr(34) + "data:image/png;base64," + lPicString + Chr(34) + " alt=" + sNumber + ".png" + Chr(34) + " height=" + Chr(34) + CStr(p.height) + Chr(34) + " width=" + Chr(34) + CStr(p.Width) + Chr(34) + ">"
+		        
+		      Else
+		        //<img src="../Documents/BKeeney%20Logo%20Horizontal.png" height="100" width="500">
+		        arImages.Append p
+		        
+		        Dim sNumber As String = Format(arImages.Ubound + 1, "00000")
+		        lines.append "<img src=" + Chr(34) + "images/" + sNumber + ".png" + Chr(34) + " height=" + Chr(34) + CStr(p.height) + Chr(34) + " width=" + Chr(34) + CStr(p.Width) + Chr(34) + ">"
+		      End If
 		      
-		      //<img src="../Documents/BKeeney%20Logo%20Horizontal.png" height="100" width="500">
-		      arImages.Append p
-		      
-		      dim sNumber as string = format(arImages.Ubound + 1, "00000")
-		      lines.append "<img src=" + chr(34) + "images/" + sNumber + ".png" + chr(34) + " height=" + chr(34) + cstr(p.height) + chr(34) + " width=" + chr(34) + cstr(p.Width) + chr(34) + ">"
-		    end
+		    End If
 		    
-		  elseif fto isa FTTab then
+		  Elseif fto IsA FTTab Then
 		    
 		    lines.append kHTMLTab
 		    
@@ -227,10 +246,26 @@ Inherits FTIteratorBase
 
 	#tag Method, Flags = &h1000
 		Sub Constructor(fOutput as FolderItem)
-		  mF = fOutput
+		  ' Summary: 
+		  '
+		  ' history:
+		  ' date       developer           description 
+		  ' 23.06.2019 Daniel Fritzsche    creation 
+		  '
+		  ' HeaderEnd
 		  
-		  mfImages = mf.child("Images")
+		  #If Not DebugBuild
+		    #Pragma DisableBoundsChecking
+		    #Pragma NilObjectChecking False
+		    #Pragma StackOverflowChecking False
+		  #EndIf
 		  
+		  If fOutput <> Nil Then
+		    mF = fOutput
+		    
+		    mfImages = mf.child("Images")
+		    
+		  End If
 		End Sub
 	#tag EndMethod
 
@@ -393,25 +428,31 @@ Inherits FTIteratorBase
 		  tos.close
 		  
 		  //Do we need to create an images directory?
-		  if arImages.Ubound > -1 then
+		  If arImages.Ubound > -1 Then
 		    if mfImages.exists = false or mfImages.Directory = false then
 		      mfImages.CreateAsFolder
 		    end
 		    
-		    for i as integer = 0 to arImages.Ubound
+		    For i As Integer = 0 To arImages.Ubound
+		      If arImages(i) = Nil Then Continue
 		      dim sName as string = format(i + 1, "00000")
 		      dim fPicture as folderitem = mfImages.child(sName + ".png")
 		      if fPicture.exists then
 		        fPicture.Delete
 		      end
 		      
-		      dim p as picture = arImages(i)
+		      Dim p As picture = arImages(i)
 		      p.save(fPicture, picture.SaveAsPNG)
 		    next
 		    
 		  end
 		End Sub
 	#tag EndMethod
+
+
+	#tag Hook, Flags = &h0
+		Event EmbedPicture() As Boolean
+	#tag EndHook
 
 
 	#tag Property, Flags = &h0
