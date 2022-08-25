@@ -14084,7 +14084,7 @@ Inherits DesktopTextInputCanvas
 		  TextChanged
 		  
 		  ' Restore the update state.
-		  call setInhibitUpdates(state)
+		  call setInhibitUpdates(False)
 		  
 		  ' Update the display.
 		  updateFull
