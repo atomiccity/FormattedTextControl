@@ -11930,21 +11930,10 @@ Inherits DesktopTextInputCanvas
 		End Sub
 	#tag EndMethod
 
-	#tag Method, Flags = &h0
-		Sub Refresh(eraseBackground as boolean = true)
-		  
-		  #if not DebugBuild
-		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
-		    
-		  #endif
-		  
-		  #pragma Unused eraseBackground
-		  
-		  ' Perform an update.
-		  update(true, true)
+	#tag Method, Flags = &h21
+		Private Sub Refresh(immediately As Boolean = False)
+		  // Calling the overridden superclass method.
+		  Super.Refresh(immediately)
 		  
 		End Sub
 	#tag EndMethod
@@ -14821,7 +14810,7 @@ Inherits DesktopTextInputCanvas
 		  end if
 		  
 		  ' Draw the entire display.
-		  ' Refresh(false)
+		  Refresh(false)
 		  
 		  #if DebugBuild
 		    
