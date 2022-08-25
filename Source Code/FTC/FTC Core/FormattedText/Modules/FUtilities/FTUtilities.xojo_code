@@ -699,7 +699,48 @@ Protected Module FTUtilities
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getStringWidth(extends obj as FTCharacterStyle, text as string) As double
+		Function getStringWidth(extends obj as FTCharacterStyle, g as graphics, text as string) As double
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #EndIf
+		  
+		  If g <> Nil Then
+		    ' Set up for the correct font.
+		    g.FontName = obj.getFontName
+		    g.FontSize = obj.getFontSize
+		    g.Bold = obj.getBold
+		    g.Italic = obj.getItalic
+		    #If XojoVersion > 2015.03 Then
+		      g.CharacterSpacing = obj.getCharacterSpacing
+		    #EndIf
+		    
+		    ' Compute the length of the sub-string.
+		    Return Floor(g.TextWidth(Text))
+		    
+		  Else
+		    ' Set up for the correct font.
+		    scratchGraphic.FontName = obj.getFontName
+		    scratchGraphic.FontSize = obj.getFontSize
+		    scratchGraphic.Bold = obj.getBold
+		    scratchGraphic.Italic = obj.getItalic
+		    #If XojoVersion > 2015.03 Then
+		      scratchGraphic.CharacterSpacing = obj.getCharacterSpacing
+		    #EndIf
+		    
+		    ' Compute the length of the sub-string.
+		    Return Floor(scratchGraphic.TextWidth(Text))
+		    
+		  End If
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getStringWidth(extends obj as FTStyleRun, g as graphics, scale as double) As double
 		  
 		  #if not DebugBuild
 		    
@@ -709,23 +750,39 @@ Protected Module FTUtilities
 		    
 		  #endif
 		  
-		  ' Set up for the correct font.
-		  scratchGraphic.FontName = obj.getFontName
-		  scratchGraphic.FontSize = obj.getFontSize
-		  scratchGraphic.Bold = obj.getBold
-		  scratchGraphic.Italic = obj.getItalic
-		  #If XojoVersion > 2015.03 Then
-		    scratchGraphic.CharacterSpacing = obj.getCharacterSpacing
-		  #Endif
-		  
-		  ' Compute the length of the sub-string.
-		  return Floor(scratchGraphic.StringWidth(text))
+		  If g <> Nil Then
+		    ' Set up for the correct font.
+		    g.FontName = obj.Font
+		    g.FontSize = Round(obj.getFontSize * scale)
+		    g.Bold = obj.bold
+		    g.Italic = obj.italic
+		    #If XojoVersion > 2015.03 Then
+		      g.CharacterSpacing = obj.characterSpacing
+		    #EndIf
+		    
+		    ' Compute the length of the string.
+		    Return Floor(g.TextWidth(obj.getText))
+		    
+		  Else
+		    ' Set up for the correct font.
+		    scratchGraphic.FontName = obj.Font
+		    scratchGraphic.FontSize = Round(obj.getFontSize * scale)
+		    scratchGraphic.Bold = obj.bold
+		    scratchGraphic.Italic = obj.italic
+		    #If XojoVersion > 2015.03 Then
+		      scratchGraphic.CharacterSpacing = obj.characterSpacing
+		    #EndIf
+		    
+		    ' Compute the length of the string.
+		    Return Floor(scratchGraphic.TextWidth(obj.getText))
+		    
+		  End If
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getStringWidth(extends obj as FTStyleRun, scale as double) As double
+		Function getStringWidth(extends obj as FTStyleRun, g as graphics, startPosition as integer, endPosition as integer, scale as double = 1.0) As double
 		  
 		  #if not DebugBuild
 		    
@@ -735,24 +792,83 @@ Protected Module FTUtilities
 		    
 		  #endif
 		  
-		  ' Set up for the correct font.
-		  scratchGraphic.FontName = obj.font
-		  scratchGraphic.FontSize = Round(obj.getFontSize * scale)
-		  scratchGraphic.Bold = obj.bold
-		  scratchGraphic.Italic = obj.italic
-		  #If XojoVersion > 2015.03 Then
-		    scratchGraphic.CharacterSpacing = obj.characterSpacing
-		  #Endif
+		  If g <> Nil Then
+		    ' Set up for the correct font.
+		    g.FontName = obj.Font
+		    g.FontSize = Round(obj.getFontSize * scale)
+		    g.Bold = obj.bold
+		    g.Italic = obj.italic
+		    #If XojoVersion > 2015.03 Then
+		      g.CharacterSpacing = obj.characterSpacing
+		    #EndIf
+		    
+		    ' Compute the length of the sub-string.
+		    Return Floor(g.TextWidth(obj.getText(startPosition, endPosition)))
+		    
+		  Else
+		    
+		    ' Set up for the correct font.
+		    scratchGraphic.FontName = obj.font
+		    scratchGraphic.FontSize = Round(obj.getFontSize * scale)
+		    scratchGraphic.Bold = obj.bold
+		    scratchGraphic.Italic = obj.italic
+		    #If XojoVersion > 2015.03 Then
+		      scratchGraphic.CharacterSpacing = obj.characterSpacing
+		    #Endif
+		    
+		    ' Compute the length of the sub-string.
+		    Return Floor(scratchGraphic.TextWidth(obj.getText(startPosition, endPosition)))
+		    
+		  End If
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function getStringWidth(extends obj as FTStyleRun, g as graphics, text as string, scale as double = 1.0) As double
 		  
-		  ' Compute the length of the string.
-		  return Floor(scratchGraphic.StringWidth(obj.getText))
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
 		  
+		  If g <> Nil Then
+		    
+		    ' Set up for the correct font.
+		    g.FontName = obj.Font
+		    g.FontSize = Round(obj.getFontSize * scale)
+		    g.Bold = obj.bold
+		    g.Italic = obj.italic
+		    #If XojoVersion > 2015.03 Then
+		      g.CharacterSpacing = obj.characterSpacing
+		    #EndIf
+		    
+		    ' Compute the length of the string.
+		    Return Floor(g.TextWidth(Text))
+		    
+		  Else
+		    
+		    ' Set up for the correct font.
+		    scratchGraphic.FontName = obj.font
+		    scratchGraphic.FontSize = Round(obj.getFontSize * scale)
+		    scratchGraphic.Bold = obj.bold
+		    scratchGraphic.Italic = obj.italic
+		    #If XojoVersion > 2015.03 Then
+		      scratchGraphic.CharacterSpacing = obj.characterSpacing
+		    #Endif
+		    
+		    ' Compute the length of the string.
+		    Return Floor(scratchGraphic.TextWidth(Text))
+		    
+		  End If
 		  
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getStringWidth(extends obj as FTStyleRun, startPosition as integer, endPosition as integer, scale as double = 1.0) As double
+		Function getStringWidth(g as graphics, s as string, font as string, size as integer, bold as boolean = false, italic as boolean = false, characterSpacing as integer = 0) As double
 		  
 		  #if not DebugBuild
 		    
@@ -762,72 +878,33 @@ Protected Module FTUtilities
 		    
 		  #endif
 		  
-		  ' Set up for the correct font.
-		  scratchGraphic.FontName = obj.font
-		  scratchGraphic.FontSize = Round(obj.getFontSize * scale)
-		  scratchGraphic.Bold = obj.bold
-		  scratchGraphic.Italic = obj.italic
-		  #If XojoVersion > 2015.03 Then
-		    scratchGraphic.CharacterSpacing = obj.characterSpacing
-		  #Endif
-		  
-		  ' Compute the length of the sub-string.
-		  return Floor(scratchGraphic.StringWidth(obj.getText(startPosition, endPosition)))
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function getStringWidth(extends obj as FTStyleRun, text as string, scale as double = 1.0) As double
-		  
-		  #if not DebugBuild
+		  If g <> Nil Then
+		    ' Set up for the correct font.
+		    g.FontName = Font
+		    g.FontSize = size
+		    g.Bold = bold
+		    g.Italic = italic
+		    #If XojoVersion > 2015.03 Then
+		      g.CharacterSpacing = characterSpacing
+		    #EndIf
 		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    ' Compute the length of the string.
+		    Return Floor(g.TextWidth(s))
 		    
-		  #endif
-		  
-		  ' Set up for the correct font.
-		  scratchGraphic.FontName = obj.font
-		  scratchGraphic.FontSize = Round(obj.getFontSize * scale)
-		  scratchGraphic.Bold = obj.bold
-		  scratchGraphic.Italic = obj.italic
-		  #If XojoVersion > 2015.03 Then
-		    scratchGraphic.CharacterSpacing = obj.characterSpacing
-		  #Endif
-		  
-		  ' Compute the length of the string.
-		  return Floor(scratchGraphic.StringWidth(text))
-		  
-		  
-		End Function
-	#tag EndMethod
-
-	#tag Method, Flags = &h0
-		Function getStringWidth(s as string, font as string, size as integer, bold as boolean = false, italic as boolean = false, characterSpacing as integer = 0) As double
-		  
-		  #if not DebugBuild
+		  Else
+		    ' Set up for the correct font.
+		    scratchGraphic.FontName = font
+		    scratchGraphic.FontSize = size
+		    scratchGraphic.Bold = bold
+		    scratchGraphic.Italic = italic
+		    #If XojoVersion > 2015.03 Then
+		      scratchGraphic.CharacterSpacing = characterSpacing
+		    #Endif
 		    
-		    #pragma BoundsChecking FTC_BOUNDSCHECKING
-		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
-		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    ' Compute the length of the string.
+		    Return Floor(scratchGraphic.TextWidth(s))
 		    
-		  #endif
-		  
-		  ' Set up for the correct font.
-		  scratchGraphic.FontName = font
-		  scratchGraphic.FontSize = size
-		  scratchGraphic.Bold = bold
-		  scratchGraphic.Italic = italic
-		  #If XojoVersion > 2015.03 Then
-		    scratchGraphic.CharacterSpacing = characterSpacing
-		  #Endif
-		  
-		  ' Compute the length of the string.
-		  return Floor(scratchGraphic.StringWidth(s))
-		  
-		  
+		  End If
 		End Function
 	#tag EndMethod
 
@@ -849,7 +926,7 @@ Protected Module FTUtilities
 		  scratchGraphic.Italic = obj.italic
 		  
 		  ' Compute the length of the string.
-		  return Floor(scratchGraphic.StringWidth(text))
+		  return Floor(scratchGraphic.TextWidth(text))
 		  
 		  
 		End Function

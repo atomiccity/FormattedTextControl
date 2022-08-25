@@ -366,6 +366,76 @@ Inherits FTBase
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function drawBackgroundsToPDF(g as PDFgraphics, x as double, y as double, leftPoint as integer, rightPoint as integer, drawBeforeSpace as boolean, printScale as double) As integer
+		  
+		  #pragma DisableBackgroundTasks
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim i as integer
+		  Dim count as integer
+		  Dim lineHeight as double
+		  Dim scale as double
+		  Dim lineStart as double
+		  
+		  ' Save the start of the line.
+		  lineStart = x
+		  
+		  ' Get the number of items to draw.
+		  count = Ubound(items)
+		  
+		  ' Is there anything to draw?
+		  if count < -1 then return getLineHeight(drawBeforeSpace, scale)
+		  
+		  ' Are we printing?
+		  'if printing then
+		  
+		  ' Use the print scale.
+		  scale = printScale
+		  
+		  ' else
+		  ' 
+		  ' ' Use the display scale.
+		  ' scale = parentControl.getDisplayScale
+		  ' 
+		  ' end if
+		  
+		  ' Calculate the top and height of the line.
+		  lineHeight = getLineHeight(drawBeforeSpace, scale)
+		  
+		  ' Draw the content.
+		  for i = 0 to count
+		    
+		    ' Draw the item.
+		    items(i).drawBackgroundToPDF(g, x, y, leftPoint, rightPoint, y, _
+		    lineHeight, printScale)
+		    
+		    ' Move to the next starting position.
+		    x = x + items(i).getWidth(g, scale, x - lineStart)
+		    
+		  next
+		  
+		  ' Is this line before the end of the document?
+		  ' if (not endOfDoc) and (not printing) then
+		  ' 
+		  ' ' Take care of the pilcrow.
+		  ' handlePilcrow(g, x, y, lineHeight, scale)
+		  ' 
+		  ' end if
+		  
+		  ' Return the height of the line.
+		  return lineHeight
+		  
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub drawForegrounds(g as graphics, page as integer, x as double, y as double, leftPoint as Integer, rightPoint as integer, printing as boolean, printScale as double)
 		  
 		  #pragma DisableBackgroundTasks
@@ -418,6 +488,156 @@ Inherits FTBase
 		  next
 		  
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub drawForegroundsToPDF(g as PDFgraphics, page as integer, x as double, y as double, leftPoint as Integer, rightPoint as integer, printScale as double)
+		  
+		  #pragma DisableBackgroundTasks
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim i as integer
+		  Dim count as integer
+		  Dim scale as double
+		  Dim lineStart as double
+		  
+		  ' Save the start of the line.
+		  lineStart = x
+		  
+		  ' Get the number of items to draw.
+		  count = Ubound(items)
+		  
+		  ' Is there anything to draw?
+		  if count < -1 then return
+		  
+		  ' Are we printing?
+		  ' if printing then
+		  
+		  ' Use the print scale.
+		  scale = printScale
+		  
+		  ' else
+		  ' 
+		  ' ' Get the scale.
+		  ' scale = parentControl.getDisplayScale
+		  ' 
+		  ' end if
+		  
+		  ' Draw the content.
+		  for i = 0 to count
+		    
+		    ' Draw the item.
+		    items(i).drawForegroundToPDF(g, page, x, y, leftPoint, _
+		    rightPoint, beforeSpace, afterSpace, printScale)
+		    
+		    ' Move to the next starting position.
+		    x = x + items(i).getWidth(g, scale, x - lineStart)
+		    
+		  next
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function drawToPDF(proxy as FTParagraphProxy, g as PDFgraphics, drawBeforeSpace as boolean, firstIndent as integer, page as integer, x as double, y as double, leftPoint as integer, rightPoint as integer, alignment as FTParagraph.Alignment_Type, printScale as double, endOfDoc as boolean, selectPilcrow as boolean) As integer
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim lineHeight as integer
+		  Dim currentAscent as double
+		  Dim scale as double
+		  
+		  ' Call the event.
+		  parentControl.callDrawLine(proxy, Self, g, drawBeforeSpace, firstIndent, _
+		  page, x, y, leftPoint, rightPoint, alignment, True, printScale)
+		  
+		  ' Is there anything to draw?
+		  if Ubound(items) = -1 then return getLineHeight(drawBeforeSpace, 1.0)
+		  
+		  ' Save the drawing state.
+		  me.drawBeforeSpace = drawBeforeSpace
+		  me.selectPilcrow = selectPilcrow
+		  me.endOfDoc = endOfDoc
+		  
+		  ' Are we printing?
+		  'if printing then
+		  
+		  ' Use the print scale.
+		  scale = printScale
+		  
+		  ' else
+		  ' 
+		  ' ' Use the display scale.
+		  ' scale = parentControl.getDisplayScale
+		  ' 
+		  ' end if
+		  
+		  ' Is this the first line?
+		  if (lineType = Line_Type.First) or (lineType = Line_Type.Both_First_And_Last) then
+		    
+		    select case alignment
+		      
+		    Case FTParagraph.Alignment_Type.Left
+		      
+		      ' Add in the indent.
+		      x = x + firstIndent
+		      
+		    end select
+		    
+		  end if
+		  
+		  ' Get the ascent of the line.
+		  currentAscent = getAscent(scale)
+		  
+		  ' Should we add in the before space?
+		  if drawBeforeSpace then
+		    
+		    ' Add the before space.
+		    currentAscent = currentAscent + _
+		    FTUtilities.getScaledLength(beforeSpace, scale)
+		    
+		  end if
+		  
+		  lineHeight = getLineHeight(drawBeforeSpace, scale)
+		  
+		  If y + lineHeight > g.Height Then
+		    g.NextPage
+		    y = doc.getTopMargin
+		  End If
+		  
+		  ' Draw the line.
+		  lineHeight = drawBackgroundsToPDF(g, x, y, leftPoint, rightPoint, _
+		  drawBeforeSpace, printScale)
+		  
+		  drawForegroundsToPDF(g, page, x, y + currentAscent, leftPoint, _
+		  rightPoint, printScale)
+		  
+		  ' Save the drawn position.
+		  ' xPos = x
+		  ' yPos = y + currentAscent
+		  ' 
+		  ' top = y
+		  ' if not parentControl.isPageViewMode then top = top + abs(parentControl.getYDisplayPosition)
+		  ' 
+		  ' bottom = top + lineHeight
+		  
+		  ' Return the height of the line.
+		  return lineHeight
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0

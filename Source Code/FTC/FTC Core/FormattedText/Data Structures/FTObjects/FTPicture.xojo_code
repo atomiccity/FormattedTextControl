@@ -77,7 +77,7 @@ Inherits FTObject
 		  if isSelected and (not resizeMode) and (not printing) then
 		    
 		    ' Get the color.
-		    g.ForeColor = getObjectColor
+		    g.DrawingColor = getObjectColor
 		    
 		    ' Save the dimensions.
 		    saveSelectDimensions(x, lineTop, target.width, lineHeight)
@@ -89,7 +89,7 @@ Inherits FTObject
 		  elseif useBackgroundColor then
 		    
 		    ' Use the background color.
-		    g.ForeColor = getBackgroundColor
+		    g.DrawingColor = getBackgroundColor
 		    
 		    ' Are we printing?
 		    if printing then
@@ -107,7 +107,7 @@ Inherits FTObject
 		  end if
 		  
 		  ' Draw the background color.
-		  g.FillRect(x, lineTop, lineWidth, lineHeight)
+		  g.FillRectangle(x, lineTop, lineWidth, lineHeight)
 		  
 		End Sub
 	#tag EndEvent
@@ -236,31 +236,31 @@ Inherits FTObject
 		      '-------------------------
 		      
 		      ' Set the drawing color.
-		      g.ForeColor = HANDLE_FILL_COLOR
+		      g.DrawingColor = HANDLE_FILL_COLOR
 		      
 		      ' Do we have room for the horizontal handle?
 		      If imageWidth > (HANDLE_SIZE2 * 2) Then
 		        
 		        ' Fill the upper handle.
-		        g.fillRect(horizontalMiddle, bottom, HANDLE_SIZE2, HANDLE_SIZE2)
+		        g.FillRectangle(horizontalMiddle, bottom, HANDLE_SIZE2, HANDLE_SIZE2)
 		        
 		      End If
 		      
 		      ' Fill the corner handle.
-		      g.fillRect(Right - HANDLE_SIZE2, bottom, HANDLE_SIZE2, HANDLE_SIZE2)
+		      g.FillRectangle(Right - HANDLE_SIZE2, bottom, HANDLE_SIZE2, HANDLE_SIZE2)
 		      
 		      ' Do we have room for the vertical handle?
 		      If imageHeight > (HANDLE_SIZE2 * 2) Then
 		        
 		        ' Fill the lower handle.
-		        g.fillRect(Right - HANDLE_SIZE2, verticalMiddle, HANDLE_SIZE2, HANDLE_SIZE2)
+		        g.FillRectangle(Right - HANDLE_SIZE2, verticalMiddle, HANDLE_SIZE2, HANDLE_SIZE2)
 		        
 		      End If
 		      
 		      '-------------------------
 		      
 		      ' Set the drawing color.
-		      g.ForeColor = HANDLE_COLOR
+		      g.DrawingColor = HANDLE_COLOR
 		      
 		      ' Do we have room for the horizontal handle?
 		      If imageWidth > (HANDLE_SIZE2 * 2) Then
@@ -287,7 +287,7 @@ Inherits FTObject
 		    If drawBorder Then
 		      
 		      ' Set the border color.
-		      g.ForeColor = borderColor
+		      g.DrawingColor = borderColor
 		      
 		      ' Draw the enclosing rectangle.
 		      g.DrawRect(x, iTop, imageWidth, imageHeight)
@@ -1230,24 +1230,24 @@ Inherits FTObject
 		  if parentControl.getFocusState then
 		    
 		    ' Set the in focus selection color.
-		    g.ForeColor = HighlightColor
+		    g.DrawingColor = HighlightColor
 		    
 		  else
 		    
 		    ' Set the out of focus selection color.
-		    g.ForeColor = FTUtilities.OUT_OF_FOCUS_COLOR
+		    g.DrawingColor = FTUtilities.OUT_OF_FOCUS_COLOR
 		    
 		  end if
 		  
 		  ' Fill in the highlight color.
-		  g.FillRect(0, 0, width, height)
+		  g.FillRectangle(0, 0, width, height)
 		  
 		  ' Get the graphics object.
 		  g = highlightPic.mask.graphics
 		  
 		  ' Set the mask.
-		  g.ForeColor = RGB(100, 100, 100)
-		  g.FillRect(0, 0, width, height)
+		  g.DrawingColor = RGB(100, 100, 100)
+		  g.FillRectangle(0, 0, width, height)
 		  
 		  ' Return the picture.
 		  return highlightPic
@@ -2474,49 +2474,67 @@ Inherits FTObject
 	#tag ViewBehavior
 		#tag ViewProperty
 			Name="borderColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="colorOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hasShadow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HyperLink"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="String"
 			EditorType="MultiLineEditor"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorDisabled"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cC0C0C0"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorRollover"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorVisited"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -2524,11 +2542,15 @@ Inherits FTObject
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="inNewWindow"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -2536,68 +2558,95 @@ Inherits FTObject
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="markColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="marked"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowAngle"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowBlur"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&c000000"
 			Type="Color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOffset"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOpacity"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Double"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="strikeThrough"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
+			InitialValue=""
 			Type="String"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="textColor"
+			Visible=false
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="color"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -2605,17 +2654,23 @@ Inherits FTObject
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="underline"
+			Visible=false
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
+			EditorType=""
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="useCustomHyperLinkColor"
+			Visible=false
 			Group="Behavior"
+			InitialValue=""
 			Type="Boolean"
+			EditorType=""
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class

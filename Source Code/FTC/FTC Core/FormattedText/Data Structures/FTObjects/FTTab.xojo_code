@@ -63,7 +63,7 @@ Inherits FTObject
 		    lineWidth = getWidth(getObjectScale(printing, printScale), currentWidth)
 		    
 		    ' Get the color.
-		    g.ForeColor = getObjectColor
+		    g.DrawingColor = getObjectColor
 		    
 		    ' Save the dimensions.
 		    saveSelectDimensions(x, lineTop, lineWidth, lineHeight)
@@ -75,7 +75,7 @@ Inherits FTObject
 		    lineWidth = getWidth(getObjectScale(printing, printScale), currentWidth)
 		    
 		    ' Use the background color.
-		    g.ForeColor = getBackgroundColor
+		    g.DrawingColor = getBackgroundColor
 		    
 		  else
 		    
@@ -93,7 +93,7 @@ Inherits FTObject
 		  end if
 		  
 		  ' Draw the background color.
-		  g.FillRect(x, lineTop, lineWidth, lineHeight)
+		  g.FillRectangle(x, lineTop, lineWidth, lineHeight)
 		  
 		  
 		End Sub
@@ -146,7 +146,7 @@ Inherits FTObject
 		    If Not printing Then
 		      
 		      ' Show the tab indicator.
-		      g.ForeColor = parentControl.InvisiblesColor
+		      g.DrawingColor = parentControl.InvisiblesColor
 		      g.FontName = "Arial"
 		      g.TextSize = 10 * printScale
 		      ' g.TextSize = 24 * printScale
@@ -169,7 +169,7 @@ Inherits FTObject
 		  ' Scale the width for printing.
 		  Dim lineWidth As Double = getWidth(getObjectScale(printing, printScale), currentWidth)
 		  
-		  g.ForeColor = Me.TextColor
+		  g.DrawingColor = Me.TextColor
 		  
 		  Dim myScale As Double = 1.5 * Me.parentControl.getDisplayScale ' printScale
 		  Dim myPrintScale As Double = 1.5 * printScale
@@ -202,7 +202,7 @@ Inherits FTObject
 		      Dim newStep As Double = myStep / 1.5
 		      
 		      For i As Integer = 2 To width - .1 Step newStep
-		        g.FillRect(x + (stepWidth * i), y - (Me.getDescent(If(printing, myPrintScale, myScale))) + myscale, myWidth , myHeight)
+		        g.FillRectangle(x + (stepWidth * i), y - (Me.getDescent(If(printing, myPrintScale, myScale))) + myscale, myWidth , myHeight)
 		      Next
 		      
 		    Case Tab_Leader_Type.MiddleDot
@@ -223,7 +223,7 @@ Inherits FTObject
 		  Case Tab_Leader_Type.Underscore
 		    
 		    ' Draws Line with Fill Sign "_"
-		    g.FillRect(x + 5, y + (Me.getDescent(If(printing, myPrintScale, myScale)) / 3), lineWidth - 10,  myHeight-(.2* If(printing, myPrintScale, myScale)))
+		    g.FillRectangle(x + 5, y + (Me.getDescent(If(printing, myPrintScale, myScale)) / 3), lineWidth - 10,  myHeight-(.2* If(printing, myPrintScale, myScale)))
 		    
 		  End Select
 		  

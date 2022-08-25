@@ -364,10 +364,10 @@ Inherits FTPicture
 		  #endif
 		  
 		  ' Set the color to white.
-		  g.ForeColor = &cFFFFFF
+		  g.DrawingColor = &cFFFFFF
 		  
 		  ' Erase the picture.
-		  g.FillRect(0, 0, g.width, g.height)
+		  g.FillRectangle(0, 0, g.width, g.height)
 		  
 		  ' Call the event.
 		  Paint(g, print, printScale)
