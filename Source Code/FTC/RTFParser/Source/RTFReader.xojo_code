@@ -80,7 +80,7 @@ Protected Class RTFReader
 		  end if
 		  
 		  if oEnc is nil then
-		    return ""
+		    oEnc = self.oEncoding
 		  end if
 		  return DefineEncoding(sData, oEnc)
 		End Function

@@ -4149,6 +4149,54 @@ Inherits FTBase
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function GetCharacterStyleRun(startPosition as integer, endPosition as integer) As FTStyleRun
+		  ' Summary: 
+		  '
+		  ' history:
+		  ' date       developer           description 
+		  ' 16.07.2022 Daniel Fritzsche    creation 
+		  ' 16.07.2022 Daniel Fritzsche    1.0.0 - vcDocEditor - added to get the character style of a selection
+		  '
+		  ' HeaderEnd
+		  
+		  
+		  #Pragma DisableBackgroundTasks
+		  
+		  #If Not DebugBuild
+		    
+		    #Pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #Pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #Pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #EndIf
+		  
+		  Dim i As Integer
+		  Dim startIndex As Integer
+		  Dim endIndex As Integer
+		  
+		  ' Get the items to change.
+		  If setupChange(startPosition, endPosition, startIndex, endIndex) Then
+		    
+		    ' get the style of the first item
+		    For i = startIndex To endIndex
+		      
+		      ' Is this a style run?
+		      If items(i) IsA FTStyleRun Then
+		        
+		        ' get the style.
+		        Return FTStyleRun(items(i))
+		        
+		      End If
+		      
+		    Next
+		    
+		  End If
+		  
+		  Return Nil
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getFirstIndent() As double
 		  
 		  #if not DebugBuild

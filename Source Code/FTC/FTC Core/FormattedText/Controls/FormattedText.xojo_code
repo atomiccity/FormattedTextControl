@@ -659,32 +659,34 @@ Inherits DesktopTextInputCanvas
 		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
 		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
 		    
-		  #endif
+		  #EndIf
 		  
-		  // -- Code modified by Sam Rowlands on May 2nd
-		  Try
-		    Dim isHIDPIMode as boolean = g.ScaleFactor <> 1
-		    if isHIDPIMode <> isHIDPT then
-		      // -- When changing, this is a bit of a nightmare, took me ages to track down
-		      //    that the doc.resolution also needed updating. But finally it's done and
-		      //    now it works correctly for me :)
-		      
-		      isHIDPT = isHIDPIMode
-		      doc.setMonitorPixelsPerInch GetMonitorPixelsPerInch
-		      resize
-		    end if
-		  end Try
-		  // -- End Sam's modification
+		  g.DrawPicture(picDisplay, 1, 1, picDisplay.Width/g.ScaleX, picDisplay.Height/g.ScaleY, 0, 0, picDisplay.Width, picDisplay.Height)
 		  
-		  ' Update the display.
-		  if IsHiDPT then
-		    'scale down the picture for rendering.
-		    'Since adjustDisplayPicture scales by 2 for retina displays, we're always guaranteed
-		    'to get an integer result when we divide by 2 here.
-		    g.DrawPicture(picDisplay, 1, 1, picDisplay.Width/2, picDisplay.Height/2, 0, 0, picDisplay.Width, picDisplay.Height)
-		  else
-		    g.DrawPicture(picDisplay, 1, 1)
-		  end
+		  ' // -- Code modified by Sam Rowlands on May 2nd
+		  ' Try
+		  ' Dim isHIDPIMode As Boolean = g.ScaleFactor <> 1
+		  ' if isHIDPIMode <> isHIDPT then
+		  ' // -- When changing, this is a bit of a nightmare, took me ages to track down
+		  ' //    that the doc.resolution also needed updating. But finally it's done and
+		  ' //    now it works correctly for me :)
+		  ' 
+		  ' isHIDPT = isHIDPIMode
+		  ' doc.setMonitorPixelsPerInch GetMonitorPixelsPerInch
+		  ' resize
+		  ' end if
+		  ' end Try
+		  ' // -- End Sam's modification
+		  ' 
+		  ' ' Update the display.
+		  ' if IsHiDPT then
+		  ' 'scale down the picture for rendering.
+		  ' 'Since adjustDisplayPicture scales by 2 for retina displays, we're always guaranteed
+		  ' 'to get an integer result when we divide by 2 here.
+		  ' g.DrawPicture(picDisplay, 1, 1, picDisplay.Width/2, picDisplay.Height/2, 0, 0, picDisplay.Width, picDisplay.Height)
+		  ' else
+		  ' g.DrawPicture(picDisplay, 1, 1)
+		  ' end
 		  
 		  ' Fill in the corner between the scrollbars.
 		  drawCorner(g)
@@ -6252,6 +6254,14 @@ Inherits DesktopTextInputCanvas
 
 	#tag Method, Flags = &h0
 		Sub editPasteAction()
+		  ' Summary: 
+		  '
+		  ' history:
+		  ' date       developer           description 
+		  ' 16.07.2022 Daniel Fritzsche    creation 
+		  ' 16.07.2022 Daniel Fritzsche    1.0.0 - vcDocEditor - insert pic before text because a picture can have an url
+		  '
+		  ' HeaderEnd
 		  
 		  #if not DebugBuild
 		    
@@ -6344,17 +6354,8 @@ Inherits DesktopTextInputCanvas
 		      end if
 		      
 		      
-		      ' Is there text available?
-		    elseif cb.TextAvailable then
-		      
-		      '--------------------------------------------
-		      ' Text.
-		      '--------------------------------------------
-		      
-		      insertText(cb.text)
-		      
 		      ' Is there a picture available?
-		    elseif cb.PictureAvailable then
+		    ElseIf cb.PictureAvailable Then
 		      
 		      '--------------------------------------------
 		      ' Picture.
@@ -6362,7 +6363,18 @@ Inherits DesktopTextInputCanvas
 		      
 		      insertPicture(cb.Picture)
 		      
-		    end if
+		      ' Is there text available?
+		    ElseIf cb.TextAvailable Then
+		      
+		      '--------------------------------------------
+		      ' Text.
+		      '--------------------------------------------
+		      
+		      insertText(cb.Text)
+		      
+		      
+		      
+		    End If
 		    
 		    ' Close the clipboard.
 		    cb.close
@@ -10531,6 +10543,14 @@ Inherits DesktopTextInputCanvas
 
 	#tag Method, Flags = &h0
 		Sub insertPicture(targetPicture as Picture, fi as FolderItem = nil)
+		  ' Summary: 
+		  '
+		  ' history:
+		  ' date       developer           description 
+		  ' 16.07.2022 Daniel Fritzsche    creation 
+		  ' 16.07.2022 Daniel Fritzsche    1.0.0 - vcDocEditor - bugfix retina images
+		  '
+		  ' HeaderEnd
 		  
 		  #if not DebugBuild
 		    
@@ -10551,7 +10571,7 @@ Inherits DesktopTextInputCanvas
 		  p = New Picture(targetPicture.Width, targetPicture.Height, BIT_DEPTH)
 		  
 		  ' Copy over the picture.
-		  p.Graphics.DrawPicture(targetPicture, 0, 0)
+		  p.Graphics.DrawPicture(targetPicture, 0, 0, p.Width, p.Height, 0, 0, p.Width, p.Height)
 		  
 		  ' Create the container.
 		  ftp = new FTPicture(self, p, true)
