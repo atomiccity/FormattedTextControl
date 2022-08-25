@@ -11667,6 +11667,99 @@ Inherits FTBase
 		End Sub
 	#tag EndMethod
 
+	#tag Method, Flags = &h0
+		Function search(target as string, searchStart as FTInsertionOffset, searchEnd as FTInsertionOffset, ByRef selectStart as FTInsertionOffset, ByRef selectEnd as FTInsertionOffset) As boolean
+		  
+		  #pragma DisableBackgroundTasks
+		  
+		  #if not DebugBuild
+		    
+		    #pragma BoundsChecking FTC_BOUNDSCHECKING
+		    #pragma NilObjectChecking FTC_NILOBJECTCHECKING
+		    #pragma StackOverflowChecking FTC_STACKOVERFLOWCHECKING
+		    
+		  #endif
+		  
+		  Dim i as integer
+		  Dim index as integer
+		  Dim text as string
+		  Dim startIndex as integer
+		  
+		  '----------------------------------------
+		  
+		  ' Was the start position specified?
+		  if searchStart is nil then
+		    
+		    ' Use the beginning of the document.
+		    searchStart = New FTInsertionOffset(Self, 0, 0)
+		    
+		  end if
+		  
+		  '----------------------------------------
+		  
+		  ' Was the end position specified?
+		  if searchEnd is nil then
+		    
+		    ' Get the index to the last paragraph.
+		    i = Self.getParagraphCount - 1
+		    
+		    ' Use the end of the document.
+		    searchEnd = New FTInsertionOffset(Self, i, Self.getParagraph(i).getLength)
+		    
+		  end if
+		  
+		  '----------------------------------------
+		  
+		  ' Is there anything to search?
+		  if searchStart >= searchEnd then return false
+		  
+		  ' Start searching at the insertion point offset.
+		  startIndex = searchStart.offset + 1
+		  
+		  ' Search the paragraphs.
+		  for i = searchStart.paragraph to searchEnd.paragraph
+		    
+		    ' Get the text from the paragraph.
+		    Text = Self.getParagraph(i).getText(True)
+		    
+		    ' Look for the string in the paragraph.
+		    index = InStr(startIndex, text, target)
+		    
+		    ' Is the target string in the paragraph?
+		    if ((index > 0) and (i < searchEnd.paragraph)) or _
+		      ((index > 0) and (index + target.len <= searchEnd.offset) and (i = searchEnd.paragraph)) then
+		      
+		      ' Make it zero based.
+		      index = index - 1
+		      
+		      ' Set the selection range.
+		      selectStart = New FTInsertionOffset(Self, i, index)
+		      selectEnd = New FTInsertionOffset(Self, i, index + target.Len)
+		      
+		      ' We found it.
+		      return true
+		      
+		    else
+		      
+		      ' Reset to the beginning of the paragraph.
+		      startIndex = 1
+		      
+		    end if
+		    
+		  next
+		  
+		  '----------------------------------------
+		  
+		  ' Clear the selection.
+		  selectStart = nil
+		  selectEnd = nil
+		  
+		  ' Target not found.
+		  return false
+		  
+		End Function
+	#tag EndMethod
+
 	#tag Method, Flags = &h1
 		Protected Function segmentString(s as string) As string()
 		  
