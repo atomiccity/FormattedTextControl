@@ -749,54 +749,46 @@ Inherits FTPicture
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
-			InheritedFrom="FTPicture"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="colorOpacity"
 			Group="Behavior"
 			Type="Double"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hasShadow"
 			Group="Behavior"
 			Type="Boolean"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="HyperLink"
 			Group="Behavior"
 			Type="String"
 			EditorType="MultiLineEditor"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColor"
 			Group="Behavior"
 			InitialValue="&c0000ff"
 			Type="color"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorDisabled"
 			Group="Behavior"
 			InitialValue="&cC0C0C0"
 			Type="color"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorRollover"
 			Group="Behavior"
 			InitialValue="&cFF0000"
 			Type="color"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="hyperLinkColorVisited"
 			Group="Behavior"
 			InitialValue="&c800080"
 			Type="color"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Index"
@@ -804,13 +796,11 @@ Inherits FTPicture
 			Group="ID"
 			InitialValue="-2147483648"
 			Type="Integer"
-			InheritedFrom="Object"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="inNewWindow"
 			Group="Behavior"
 			Type="Boolean"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Left"
@@ -818,80 +808,68 @@ Inherits FTPicture
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Object"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="markColor"
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="Color"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="marked"
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Name"
 			Visible=true
 			Group="ID"
 			Type="String"
-			InheritedFrom="Object"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowAngle"
 			Group="Behavior"
 			Type="double"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowBlur"
 			Group="Behavior"
 			Type="Double"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowColor"
 			Group="Behavior"
 			InitialValue="&c000000"
 			Type="Color"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOffset"
 			Group="Behavior"
 			Type="Double"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="shadowOpacity"
 			Group="Behavior"
 			Type="Double"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="strikeThrough"
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
 			Visible=true
 			Group="ID"
 			Type="String"
-			InheritedFrom="Object"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="textColor"
 			Group="Behavior"
 			InitialValue="&h000000"
 			Type="color"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Top"
@@ -899,20 +877,17 @@ Inherits FTPicture
 			Group="Position"
 			InitialValue="0"
 			Type="Integer"
-			InheritedFrom="Object"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="underline"
 			Group="Behavior"
 			InitialValue="0"
 			Type="boolean"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="useCustomHyperLinkColor"
 			Group="Behavior"
 			Type="Boolean"
-			InheritedFrom="FTObject"
 		#tag EndViewProperty
 	#tag EndViewBehavior
 End Class
