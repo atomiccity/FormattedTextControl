@@ -745,7 +745,7 @@ Inherits DesktopTextInputCanvas
 		  //        If you find an instance where it doesn't work please let us know!  - BKeeney Software
 		  
 		  Dim x, y As Integer
-		  dim r as new REALbasic.Rect
+		  dim r as new xojo.Rect
 		  
 		  // Get the page.
 		  Dim iPage As Integer = doc.getInsertionPoint.getCurrentProxyParagraph.getAbsolutePage
