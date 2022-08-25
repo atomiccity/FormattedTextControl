@@ -246,10 +246,26 @@ Inherits FTIteratorBase
 
 	#tag Method, Flags = &h1000
 		Sub Constructor(fOutput as FolderItem)
-		  mF = fOutput
+		  ' Summary: 
+		  '
+		  ' history:
+		  ' date       developer           description 
+		  ' 23.06.2019 Daniel Fritzsche    creation 
+		  '
+		  ' HeaderEnd
 		  
-		  mfImages = mf.child("Images")
+		  #If Not DebugBuild
+		    #Pragma DisableBoundsChecking
+		    #Pragma NilObjectChecking False
+		    #Pragma StackOverflowChecking False
+		  #EndIf
 		  
+		  If fOutput <> Nil Then
+		    mF = fOutput
+		    
+		    mfImages = mf.child("Images")
+		    
+		  End If
 		End Sub
 	#tag EndMethod
 
